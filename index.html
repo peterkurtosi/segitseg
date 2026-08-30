@@ -1011,7 +1011,10 @@ footer .sor { display: flex; gap: 10px 26px; flex-wrap: wrap; align-items: basel
     <div class="sor">
       <span>© 2026 Kürtösi Péter</span>
       <span data-t="lab_licenc"></span>
-      <span data-t="lab_verzio"></span>
+      <span id="lab-verzio" data-t="lab_verzio"></span>
+      <!-- ⚠ A számláló SZÁNDÉKOSAN nem hivatkozás: a kiadási oldalra
+           mutatva a letöltő link kerülne ki a nyilvános lapra. -->
+      <span id="letoltesek" hidden></span>
     </div>
   </div>
 </footer>
@@ -1075,7 +1078,7 @@ const SZOVEG = {
     hos_bev: 'A Segítség egy nagy gombos segélyhívó alkalmazás. Az édesanyámnak készült, aki 83 éves, eltévedt, és nem tudta elmondani, hol van. Azóta bárki megkaphatja, ingyen.',
     gomb_fo: 'ITT VAGYOK BAJBAN!',
     gomb_alatt: 'Egy koppintás. A telefon megkeresi, hol vagy, és SMS-t küld a családnak.',
-    hos_alairas: 'Kürtösi Péter vagyok, mérnök. Ezt magamnak és az édesanyámnak építettem. Nem üzlet, nem lesz belőle az.',
+    hos_alairas: 'Kürtösi Péter vagyok — gépész-, szoftver- és villamosmérnök. Ezt magamnak és az édesanyámnak építettem. Nem üzlet, nem lesz belőle az.',
     makett_kinek: 'Szólok neki: Klotild, Péter',
 
     miert_cimke: 'Miért van',
@@ -1188,7 +1191,9 @@ const SZOVEG = {
 
     lab_ingyen: 'Ingyenes, és az is marad. Egyetlen fillért nem fogadunk el érte senkitől.',
     lab_licenc: 'PolyForm Noncommercial 1.0.0 licenc',
-    lab_verzio: 'Jelenlegi változat: 1.0.0-beta.11'
+    lab_verzio: 'Jelenlegi változat: 1.0.0-beta.11',
+    lab_verzio_elo: 'Jelenlegi változat: ',
+    lab_letoltes: ' letöltés'
   },
 
   /* ═══ DEUTSCH ══════════════════════════════════════════════════ */
@@ -1207,7 +1212,7 @@ const SZOVEG = {
     hos_bev: 'Segítség ist eine Notruf-App mit sehr großen Tasten. Ich habe sie für meine 83-jährige Mutter gebaut, die sich verlaufen hatte und nicht sagen konnte, wo sie war. Seitdem bekommt sie jeder — kostenlos.',
     gomb_fo: 'ICH BRAUCHE HILFE!',
     gomb_alatt: 'Ein Tippen. Das Telefon ermittelt den Standort und schickt eine SMS an die Familie.',
-    hos_alairas: 'Ich bin Péter Kürtösi, Ingenieur. Ich habe das für mich und meine Mutter gebaut. Kein Geschäft — und es wird auch keines.',
+    hos_alairas: 'Ich bin Péter Kürtösi — Maschinenbau-, Software- und Elektroingenieur. Ich habe das für mich und meine Mutter gebaut. Kein Geschäft — und es wird auch keines.',
     makett_kinek: 'Benachrichtigt: Klotild, Peter',
 
     miert_cimke: 'Warum es das gibt',
@@ -1320,7 +1325,9 @@ const SZOVEG = {
 
     lab_ingyen: 'Kostenlos, und das bleibt so. Wir nehmen dafür von niemandem einen Cent.',
     lab_licenc: 'Lizenz: PolyForm Noncommercial 1.0.0',
-    lab_verzio: 'Aktuelle Version: 1.0.0-beta.11'
+    lab_verzio: 'Aktuelle Version: 1.0.0-beta.11',
+    lab_verzio_elo: 'Aktuelle Version: ',
+    lab_letoltes: ' Downloads'
   },
 
   /* ═══ ENGLISH ══════════════════════════════════════════════════ */
@@ -1339,7 +1346,7 @@ const SZOVEG = {
     hos_bev: 'Segítség is an emergency-call app with very large buttons. I built it for my 83-year-old mother, who got lost and could not say where she was. Since then anyone can have it, free.',
     gomb_fo: "I'M IN TROUBLE!",
     gomb_alatt: 'One tap. The phone finds where you are and texts your family.',
-    hos_alairas: "I'm Péter Kürtösi, an engineer. I built this for myself and my mother. It isn't a business, and it won't become one.",
+    hos_alairas: "I'm Péter Kürtösi — a mechanical, software and electrical engineer. I built this for myself and my mother. It isn't a business, and it won't become one.",
     makett_kinek: 'Alerts: Klotild, Peter',
 
     miert_cimke: 'Why it exists',
@@ -1452,7 +1459,9 @@ const SZOVEG = {
 
     lab_ingyen: 'Free, and it will stay free. We will not accept a penny for it from anyone.',
     lab_licenc: 'PolyForm Noncommercial 1.0.0 licence',
-    lab_verzio: 'Current version: 1.0.0-beta.11'
+    lab_verzio: 'Current version: 1.0.0-beta.11',
+    lab_verzio_elo: 'Current version: ',
+    lab_letoltes: ' downloads'
   }
 };
 
@@ -1498,6 +1507,54 @@ function korlatokatRajzol(sz) {
   }).join('');
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   A KIADÁS ADATAI — élőben, a GitHubtól
+
+   ⭐ Egy lekérdezés két dolgot old meg: a letöltésszámot ÉS a
+     verziószámot. Így a lábléc verziója soha nem avul el.
+
+   ⚠ Ha a lekérdezés bármiért nem sikerül (nincs hálózat, nincs még
+     kiadás, vagy a lap nem a GitHubról fut), akkor CSENDBEN marad a
+     statikus szöveg. Hibaüzenetet nem mutatunk: a látogatót nem
+     érdekli, és nem is tud vele mit kezdeni.
+   ═══════════════════════════════════════════════════════════════════ */
+
+const KIADAS_API =
+  'https://api.github.com/repos/peterkurtosi/segitseg/releases/latest';
+
+let kiadasAdat = null;   // { verzio, letoltes }
+
+function kiadastKiir() {
+  if (!kiadasAdat) return;
+  const sz = SZOVEG[document.documentElement.lang] || SZOVEG.hu;
+
+  const v = document.getElementById('lab-verzio');
+  if (v) v.textContent = sz.lab_verzio_elo + kiadasAdat.verzio;
+
+  const l = document.getElementById('letoltesek');
+  if (l && kiadasAdat.letoltes > 0) {
+    l.textContent = kiadasAdat.letoltes.toLocaleString() + sz.lab_letoltes;
+    l.hidden = false;
+  }
+}
+
+function kiadastLekerdez() {
+  fetch(KIADAS_API)
+    .then(function (v) { return v.ok ? v.json() : null; })
+    .then(function (a) {
+      if (!a || !a.tag_name) return;
+      const db = (a.assets || []).reduce(function (osszeg, e) {
+        return osszeg + (e.download_count || 0);
+      }, 0);
+      kiadasAdat = {
+        verzio: String(a.tag_name).replace(/^v/, ''),
+        letoltes: db
+      };
+      kiadastKiir();
+    })
+    .catch(function () { /* marad a statikus szöveg */ });
+}
+
 function ujSzakaszokatRajzol(sz) {
   // A makett arcképei — ugyanaz a rajz, mint a csempéken.
   document.getElementById('mak-arc1').innerHTML = ARCOK[0];
@@ -1530,6 +1587,7 @@ function nyelvetAllit(kod) {
   tablatRajzol(sz);
   korlatokatRajzol(sz);
   ujSzakaszokatRajzol(sz);
+  kiadastKiir();
 
   document.querySelectorAll('.nyelvek button').forEach(function (b) {
     b.setAttribute('aria-pressed', String(b.dataset.nyelv === kod));
@@ -1562,6 +1620,8 @@ nyelvetAllit(mentettNyelv || 'hu');
 
 const mentettMeret = biztosTarolas(function () { return localStorage.getItem('segitseg-meret'); }, null);
 meretetAllit(mentettMeret !== null ? Number(mentettMeret) : 1);
+
+kiadastLekerdez();
 </script>
 </body>
 </html>
