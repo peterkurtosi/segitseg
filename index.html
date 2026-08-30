@@ -1,0 +1,1567 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ingyenes, nagy gombos segélyhívó alkalmazás Androidra. Egy koppintás: a telefon megkeresi, hol vagy, és SMS-t küld a családnak.">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Segítség">
+  <meta property="og:description" content="Ingyenes, nagy gombos segélyhívó alkalmazás Androidra. Egy koppintás: a telefon megkeresi, hol vagy, és SMS-t küld a családnak.">
+  <meta name="twitter:card" content="summary">
+
+  <title>Segítség</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap">
+</head>
+<body>
+<!--
+  ⚠️ EZ A FÁJL GENERÁLT. NE SZERKESZD.
+     A forrás: ../index.html  —  utána: python keszit.py
+-->
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   SEGÍTSÉG — ismertető oldal
+   Egyetlen önálló fájl. Nincs külső szkript, nincs követés, nincs süti.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Világos alap — hűvös-semleges papír, hogy a piros kiüssön rajta */
+  --papir:      #F1F3F6;
+  --lap:        #FFFFFF;
+  --tinta:      #171A20;
+  --halvany:    #5C6472;
+  --vonal:      #D7DBE2;
+  --vonal-eros: #B6BDC8;
+
+  /* Az app SAJÁT színei — nem díszítés, hanem idézet */
+  --piros:      #C62828;
+  --piros-sotet:#8E1B1B;
+  --kek:        #12539E;
+  --zold:       #2E7D32;
+  --sarga-lap:  #FFF8E6;
+
+  --alap: 17px;          /* az A− / A / A+ ezt állítja */
+  --sav: 68ch;
+  --sugar: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papir:      #12151B;
+    --lap:        #191D25;
+    --tinta:      #E8EBF0;
+    --halvany:    #99A2B0;
+    --vonal:      #2B313C;
+    --vonal-eros: #3C4451;
+    --piros:      #EF5350;
+    --piros-sotet:#B71C1C;
+    --kek:        #6BA6E8;
+    --zold:       #66BB6A;
+    --sarga-lap:  #2A2417;
+  }
+}
+
+:root[data-theme="dark"] {
+  --papir:      #12151B;
+  --lap:        #191D25;
+  --tinta:      #E8EBF0;
+  --halvany:    #99A2B0;
+  --vonal:      #2B313C;
+  --vonal-eros: #3C4451;
+  --piros:      #EF5350;
+  --piros-sotet:#B71C1C;
+  --kek:        #6BA6E8;
+  --zold:       #66BB6A;
+  --sarga-lap:  #2A2417;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--tinta);
+  font-family: "Public Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: var(--alap);
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .cimke, .gomb-szoveg {
+  font-family: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+
+h1 {
+  font-size: clamp(2.1rem, 5.4vw, 3.15rem);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.08;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3.2vw, 1.95rem);
+  font-weight: 700;
+  letter-spacing: -0.021em;
+  line-height: 1.16;
+}
+
+h3 {
+  font-size: 1.12rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0; }
+strong { font-weight: 600; }
+
+.cimke {
+  font-size: 0.775rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--halvany);
+}
+
+/* ── Váz ────────────────────────────────────────────────────────── */
+
+.burok { max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+.hasab { max-width: var(--sav); }
+
+section {
+  padding: clamp(46px, 7vw, 80px) 0;
+  border-top: 1px solid var(--vonal);
+}
+section:first-of-type { border-top: 0; }
+
+.verem   { display: flex; flex-direction: column; gap: 20px; }
+.verem-s { display: flex; flex-direction: column; gap: 12px; }
+
+/* ── Fejléc ─────────────────────────────────────────────────────── */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--papir) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--vonal);
+}
+
+.fejlec-sor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 11px 0;
+}
+
+.marka {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Archivo", sans-serif;
+  font-weight: 700;
+  font-size: 1.06rem;
+  letter-spacing: -0.02em;
+}
+
+.marka-jel {
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  background: var(--piros);
+  display: grid; place-items: center;
+  flex: none;
+}
+.marka-jel svg { width: 15px; height: 15px; }
+
+.vezerlok { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.nyelvek, .meret {
+  display: flex;
+  border: 1px solid var(--vonal-eros);
+  border-radius: 9px;
+  overflow: hidden;
+  background: var(--lap);
+}
+
+.nyelvek button, .meret button {
+  font: inherit;
+  font-size: 0.845rem;
+  font-weight: 500;
+  padding: 5px 11px;
+  border: 0;
+  background: transparent;
+  color: var(--halvany);
+  cursor: pointer;
+  border-right: 1px solid var(--vonal);
+}
+
+.nyelvek button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 10px;
+}
+
+/* A zászlók: megrajzolva, hogy minden gépen egyformák legyenek.
+   ⚠ A vékony keret kell: a magyar és a német zászló FEHÉR sávja
+   különben eltűnne a világos háttéren. */
+.zaszlo {
+  width: 21px;
+  height: 14px;
+  flex: none;
+  border-radius: 2.5px;
+  outline: 1px solid color-mix(in srgb, var(--tinta) 22%, transparent);
+  outline-offset: -1px;
+  /* A ki nem választott nyelv zászlaja halkabb — a kiválasztott üt ki. */
+  opacity: 0.55;
+  transition: opacity 0.15s ease;
+}
+/* ⚠ A kiválasztottat KIHAGYJUK: különben rávitt egérrel
+   HALVÁNYABB lett, mint anélkül — visszafelé működött. */
+.nyelvek button:not([aria-pressed="true"]):hover .zaszlo { opacity: 0.85; }
+.nyelvek button[aria-pressed="true"] .zaszlo { opacity: 1; }
+.nyelvek button:last-child, .meret button:last-child { border-right: 0; }
+.nyelvek button:hover, .meret button:hover { color: var(--tinta); }
+
+/* A kiválasztott nyelvet NEM csak szín jelöli: aláhúzás + félkövér is. */
+.nyelvek button[aria-pressed="true"] {
+  color: var(--tinta);
+  font-weight: 600;
+  box-shadow: inset 0 -3px 0 var(--piros);
+}
+.meret button[aria-pressed="true"] {
+  color: var(--tinta);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--tinta) 8%, transparent);
+}
+
+button:focus-visible, a:focus-visible {
+  outline: 3px solid var(--kek);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Hős ────────────────────────────────────────────────────────── */
+
+.hos {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+  padding-top: clamp(40px, 6vw, 68px);
+}
+@media (max-width: 860px) {
+  .hos { grid-template-columns: 1fr; }
+}
+
+.bevezeto { font-size: 1.115rem; color: var(--halvany); }
+
+.alairas {
+  font-size: 0.94rem;
+  color: var(--halvany);
+  border-left: 3px solid var(--piros);
+  padding-left: 14px;
+}
+
+/* A piros gomb — valódi méretben, ahogy a telefonon látszik */
+.piros-gomb {
+  background: var(--piros);
+  color: #fff;
+  border-radius: 18px;
+  padding: 22px 20px;
+  text-align: center;
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--piros) 28%, transparent);
+}
+.piros-gomb .gomb-szoveg {
+  font-size: clamp(1.4rem, 4.2vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  display: block;
+}
+.piros-gomb small {
+  display: block;
+  margin-top: 7px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.94;
+}
+
+/* ── A telefon-makett ───────────────────────────────────────────── */
+
+.telefon {
+  background: var(--lap);
+  border: 1px solid var(--vonal-eros);
+  border-radius: 26px;
+  padding: 14px;
+  max-width: 355px;
+  margin: 0 auto;
+  box-shadow: 0 18px 44px rgba(10, 14, 25, 0.13);
+}
+
+.telefon-fejlec {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 2px 4px 12px;
+  font-size: 0.86rem;
+  color: var(--halvany);
+}
+.telefon-fejlec .marka-jel { width: 21px; height: 21px; border-radius: 6px; }
+.telefon-fejlec .marka-jel svg { width: 12px; height: 12px; }
+.fogaskerek { margin-left: auto; opacity: 0.5; }
+
+.csempek {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.csempe {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 13px;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.csempe svg { width: 74%; height: 74%; }
+
+.csempe-nev {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 7px 6px;
+  text-align: center;
+  font-family: "Archivo", sans-serif;
+  font-weight: 700;
+  font-size: 0.83rem;
+  color: #fff;
+  background: rgba(20, 22, 28, 0.55);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.csempe.ures { background: #DFE2E7; }
+.csempe.ures .csempe-nev { background: rgba(70, 76, 88, 0.62); }
+
+.mini-piros {
+  margin-top: 10px;
+  background: var(--piros);
+  color: #fff;
+  border-radius: 13px;
+  padding: 13px 10px;
+  text-align: center;
+}
+.mini-piros b {
+  font-family: "Archivo", sans-serif;
+  font-size: 1.03rem;
+  letter-spacing: -0.01em;
+}
+.mini-piros span { display: block; font-size: 0.76rem; margin-top: 3px; opacity: 0.93; }
+
+/* ── A hivatalos segélyhívó tábla ───────────────────────────────── */
+
+.tabla {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 7px;
+  margin-top: 10px;
+}
+.tabla.onallo { max-width: 460px; gap: 10px; margin-top: 0; }
+
+.szam-lap {
+  border-radius: 10px;
+  padding: 9px 4px 8px;
+  text-align: center;
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.szam-lap svg { width: 19px; height: 19px; }
+.szam-lap .nev {
+  font-family: "Archivo", sans-serif;
+  font-weight: 700;
+  font-size: 0.63rem;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+.szam-lap .szam {
+  font-family: "Archivo", sans-serif;
+  font-weight: 700;
+  font-size: 0.98rem;
+  font-variant-numeric: tabular-nums;
+}
+.tabla.onallo .szam-lap { padding: 15px 8px 13px; }
+.tabla.onallo .szam-lap svg { width: 27px; height: 27px; }
+.tabla.onallo .szam-lap .nev { font-size: 0.76rem; }
+.tabla.onallo .szam-lap .szam { font-size: 1.32rem; }
+
+.lap-piros { background: #C62828; color: #fff; }
+.lap-feher-piros { background: #fff; color: #C62828; border-color: #C62828; }
+.lap-feher-kek { background: #fff; color: #12539E; border-color: #12539E; }
+.lap-kek { background: #12539E; color: #fff; }
+
+
+/* ── Két üzemmód ────────────────────────────────────────────────── */
+
+.mod-racs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.mod {
+  background: var(--lap);
+  border: 1px solid var(--vonal-eros);
+  border-radius: var(--sugar);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mod .fej { display: flex; align-items: center; gap: 11px; }
+.mod .fej svg { width: 26px; height: 26px; flex: none; color: var(--kek); }
+.mod p { color: var(--halvany); font-size: 0.955rem; }
+
+.kinek-racs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 14px;
+}
+.kinek {
+  border-left: 3px solid var(--piros);
+  padding: 3px 0 3px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.kinek b { font-weight: 600; }
+.kinek span { color: var(--halvany); font-size: 0.93rem; }
+
+/* ── A beállító képernyő ábrája ─────────────────────────────────── */
+
+.beall-racs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(305px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.makett {
+  background: var(--lap);
+  border: 1px solid var(--vonal-eros);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.makett-cim {
+  font-family: "Archivo", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--halvany);
+}
+
+.makett-fej { display: flex; gap: 14px; align-items: flex-start; }
+
+.makett-kep {
+  width: 84px; height: 84px;
+  border-radius: 11px;
+  overflow: hidden;
+  flex: none;
+  background: color-mix(in srgb, var(--tinta) 7%, transparent);
+  display: grid; place-items: center;
+}
+.makett-kep svg { width: 100%; height: 100%; }
+
+.mezok { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 11px; }
+
+.mezo { display: flex; flex-direction: column; gap: 2px; }
+.mezo .cimke-kis {
+  font-size: 0.76rem;
+  color: var(--halvany);
+}
+.mezo .ertek {
+  font-size: 1rem;
+  padding-bottom: 4px;
+  border-bottom: 1.5px solid var(--vonal-eros);
+  font-variant-numeric: tabular-nums;
+}
+
+.kerdes { font-size: 0.93rem; font-weight: 600; }
+
+.valaszto { display: flex; gap: 9px; flex-wrap: wrap; }
+.valaszto div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--vonal-eros);
+  font-size: 0.93rem;
+  color: var(--halvany);
+}
+.valaszto div svg { width: 17px; height: 17px; }
+/* A kiválasztott: NEM csak szín — vastagabb keret és félkövér is. */
+.valaszto div.aktiv {
+  border-color: var(--kek);
+  border-width: 2.5px;
+  color: var(--tinta);
+  font-weight: 600;
+}
+
+.jegyzet-dolt {
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--halvany);
+}
+
+.jelolo { display: flex; gap: 11px; align-items: flex-start; font-size: 0.93rem; }
+.jelolo .pipa {
+  width: 21px; height: 21px;
+  border-radius: 5px;
+  background: var(--kek);
+  display: grid; place-items: center;
+  flex: none;
+  margin-top: 1px;
+}
+.jelolo .pipa svg { width: 13px; height: 13px; }
+
+.uzenet-doboz {
+  background: color-mix(in srgb, var(--zold) 10%, transparent);
+  border: 1.5px solid color-mix(in srgb, var(--zold) 45%, transparent);
+  border-radius: 10px;
+  padding: 11px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.uzenet-doboz .cimke-kis { font-size: 0.76rem; color: var(--halvany); }
+.uzenet-doboz .ertek { font-size: 0.97rem; }
+
+/* ── Tartalmi elemek ────────────────────────────────────────────── */
+
+.racs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  gap: 18px;
+}
+
+.kartya {
+  background: var(--lap);
+  border: 1px solid var(--vonal);
+  border-radius: var(--sugar);
+  padding: 20px 21px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.kartya p { color: var(--halvany); font-size: 0.955rem; }
+
+.elv {
+  background: var(--lap);
+  border: 1px solid var(--vonal-eros);
+  border-radius: var(--sugar);
+  padding: clamp(24px, 4vw, 38px);
+}
+.elv-mondat {
+  font-family: "Archivo", sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.35rem, 3.6vw, 1.85rem);
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+}
+.elv-mondat em { font-style: normal; color: var(--piros); }
+
+/* Lépések — ez tényleg SORREND, ezért van megszámozva */
+ol.lepesek { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; counter-reset: l; }
+ol.lepesek li {
+  counter-increment: l;
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 15px;
+  align-items: start;
+}
+ol.lepesek li::before {
+  content: counter(l);
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--kek);
+  color: var(--lap);
+  display: grid; place-items: center;
+  font-family: "Archivo", sans-serif;
+  font-weight: 700;
+  font-size: 0.94rem;
+}
+ol.lepesek li b { display: block; font-weight: 600; }
+ol.lepesek li span { color: var(--halvany); font-size: 0.955rem; }
+
+/* Zárak és korlátok — a jelentést IKON + SZÖVEG hordozza, nem a szín */
+ul.tetelek { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+ul.tetelek li { display: grid; grid-template-columns: 26px 1fr; gap: 13px; align-items: start; }
+ul.tetelek li svg { width: 21px; height: 21px; margin-top: 3px; }
+/* ⚠ A cím SAJÁT SORBA kell: enélkül a magyarázat hozzáragad
+   („…akkumulátorAz üzenet közönséges SMS”). A lépéseknél beállítottam,
+   itt elfelejtettem — a böngészőben látszott meg. */
+ul.tetelek li b { display: block; font-weight: 600; }
+ul.tetelek li span { color: var(--halvany); }
+
+.doboz-sarga {
+  background: var(--sarga-lap);
+  border: 1px solid color-mix(in srgb, #C9922A 45%, var(--vonal));
+  border-radius: var(--sugar);
+  padding: 18px 20px;
+  font-size: 0.965rem;
+}
+
+.zaras {
+  background: var(--lap);
+  border: 1px solid var(--vonal-eros);
+  border-radius: var(--sugar);
+  padding: clamp(24px, 4vw, 36px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.kapcsolat {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--tinta);
+  color: var(--papir);
+  text-decoration: none;
+  font-family: "Archivo", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 13px 21px;
+  border-radius: 11px;
+}
+.kapcsolat:hover { opacity: 0.88; }
+.kapcsolat svg { width: 18px; height: 18px; }
+
+.bolt-jegyzet {
+  font-size: 0.9rem;
+  color: var(--halvany);
+  border: 1px dashed var(--vonal-eros);
+  border-radius: 11px;
+  padding: 13px 16px;
+}
+
+footer {
+  border-top: 1px solid var(--vonal);
+  padding: 30px 0 44px;
+  font-size: 0.885rem;
+  color: var(--halvany);
+}
+footer .sor { display: flex; gap: 10px 26px; flex-wrap: wrap; align-items: baseline; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+
+<header>
+  <div class="burok fejlec-sor">
+    <div class="marka">
+      <span class="marka-jel" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round">
+          <path d="M12 5v14M5 12h14"/>
+        </svg>
+      </span>
+      <span>Segítség</span>
+    </div>
+    <div class="vezerlok">
+      <div class="meret" role="group" aria-label="Betűméret">
+        <button type="button" data-meret="0" aria-pressed="false">A−</button>
+        <button type="button" data-meret="1" aria-pressed="true">A</button>
+        <button type="button" data-meret="2" aria-pressed="false">A+</button>
+      </div>
+      <!-- ⚠ MEGRAJZOLT zászlók, nem emoji: a Windows az emoji-zászlót nem
+           rajzolja ki, csak két betűt mutat helyette („HU"). Így minden
+           gépen ugyanaz látszik, és külső kép sem kell hozzá.
+           ⭐ A zászló mellett OTT MARAD a nyelv neve: a jelentést nem a
+           szín hordozza, csak a figyelmet vonzza. -->
+      <div class="nyelvek" role="group" aria-label="Nyelv / Sprache / Language">
+        <button type="button" data-nyelv="hu" aria-pressed="true">
+          <svg class="zaszlo" viewBox="0 0 60 30" aria-hidden="true">
+            <rect width="60" height="10" fill="#CE2939"/>
+            <rect y="10" width="60" height="10" fill="#FFFFFF"/>
+            <rect y="20" width="60" height="10" fill="#477050"/>
+          </svg>
+          <span>Magyar</span>
+        </button>
+        <button type="button" data-nyelv="de" aria-pressed="false">
+          <svg class="zaszlo" viewBox="0 0 60 30" aria-hidden="true">
+            <rect width="60" height="10" fill="#000000"/>
+            <rect y="10" width="60" height="10" fill="#DD0000"/>
+            <rect y="20" width="60" height="10" fill="#FFCE00"/>
+          </svg>
+          <span>Deutsch</span>
+        </button>
+        <button type="button" data-nyelv="en" aria-pressed="false">
+          <svg class="zaszlo" viewBox="0 0 60 30" aria-hidden="true">
+            <clipPath id="uk-negyed">
+              <path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/>
+            </clipPath>
+            <rect width="60" height="30" fill="#012169"/>
+            <path d="M0,0 L60,30 M60,0 L0,30" stroke="#FFFFFF" stroke-width="6"/>
+            <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#uk-negyed)"
+                  stroke="#C8102E" stroke-width="4"/>
+            <path d="M30,0 v30 M0,15 h60" stroke="#FFFFFF" stroke-width="10"/>
+            <path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/>
+          </svg>
+          <span>English</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ⚠ Az oldal szövegét a nyelvváltó rajzolja ki, tehát JavaScript nélkül
+     üres lenne. Ez a néhány sor akkor is látszik — a lényeg és a cím. -->
+<noscript>
+  <div class="burok" style="padding-top:34px;padding-bottom:34px">
+    <div class="verem hasab">
+      <h1>Segítség</h1>
+      <p class="bevezeto">Ingyenes, nagy gombos segélyhívó alkalmazás Androidra.
+        Az édesanyámnak készült, aki 83 éves, eltévedt, és nem tudta elmondani,
+        hol van. Azóta bárki megkaphatja, ingyen.</p>
+      <p>Ehhez az oldalhoz JavaScript kell (a magyar, német és angol változat
+        váltásához). Ha nem tudod bekapcsolni, írj nyugodtan:
+        <a href="mailto:peter.kurtosi@gmail.com">peter.kurtosi@gmail.com</a></p>
+    </div>
+  </div>
+</noscript>
+
+<main>
+
+  <!-- ══ HŐS ══════════════════════════════════════════════════════ -->
+  <div class="burok">
+    <div class="hos">
+      <div class="verem">
+        <span class="cimke" data-t="hos_cimke"></span>
+        <h1 data-t="hos_cim"></h1>
+        <p class="bevezeto" data-t="hos_bev"></p>
+        <div class="piros-gomb">
+          <span class="gomb-szoveg" data-t="gomb_fo"></span>
+          <small data-t="gomb_alatt"></small>
+        </div>
+        <p class="alairas" data-t="hos_alairas"></p>
+      </div>
+
+      <!-- A telefon-makett: RAJZ, nem képernyőkép. Így mindhárom
+           nyelven a helyes szöveget mutatja. -->
+      <div class="telefon" role="img" aria-label="A Segítség főképernyője">
+        <div class="telefon-fejlec">
+          <span class="marka-jel" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+          </span>
+          <span>Segítség</span>
+          <svg class="fogaskerek" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.1"/><path d="M12 2.6v3M12 18.4v3M2.6 12h3M18.4 12h3M5.4 5.4l2.1 2.1M16.5 16.5l2.1 2.1M18.6 5.4l-2.1 2.1M7.5 16.5l-2.1 2.1"/>
+          </svg>
+        </div>
+        <div class="csempek" id="csempek"></div>
+        <div class="mini-piros">
+          <b data-t="gomb_fo"></b>
+          <span data-t="makett_kinek"></span>
+        </div>
+        <div class="tabla" id="tabla-mini"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="burok">
+
+    <!-- ══ MIÉRT ═════════════════════════════════════════════════ -->
+    <section>
+      <div class="verem hasab">
+        <span class="cimke" data-t="miert_cimke"></span>
+        <h2 data-t="miert_cim"></h2>
+        <p data-t="miert_1"></p>
+        <p data-t="miert_2"></p>
+        <p data-t="miert_3"></p>
+      </div>
+    </section>
+
+    <!-- ══ A VEZÉRELV ════════════════════════════════════════════ -->
+    <section>
+      <div class="elv verem">
+        <span class="cimke" data-t="elv_cimke"></span>
+        <p class="elv-mondat" data-t="elv_mondat"></p>
+        <p class="hasab" data-t="elv_szoveg"></p>
+      </div>
+    </section>
+
+    <!-- ══ MIT CSINÁL ════════════════════════════════════════════ -->
+    <section>
+      <div class="verem">
+        <span class="cimke" data-t="mit_cimke"></span>
+        <h2 class="hasab" data-t="mit_cim"></h2>
+        <div class="racs" style="margin-top:8px">
+          <div class="kartya"><h3 data-t="k1_cim"></h3><p data-t="k1_szo"></p></div>
+          <div class="kartya"><h3 data-t="k2_cim"></h3><p data-t="k2_szo"></p></div>
+          <div class="kartya"><h3 data-t="k3_cim"></h3><p data-t="k3_szo"></p></div>
+          <div class="kartya"><h3 data-t="k4_cim"></h3><p data-t="k4_szo"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ A SEGÉLYHÍVÓ TÁBLA ════════════════════════════════════ -->
+    <section>
+      <div class="verem">
+        <span class="cimke" data-t="tabla_cimke"></span>
+        <h2 class="hasab" data-t="tabla_cim"></h2>
+        <p class="hasab" data-t="tabla_szo"></p>
+        <div class="tabla onallo" id="tabla-nagy" style="margin-top:6px"></div>
+        <div class="doboz-sarga hasab" data-t="tabla_figyelem"></div>
+      </div>
+    </section>
+
+    <!-- ══ BEÁLLÍTÁS ═════════════════════════════════════════════ -->
+    <section>
+      <div class="verem">
+        <span class="cimke" data-t="beall_cimke"></span>
+        <h2 class="hasab" data-t="beall_cim"></h2>
+        <p class="hasab" data-t="beall_bev"></p>
+        <!-- ⚠ A cím és a magyarázat KÖZÖS dobozban: a sor rács (34px | 1fr),
+             és külön gyerekként a magyarázat a 34 pixeles oszlopba csúszott
+             át — szavanként tördelve. A korlátok listájánál eleve így volt,
+             itt kimaradt. -->
+        <ol class="lepesek hasab" style="margin-top:8px">
+          <li><div><b data-t="l1_cim"></b><span data-t="l1_szo"></span></div></li>
+          <li><div><b data-t="l2_cim"></b><span data-t="l2_szo"></span></div></li>
+          <li><div><b data-t="l3_cim"></b><span data-t="l3_szo"></span></div></li>
+          <li><div><b data-t="l4_cim"></b><span data-t="l4_szo"></span></div></li>
+        </ol>
+        <p class="hasab" style="margin-top:6px" data-t="beall_zaro"></p>
+      </div>
+    </section>
+
+
+    <!-- ══ KÉT ÜZEMMÓD ═══════════════════════════════════════════ -->
+    <section>
+      <div class="verem">
+        <span class="cimke" data-t="mod_cimke"></span>
+        <h2 class="hasab" data-t="mod_cim"></h2>
+        <p class="hasab" data-t="mod_bev"></p>
+
+        <div class="mod-racs" style="margin-top:8px">
+          <div class="mod">
+            <div class="fej"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.6 12 3.6l8.5 7v9.2a1.2 1.2 0 0 1-1.2 1.2H4.7a1.2 1.2 0 0 1-1.2-1.2z"/></svg><h3 data-t="mod1_cim"></h3></div>
+            <p data-t="mod1_szo"></p>
+          </div>
+          <div class="mod">
+            <div class="fej"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><rect x="3.4" y="3.4" width="7.2" height="7.2" rx="1.6"/><rect x="13.4" y="3.4" width="7.2" height="7.2" rx="1.6"/><rect x="3.4" y="13.4" width="7.2" height="7.2" rx="1.6"/><rect x="13.4" y="13.4" width="7.2" height="7.2" rx="1.6"/></svg><h3 data-t="mod2_cim"></h3></div>
+            <p data-t="mod2_szo"></p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:14px" data-t="kinek_cim"></h3>
+        <div class="kinek-racs" id="kinek-racs"></div>
+      </div>
+    </section>
+
+    <!-- ══ MIT LEHET BEÁLLÍTANI ══════════════════════════════════ -->
+    <section>
+      <div class="verem">
+        <span class="cimke" data-t="beall2_cimke"></span>
+        <h2 class="hasab" data-t="beall2_cim"></h2>
+        <p class="hasab" data-t="beall2_bev"></p>
+
+        <div class="beall-racs" style="margin-top:8px">
+
+          <!-- Csempe HÍVÁS módban -->
+          <div class="makett">
+            <span class="makett-cim" data-t="mak_cim1"></span>
+            <div class="makett-fej">
+              <div class="makett-kep" id="mak-arc1"></div>
+              <div class="mezok">
+                <div class="mezo">
+                  <span class="cimke-kis" data-t="mak_nev_cimke"></span>
+                  <span class="ertek" data-t="mak_nev1"></span>
+                </div>
+                <div class="mezo">
+                  <span class="cimke-kis" data-t="mak_szam_cimke"></span>
+                  <span class="ertek" data-t="mak_szam1"></span>
+                </div>
+              </div>
+            </div>
+            <span class="kerdes" data-t="mak_kerdes"></span>
+            <div class="valaszto">
+              <div class="aktiv">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 3.6a1.6 1.6 0 0 1 1.5 1l1.1 2.7a1.6 1.6 0 0 1-.4 1.8l-1 .9a12.4 12.4 0 0 0 4.7 4.7l.9-1a1.6 1.6 0 0 1 1.8-.4l2.7 1.1a1.6 1.6 0 0 1 1 1.5v2.5a1.6 1.6 0 0 1-1.8 1.6C9.6 19.2 4.8 14.4 3.5 5.4a1.6 1.6 0 0 1 1.6-1.8z"/></svg>
+                <span data-t="mak_hiv"></span>
+              </div>
+              <div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5.4" width="18" height="13.2" rx="2.2"/><path d="m3.7 6.8 8.3 6 8.3-6"/></svg>
+                <span data-t="mak_uzen"></span>
+              </div>
+            </div>
+            <span class="jegyzet-dolt" data-t="mak_fuggetlen"></span>
+            <div class="jelolo">
+              <span class="pipa" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4.6 12.4 5 5 9.8-10.4"/></svg></span>
+              <span data-t="mak_jelolo"></span>
+            </div>
+          </div>
+
+          <!-- Csempe ÜZENET módban -->
+          <div class="makett">
+            <span class="makett-cim" data-t="mak_cim2"></span>
+            <div class="makett-fej">
+              <div class="makett-kep" id="mak-arc2"></div>
+              <div class="mezok">
+                <div class="mezo">
+                  <span class="cimke-kis" data-t="mak_nev_cimke"></span>
+                  <span class="ertek" data-t="mak_nev2"></span>
+                </div>
+                <div class="mezo">
+                  <span class="cimke-kis" data-t="mak_szam_cimke"></span>
+                  <span class="ertek" data-t="mak_szam2"></span>
+                </div>
+              </div>
+            </div>
+            <span class="kerdes" data-t="mak_kerdes"></span>
+            <div class="valaszto">
+              <div>
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 3.6a1.6 1.6 0 0 1 1.5 1l1.1 2.7a1.6 1.6 0 0 1-.4 1.8l-1 .9a12.4 12.4 0 0 0 4.7 4.7l.9-1a1.6 1.6 0 0 1 1.8-.4l2.7 1.1a1.6 1.6 0 0 1 1 1.5v2.5a1.6 1.6 0 0 1-1.8 1.6C9.6 19.2 4.8 14.4 3.5 5.4a1.6 1.6 0 0 1 1.6-1.8z"/></svg>
+                <span data-t="mak_hiv"></span>
+              </div>
+              <div class="aktiv">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5.4" width="18" height="13.2" rx="2.2"/><path d="m3.7 6.8 8.3 6 8.3-6"/></svg>
+                <span data-t="mak_uzen"></span>
+              </div>
+            </div>
+            <div class="uzenet-doboz">
+              <span class="cimke-kis" data-t="mak_uzenet_cimke"></span>
+              <span class="ertek" data-t="mak_uzenet"></span>
+            </div>
+            <span class="jegyzet-dolt" data-t="mak_uzenet_jegyzet"></span>
+          </div>
+
+        </div>
+
+        <h3 style="margin-top:20px" data-t="beall2_meg"></h3>
+        <ul class="tetelek hasab" id="beall2-lista"></ul>
+      </div>
+    </section>
+
+    <!-- ══ MIT NEM CSINÁL ════════════════════════════════════════ -->
+    <section>
+      <div class="verem">
+        <span class="cimke" data-t="nem_cimke"></span>
+        <h2 class="hasab" data-t="nem_cim"></h2>
+        <p class="hasab" data-t="nem_bev"></p>
+        <ul class="tetelek hasab" style="margin-top:8px">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2.2"/><path d="M8 10.5V7.4a4 4 0 0 1 8 0v3.1"/></svg>
+            <div><b data-t="zar1_cim"></b><span data-t="zar1_szo"></span></div>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10" rx="2.2"/><path d="M8 10.5V7.4a4 4 0 0 1 8 0v3.1"/></svg>
+            <div><b data-t="zar2_cim"></b><span data-t="zar2_szo"></span></div>
+          </li>
+        </ul>
+        <p class="hasab" style="margin-top:4px" data-t="nem_zaro"></p>
+      </div>
+    </section>
+
+    <!-- ══ ŐSZINTE KORLÁTOK ══════════════════════════════════════ -->
+    <section>
+      <div class="verem">
+        <span class="cimke" data-t="korlat_cimke"></span>
+        <h2 class="hasab" data-t="korlat_cim"></h2>
+        <p class="hasab" data-t="korlat_bev"></p>
+        <ul class="tetelek hasab" style="margin-top:8px" id="korlatok"></ul>
+      </div>
+    </section>
+
+    <!-- ══ HOGYAN KAPHATÓ MEG ════════════════════════════════════ -->
+    <section>
+      <div class="zaras">
+        <span class="cimke" data-t="kap_cimke"></span>
+        <h2 data-t="kap_cim"></h2>
+        <p class="hasab" data-t="kap_szo"></p>
+        <a class="kapcsolat" id="kapcsolat-link" href="mailto:peter.kurtosi@gmail.com?subject=Seg%C3%ADts%C3%A9g">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.4"/><path d="m3.6 6.6 8.4 6 8.4-6"/></svg>
+          <span data-t="kap_gomb"></span>
+        </a>
+        <p class="bolt-jegyzet" data-t="kap_bolt"></p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="burok verem-s">
+    <p data-t="lab_ingyen"></p>
+    <div class="sor">
+      <span>© 2026 Kürtösi Péter</span>
+      <span data-t="lab_licenc"></span>
+      <span data-t="lab_verzio"></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   SZÖVEGEK — három nyelven.
+
+   ⚠ A NYELVHEZ ORSZÁG IS TARTOZIK. A segélyhívó számok nem fordítás
+     kérdései: a 104/105/107 csak Magyarországon létezik. Ezért minden
+     nyelvhez SAJÁT segélyhívó-tábla és saját csempe-nevek tartoznak.
+   ═══════════════════════════════════════════════════════════════════ */
+
+const IKON = {
+  mento:   '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M10 3h4v5h5v4h-5v5h-4v-5H5V8h5V3z"/></svg>',
+  tuz:     '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.5 2c.4 3-1.6 4.2-2.9 5.8C8 9.6 7 11.2 7 13.4 7 17 9.7 20 12.6 20S18 17.4 18 13.9c0-2.6-1.4-4.3-2.6-5.6-.5 1-1.2 1.6-2 1.9.6-2.6-.4-5.7-2.9-8.2z"/></svg>',
+  szirena: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 6.2a5 5 0 0 0-5 5V15h10v-3.8a5 5 0 0 0-5-5zM5 16.4h14V19H5v-2.6zM11.1 2h1.8v2.6h-1.8V2zM4.1 5.1 5.4 3.8l1.9 1.8L6 6.9 4.1 5.1zM16.7 5.6l1.9-1.8 1.3 1.3-1.9 1.8-1.3-1.3z"/></svg>',
+  sos:     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 9.5a1.8 1.8 0 0 1 1.8-1.8h1.4M4 14.5a1.8 1.8 0 0 0 1.8 1.8h1.4"/><circle cx="12" cy="12" r="3.4"/><path d="M20 9.5a1.8 1.8 0 0 0-1.8-1.8h-1.4M20 14.5a1.8 1.8 0 0 1-1.8 1.8h-1.4"/></svg>'
+};
+
+/* Rajzolt arckép — ugyanaz a gondolat, mint az appban:
+   akinek nincs fényképe, kap egy felismerhető rajzot. */
+function arc(hajSzin, borSzin, ruhaSzin, hosszuHaj) {
+  const haj = hosszuHaj
+    ? '<rect x="21" y="30" width="14" height="40" rx="7" fill="' + hajSzin + '"/><rect x="65" y="30" width="14" height="40" rx="7" fill="' + hajSzin + '"/>'
+    : '';
+  return '<svg viewBox="0 0 100 100" aria-hidden="true">' +
+    '<circle cx="50" cy="50" r="50" fill="' + ruhaSzin + '" opacity="0.22"/>' +
+    haj +
+    '<path d="M28 34c0-12 10-20 22-20s22 8 22 20v6c0 12-10 21-22 21S28 52 28 40z" fill="' + hajSzin + '"/>' +
+    '<path d="M32 38c0-10 8-17 18-17s18 7 18 17v4c0 11-8 19-18 19s-18-8-18-19z" fill="' + borSzin + '"/>' +
+    '<circle cx="43" cy="40" r="2.6" fill="#2A2118"/><circle cx="57" cy="40" r="2.6" fill="#2A2118"/>' +
+    '<path d="M43 50c2.4 2.6 11.6 2.6 14 0" stroke="#2A2118" stroke-width="2.4" fill="none" stroke-linecap="round"/>' +
+    '<path d="M50 61c-14 0-24 8-26 20h52c-2-12-12-20-26-20z" fill="' + ruhaSzin + '"/>' +
+    '</svg>';
+}
+
+const ARCOK = [
+  arc('#8C6239', '#F0C9A4', '#7E9CC4', true),
+  arc('#4A4A4A', '#EAC0A0', '#6FA37B', false),
+  arc('#C9873F', '#F3D2B2', '#C98A9E', true),
+  arc('#2F2F2F', '#D9A87E', '#8A7FBF', false),
+  arc('#B9B2A6', '#F1CEAB', '#C9A15A', true)
+];
+
+const SZOVEG = {
+
+  /* ═══ MAGYAR ═══════════════════════════════════════════════════ */
+  hu: {
+    nevek: ['Anna', 'Péter', 'Zsuzsa', 'Marika', 'Dr. Kovács'],
+    ures: 'üres hely',
+    szamok: [
+      { o: 'lap-piros',       i: 'mento',   n: 'MENTŐK',     s: '104' },
+      { o: 'lap-feher-piros', i: 'tuz',     n: 'TŰZOLTÓK',   s: '105' },
+      { o: 'lap-feher-kek',   i: 'szirena', n: 'RENDŐRSÉG',  s: '107' },
+      { o: 'lap-kek',         i: 'sos',     n: 'SEGÉLYHÍVÓ', s: '112' }
+    ],
+
+    hos_cimke: 'Ingyenes segélyhívó alkalmazás Androidra',
+    hos_cim: 'Ha baj van, ne kelljen semmit eldönteni.',
+    hos_bev: 'A Segítség egy nagy gombos segélyhívó alkalmazás. Az édesanyámnak készült, aki 83 éves, eltévedt, és nem tudta elmondani, hol van. Azóta bárki megkaphatja, ingyen.',
+    gomb_fo: 'ITT VAGYOK BAJBAN!',
+    gomb_alatt: 'Egy koppintás. A telefon megkeresi, hol vagy, és SMS-t küld a családnak.',
+    hos_alairas: 'Kürtösi Péter vagyok, mérnök. Ezt magamnak és az édesanyámnak építettem. Nem üzlet, nem lesz belőle az.',
+    makett_kinek: 'Szólok neki: Anna, Péter',
+
+    miert_cimke: 'Miért van',
+    miert_cim: 'Volt nála telefon. Fel is hívott. És mégsem tudtunk segíteni.',
+    miert_1: '2026 májusában az édesanyám eltévedt. Nem volt eszköztelen: nála volt a telefonja, és fel is hívott minket. De nem tudta megmondani, hol van — és mi sem tudtuk megnézni.',
+    miert_2: 'A baj nem az volt, hogy nincs okostelefonja. Az volt, hogy abban a pillanatban, amikor segítenie kellett volna, a telefon kérdezett tőle valamit: melyik alkalmazás, melyik gomb, melyik menü.',
+    miert_3: 'Aztán hónapokig dolgoztam rajta: mit lásson, mit ne kelljen eldöntenie, hogyan ne tudjon elveszni benne. Három hónappal később állt össze azzá, ami most — és napokon belül már idegen telefonokon is működött.',
+
+    elv_cimke: 'A vezérelv',
+    elv_mondat: 'Nem hülyebiztos. <em>Idős nagymama-biztos.</em>',
+    elv_szoveg: 'A technikus érti a gépet, csak siet. Ő nem érti, és fél. Ezért a Segítség soha nem kérdez attól, aki bajban van. Minden döntés — engedélyek, beállítások, hozzáférések — előre le van zárva: akkor, amikor a segítő még ott áll mellette.',
+
+    mit_cimke: 'Mit csinál',
+    mit_cim: 'Hat fénykép, egy piros gomb, és a segélyhívó számok.',
+    k1_cim: 'A fénykép maga a gomb',
+    k1_szo: 'Hat nagy csempe. Aki nem tudja elolvasni a nevet, felismeri az arcot. Ha nincs fénykép, rajzolt arcot kap — nem egy szürke sziluettet.',
+    k2_cim: 'Koppintásra hív — vagy üzen',
+    k2_szo: 'Csempénként beállítható: felhívja az illetőt, vagy elküld egy előre megírt üzenetet. „Nagypapa vagyok, kérlek nézz be hozzám." A szöveget te írod.',
+    k3_cim: 'A piros gomb megmondja, hol van',
+    k3_szo: 'Megkeresi a helyzetet, és SMS-t küld a megjelölt embereknek — a pontos hellyel. Nem kérdez semmit, nem kell megerősíteni.',
+    k4_cim: 'Nagyi mód',
+    k4_szo: 'Bekapcsolva az alkalmazás lesz a kezdőképernyő: nem lehet véletlenül bezárni, nem lehet „eltévedni" a telefonban. Kikapcsolva teljesen normál alkalmazás.',
+
+    tabla_cimke: 'A segélyhívó sáv',
+    tabla_cim: 'A hivatalos tábla, nem a saját ötletünk.',
+    tabla_szo: 'A szín, a jel és a sorrend a hivatalos magyar segélyhívó tábláról jön. Vészhelyzetben a megszokás többet ér, mint a logika: ha valaki életében ezerszer látta ezt a sorrendet, ne mi írjuk át.',
+    tabla_figyelem: '⚠️ Ezek a gombok szabadon átírhatók. Az alkalmazásban jelenleg a magyar számok az alapértelmezettek — más országban a beállításban kell átírni őket. A német és angol nyelvű változat készül.',
+
+    beall_cimke: 'A beállítás',
+    beall_cim: 'Ez a rész neked szól, nem neki.',
+    beall_bev: 'A Segítséget nem az állítja be, aki használni fogja. A gyerek, az unoka, a szomszéd állítja be — egyszer, és utána soha többé nem kell hozzányúlni.',
+    l1_cim: 'Töltsd fel a csempéket',
+    l1_szo: 'Fénykép a galériából (kivághatod az arcot) vagy rajzolt arc, mellé név és telefonszám.',
+    l2_cim: 'Jelöld meg, ki kapjon segélykérést',
+    l2_szo: 'A piros gomb csak azoknak szól, akiket megjelölsz. A főképernyőn ott van, kiket értesít.',
+    l3_cim: 'Add meg az engedélyeket — most',
+    l3_szo: 'Helymeghatározás és üzenetküldés. Az alkalmazás végigvezet rajta, és zölddel visszaigazolja, ha kész. Ez a legfontosabb lépés: bajban már nem lesz idő rá.',
+    l4_cim: 'Kapcsold be a nagyi módot, ha kell',
+    l4_szo: 'Egy kapcsoló. Utána a telefon egyetlen dolgot tud, és azt nem lehet elrontani.',
+    beall_zaro: 'Az egész öt perc. Van benne részletes súgó is, magyarul.',
+
+    mod_cimke: 'Két üzemmód',
+    mod_cim: 'Nem csak nagyszülőknek.',
+    mod_bev: 'Egy kapcsoló dönti el, mennyire veszi át a telefont. Ugyanaz az alkalmazás, két teljesen más viselkedés.',
+    mod1_cim: 'Nagyi mód',
+    mod1_szo: 'Az alkalmazás lesz a kezdőképernyő. A VISSZA, a HOME és az app-váltó után is ide jön vissza a telefon — nem lehet véletlenül bezárni, és nem lehet „eltévedni" a menükben. Akinek ez kell, annál a telefon egyetlen dolgot tud, és azt nem lehet elrontani.',
+    mod2_cim: 'Normál alkalmazás',
+    mod2_szo: 'Kikapcsolva teljesen hétköznapi app: megnyitod, használod, bezárod. A telefon minden más funkciója érintetlen marad. Így annak is jó, aki egyébként otthonosan mozog a telefonján.',
+    kinek_cim: 'Kinek jó még a normál mód',
+    kinek: [
+      ['Aki nem tud beszélni', 'Egy rokonom nem tud beszélni. Lerobbant az autójával egy néptelen úton. Hívni tudott volna bárkit — megszólalni nem. SMS-ben pedig több mondat lett volna elmagyarázni, hol áll. Egy koppintás megoldotta volna. Sokan vannak így: stroke után, beszédsérüléssel — vagy csak mert pánikban nem jön ki hang az emberből.'],
+      ['Iskolás gyereknek', 'Tudja kezelni a telefont — de eltévedni ő is tud. Egy koppintás, és a szülő tudja, hol van. Nem kell kitalálnia, kit hívjon, és nem kell elmondania, merre jár.'],
+      ['Vezetés közben', 'Egy nagy fénykép, egy koppintás, hívás. Nem kell a névjegyzékben keresgélni, miközben az utat nézed.'],
+      ['Aki egyedül él', 'A piros gomb akkor is jól jön, ha valaki elesik vagy rosszul lesz otthon — nem kell kitalálni, kinek és mit írjon.']
+    ],
+
+    beall2_cimke: 'Mit lehet beállítani',
+    beall2_cim: 'Minden csempe külön testre szabható.',
+    beall2_bev: 'Érdemes végignézni, mielőtt letöltöd: ebből derül ki, hogy tudja-e azt, amit vársz tőle. Így néz ki egy csempe beállítása.',
+    mak_cim1: 'Csempe · hívás módban',
+    mak_cim2: 'Csempe · üzenet módban',
+    mak_nev_cimke: 'Név',
+    mak_nev1: 'Anna',
+    mak_nev2: 'Zsuzsa',
+    mak_szam_cimke: 'Telefonszám',
+    mak_szam1: '+36 30 123 4567',
+    mak_szam2: '+36 20 987 6543',
+    mak_kerdes: 'Amikor erre a képre koppint:',
+    mak_hiv: 'felhívja',
+    mak_uzen: 'üzen neki',
+    mak_fuggetlen: 'Ez a kettő független: kaphat koppintásra üzenetet ÉS segélykérőt is.',
+    mak_jelolo: 'Az ITT VAGYOK BAJBAN gomb neki is szóljon (a helyzettel)',
+    mak_uzenet_cimke: 'Az üzenet, ami kimegy',
+    mak_uzenet: 'Nagypapa vagyok, kérlek nézz be hozzám!',
+    mak_uzenet_jegyzet: 'A szöveget te írod. Ha üresen hagyod, egy általános üzenet megy ki — üres SMS soha.',
+    beall2_meg: 'Amit még be lehet állítani',
+    beall2_lista: [
+      ['A segélyhívó gombok', 'Mind a négy neve és száma átírható — más ország, más számok. A már átírt számokat egy frissítés soha nem írja felül.'],
+      ['Fénykép vagy rajzolt arc', 'A galériából választott képből kivághatod az arcot: húzod, és a KISEBB / NAGYOBB gombokkal ráközelítesz. Ha nincs fénykép, választhatsz rajzolt női vagy férfi arcot — az is felismerhető, nem egy szürke sziluett.'],
+      ['Ki kapjon segélykérést', 'Csempénként külön. A főképernyőn a piros gomb alatt ott a nevük, hogy ne kelljen emlékezni rá.'],
+      ['Belépés a beállításokba', 'Hosszú nyomás a fogaskeréken, majd egy kérdés — ahol a NEM a nagy zöld gomb. Így véletlenül nem lehet belekeveredni.'],
+      ['Beépített súgó', 'Részletes leírás minden beállításról és a gyakori kérdésekről, az alkalmazáson belül.']
+    ],
+
+    nem_cimke: 'Mit nem csinál',
+    nem_cim: 'Nem tudunk rólad semmit. Nem is akarunk.',
+    nem_bev: 'Nincs szerver, nincs fiók, nincs regisztráció, nincs hirdetés. Nem ígéret ez, hanem két zár:',
+    zar1_cim: 'Az alkalmazásnak nincs internet-engedélye',
+    zar1_szo: 'A telefon operációs rendszere nem is engedné, hogy bárhova adatot küldjön. Ezt bárki ellenőrizheti a telefon beállításaiban.',
+    zar2_cim: 'A rendszer felhő-mentése ki van kapcsolva rá',
+    zar2_szo: 'Ez fontos: az Android alapból feltölti az alkalmazások adatait a Google Drive-ra — nem az alkalmazás, hanem maga a rendszer. Ezt méréssel találtuk meg, és kikapcsoltuk.',
+    nem_zaro: 'Ennek ez az ára: új telefonra a beállítások nem költöznek át maguktól. Öt perc újra megcsinálni — cserébe a nagymamád segélyhívó-listája sehol nincs fent.',
+
+    korlat_cimke: 'Őszinte korlátok',
+    korlat_cim: 'Amit tudnod kell, mielőtt rábízol valakit.',
+    korlat_bev: 'Ez egy telefonos alkalmazás, nem csoda. Amit nem tud:',
+    korlatok: [
+      ['Kell hozzá térerő és feltöltött akkumulátor', 'Az üzenet közönséges SMS. Ha nincs hálózat, nem megy el — ahogy a telefonhívás sem.'],
+      ['A helymeghatározás annyira pontos, amennyire a telefon', 'Szabad ég alatt néhány méter, épületben, mélygarázsban sokkal rosszabb.'],
+      ['Nem diszpécserközpont', 'A családot értesíti, nem a mentőket. A 112-t is fel lehet hívni belőle egy koppintással, de a piros gomb a családnak szól.'],
+      ['Csak Androidra', 'iPhone-ra nem készül. Az iOS szándékosan nem enged automatikus SMS-küldést — ott a beépített Vész-SOS a jó megoldás, és az jobb, mint amit mi tudnánk.'],
+      ['Béta változat', 'Működik, és valódi telefonokon bizonyított — de még tesztelés alatt áll. Ha valami nem megy, írj.']
+    ],
+
+    kap_cimke: 'Hogyan kapható meg',
+    kap_cim: 'Írj nekem, és elküldöm.',
+    kap_szo: 'Innen most nem lehet letölteni. Béta változat, és szeretném tudni, kihez kerül — hogy szólni tudjak, ha javítás készül. Írj egy sort, és küldöm a telepítőt meg a leírást.',
+    kap_gomb: 'Írok Péternek',
+    kap_bolt: 'Ha felkerül a Google Play Áruházba, ide kerül a letöltés gombja — akkor már két akadály (az „ismeretlen fejlesztő" figyelmeztetés és a letiltott SMS-engedély) is megszűnik.',
+
+    lab_ingyen: 'Ingyenes, és az is marad. Egyetlen fillért nem fogadunk el érte senkitől.',
+    lab_licenc: 'PolyForm Noncommercial 1.0.0 licenc',
+    lab_verzio: 'Jelenlegi változat: 1.0.0-beta.11'
+  },
+
+  /* ═══ DEUTSCH ══════════════════════════════════════════════════ */
+  de: {
+    nevek: ['Anna', 'Peter', 'Susanne', 'Maria', 'Dr. Weber'],
+    ures: 'frei',
+    szamok: [
+      { o: 'lap-piros',       i: 'mento',   n: 'RETTUNG',   s: '112' },
+      { o: 'lap-feher-piros', i: 'tuz',     n: 'FEUERWEHR', s: '112' },
+      { o: 'lap-feher-kek',   i: 'szirena', n: 'POLIZEI',   s: '110' },
+      { o: 'lap-kek',         i: 'sos',     n: 'ÄRZTL. DIENST', s: '116117' }
+    ],
+
+    hos_cimke: 'Kostenlose Notruf-App für Android',
+    hos_cim: 'Im Notfall soll man nichts entscheiden müssen.',
+    hos_bev: 'Segítség ist eine Notruf-App mit sehr großen Tasten. Ich habe sie für meine 83-jährige Mutter gebaut, die sich verlaufen hatte und nicht sagen konnte, wo sie war. Seitdem bekommt sie jeder — kostenlos.',
+    gomb_fo: 'ICH BRAUCHE HILFE!',
+    gomb_alatt: 'Ein Tippen. Das Telefon ermittelt den Standort und schickt eine SMS an die Familie.',
+    hos_alairas: 'Ich bin Péter Kürtösi, Ingenieur. Ich habe das für mich und meine Mutter gebaut. Kein Geschäft — und es wird auch keines.',
+    makett_kinek: 'Benachrichtigt: Anna, Peter',
+
+    miert_cimke: 'Warum es das gibt',
+    miert_cim: 'Sie hatte ihr Telefon dabei. Sie hat angerufen. Und wir konnten trotzdem nicht helfen.',
+    miert_1: 'Im Mai 2026 hat sich meine Mutter verlaufen. Sie war nicht hilflos: Sie hatte ihr Telefon dabei und hat uns angerufen. Aber sie konnte nicht sagen, wo sie war — und wir konnten es nicht nachsehen.',
+    miert_2: 'Das Problem war nicht das fehlende Smartphone. Das Problem war, dass das Telefon genau in dem Moment, in dem es helfen sollte, eine Frage stellte: welche App, welche Taste, welches Menü.',
+    miert_3: 'Danach habe ich monatelang daran gearbeitet: was sie sehen soll, was sie nicht entscheiden muss, wie sie sich darin nicht verirren kann. Drei Monate später war sie das, was sie heute ist — und wenige Tage danach lief sie auch auf fremden Telefonen.',
+
+    elv_cimke: 'Das Leitprinzip',
+    elv_mondat: 'Nicht idiotensicher. <em>Großmutter-sicher.</em>',
+    elv_szoveg: 'Ein Techniker versteht das Gerät, er hat es nur eilig. Sie versteht es nicht — und sie hat Angst. Deshalb stellt Segítség niemandem eine Frage, der in Not ist. Alle Entscheidungen — Berechtigungen, Einstellungen, Zugriffe — werden vorher erledigt: dann, wenn die helfende Person noch daneben steht.',
+
+    mit_cimke: 'Was sie tut',
+    mit_cim: 'Sechs Fotos, eine rote Taste und die Notrufnummern.',
+    k1_cim: 'Das Foto ist die Taste',
+    k1_szo: 'Sechs große Kacheln. Wer den Namen nicht lesen kann, erkennt das Gesicht. Ohne Foto gibt es ein gezeichnetes Gesicht — keine graue Silhouette.',
+    k2_cim: 'Anrufen — oder schreiben',
+    k2_szo: 'Pro Kachel einstellbar: anrufen oder eine vorgeschriebene Nachricht senden. „Hier ist Opa, bitte schau mal nach mir." Den Text schreiben Sie selbst.',
+    k3_cim: 'Die rote Taste sagt, wo sie ist',
+    k3_szo: 'Sie ermittelt den Standort und schickt eine SMS an die ausgewählten Personen — mit der genauen Position. Keine Rückfrage, keine Bestätigung.',
+    k4_cim: 'Großmutter-Modus',
+    k4_szo: 'Eingeschaltet wird die App zum Startbildschirm: man kann sie nicht versehentlich schließen und sich im Telefon nicht verirren. Ausgeschaltet ist sie eine ganz normale App.',
+
+    tabla_cimke: 'Die Notrufleiste',
+    tabla_cim: 'Die offiziellen Nummern, nicht unsere Idee.',
+    tabla_szo: 'Farbe, Symbol und Reihenfolge stammen von der offiziellen Notruftafel. In einer Notlage zählt Gewohnheit mehr als Logik: Wer diese Reihenfolge tausendmal gesehen hat, soll sie von uns nicht umgestellt bekommen.',
+    tabla_figyelem: '⚠️ Diese Tasten sind frei änderbar. In der App sind derzeit die ungarischen Nummern voreingestellt — in anderen Ländern müssen sie in den Einstellungen angepasst werden. Eine deutsche Sprachversion der App ist in Arbeit.',
+
+    beall_cimke: 'Die Einrichtung',
+    beall_cim: 'Dieser Teil ist für Sie, nicht für sie.',
+    beall_bev: 'Segítség wird nicht von der Person eingerichtet, die sie benutzt. Das machen die Kinder, die Enkel, die Nachbarin — einmal, und danach nie wieder.',
+    l1_cim: 'Kacheln füllen',
+    l1_szo: 'Foto aus der Galerie (das Gesicht lässt sich zuschneiden) oder ein gezeichnetes Gesicht, dazu Name und Telefonnummer.',
+    l2_cim: 'Festlegen, wer den Notruf bekommt',
+    l2_szo: 'Die rote Taste erreicht nur die Ausgewählten. Auf dem Startbildschirm steht, wer benachrichtigt wird.',
+    l3_cim: 'Berechtigungen jetzt erteilen',
+    l3_szo: 'Standort und SMS. Die App führt Schritt für Schritt hindurch und bestätigt grün, wenn es geklappt hat. Das ist der wichtigste Schritt: im Notfall ist dafür keine Zeit.',
+    l4_cim: 'Großmutter-Modus einschalten, falls nötig',
+    l4_szo: 'Ein Schalter. Danach kann das Telefon eine einzige Sache — und die kann man nicht falsch machen.',
+    beall_zaro: 'Das Ganze dauert fünf Minuten. Eine ausführliche Hilfe ist eingebaut.',
+
+    mod_cimke: 'Zwei Betriebsarten',
+    mod_cim: 'Nicht nur für Großeltern.',
+    mod_bev: 'Ein Schalter entscheidet, wie weit die App das Telefon übernimmt. Dieselbe App, zwei völlig verschiedene Verhaltensweisen.',
+    mod1_cim: 'Großmutter-Modus',
+    mod1_szo: 'Die App wird zum Startbildschirm. Auch nach ZURÜCK, HOME oder dem App-Wechsler landet das Telefon wieder hier — man kann sie nicht versehentlich schließen und sich in den Menüs nicht verirren. Wer das braucht, hat ein Telefon, das eine einzige Sache kann — und die kann man nicht falsch machen.',
+    mod2_cim: 'Normale App',
+    mod2_szo: 'Ausgeschaltet ist sie eine ganz gewöhnliche App: öffnen, benutzen, schließen. Alle anderen Funktionen des Telefons bleiben unangetastet. So eignet sie sich auch für Menschen, die mit ihrem Telefon gut zurechtkommen.',
+    kinek_cim: 'Für wen der normale Modus außerdem gut ist',
+    kinek: [
+      ['Wer nicht sprechen kann', 'Jemand aus meiner Familie kann nicht sprechen. Das Auto blieb auf einer leeren Landstraße liegen. Anrufen hätte diese Person jeden können — sprechen nicht. Und per SMS zu erklären, wo sie stand, hätte mehrere Sätze gebraucht. Ein Tippen hätte gereicht. Vielen geht es so: nach einem Schlaganfall, mit einer Sprachstörung — oder einfach, weil in Panik kein Ton herauskommt.'],
+      ['Für Schulkinder', 'Sie können mit dem Telefon umgehen — verlaufen können sie sich trotzdem. Ein Tippen, und die Eltern wissen, wo sie sind. Sie müssen nicht überlegen, wen sie anrufen, und nicht erklären, wo sie gerade stehen.'],
+      ['Beim Autofahren', 'Ein großes Foto, ein Tippen, Anruf. Kein Suchen im Adressbuch, während man auf die Straße schaut.'],
+      ['Für Alleinlebende', 'Die rote Taste hilft auch, wenn jemand zu Hause stürzt oder ihm schlecht wird — man muss nicht überlegen, wem man was schreibt.']
+    ],
+
+    beall2_cimke: 'Was sich einstellen lässt',
+    beall2_cim: 'Jede Kachel ist einzeln anpassbar.',
+    beall2_bev: 'Es lohnt sich, das vor dem Herunterladen anzusehen: daran erkennen Sie, ob die App das kann, was Sie erwarten. So sieht die Einstellung einer Kachel aus.',
+    mak_cim1: 'Kachel · Anruf-Modus',
+    mak_cim2: 'Kachel · Nachrichten-Modus',
+    mak_nev_cimke: 'Name',
+    mak_nev1: 'Anna',
+    mak_nev2: 'Susanne',
+    mak_szam_cimke: 'Telefonnummer',
+    mak_szam1: '+49 151 1234567',
+    mak_szam2: '+49 160 9876543',
+    mak_kerdes: 'Beim Tippen auf dieses Bild:',
+    mak_hiv: 'anrufen',
+    mak_uzen: 'Nachricht senden',
+    mak_fuggetlen: 'Beides ist unabhängig: eine Kachel kann beim Tippen eine Nachricht senden UND den Notruf bekommen.',
+    mak_jelolo: 'Soll auch von der Taste ICH BRAUCHE HILFE benachrichtigt werden (mit Standort)',
+    mak_uzenet_cimke: 'Die Nachricht, die gesendet wird',
+    mak_uzenet: 'Hier ist Opa, bitte schau mal nach mir!',
+    mak_uzenet_jegyzet: 'Den Text schreiben Sie selbst. Bleibt das Feld leer, geht ein allgemeiner Text raus — niemals eine leere SMS.',
+    beall2_meg: 'Was sich außerdem einstellen lässt',
+    beall2_lista: [
+      ['Die Notruftasten', 'Name und Nummer aller vier sind änderbar — anderes Land, andere Nummern. Bereits geänderte Nummern werden von einem Update nie überschrieben.'],
+      ['Foto oder gezeichnetes Gesicht', 'Aus einem Foto aus der Galerie lässt sich das Gesicht zuschneiden: ziehen und mit KLEINER / GRÖSSER heranzoomen. Ohne Foto können Sie ein gezeichnetes weibliches oder männliches Gesicht wählen — auch das ist erkennbar, keine graue Silhouette.'],
+      ['Wer den Notruf bekommt', 'Pro Kachel einzeln. Auf dem Startbildschirm stehen die Namen unter der roten Taste, damit man sie sich nicht merken muss.'],
+      ['Zugang zu den Einstellungen', 'Langes Drücken auf das Zahnrad, dann eine Rückfrage — bei der NEIN die große grüne Taste ist. So gerät niemand versehentlich hinein.'],
+      ['Eingebaute Hilfe', 'Ausführliche Beschreibung aller Einstellungen und der häufigen Fragen, direkt in der App.']
+    ],
+
+    nem_cimke: 'Was sie nicht tut',
+    nem_cim: 'Wir wissen nichts über Sie. Wir wollen es auch nicht.',
+    nem_bev: 'Kein Server, kein Konto, keine Registrierung, keine Werbung. Das ist kein Versprechen, sondern zwei Schlösser:',
+    zar1_cim: 'Die App hat keine Internet-Berechtigung',
+    zar1_szo: 'Das Betriebssystem würde ihr gar nicht erlauben, irgendwohin Daten zu senden. Das kann jeder in den Telefoneinstellungen nachprüfen.',
+    zar2_cim: 'Die automatische Cloud-Sicherung ist abgeschaltet',
+    zar2_szo: 'Das ist wichtig: Android lädt App-Daten standardmäßig in Google Drive — nicht die App, sondern das System selbst. Wir haben das durch Messung entdeckt und abgeschaltet.',
+    nem_zaro: 'Der Preis dafür: Auf ein neues Telefon werden die Einstellungen nicht übernommen. Fünf Minuten neu einrichten — dafür liegt die Notfallliste Ihrer Großmutter nirgends in einer Cloud.',
+
+    korlat_cimke: 'Ehrliche Grenzen',
+    korlat_cim: 'Was Sie wissen sollten, bevor Sie jemanden darauf verlassen lassen.',
+    korlat_bev: 'Das ist eine Telefon-App, kein Wunder. Was sie nicht kann:',
+    korlatok: [
+      ['Sie braucht Empfang und einen geladenen Akku', 'Die Nachricht ist eine gewöhnliche SMS. Ohne Netz geht sie nicht raus — genau wie ein Anruf.'],
+      ['Der Standort ist so genau wie das Telefon', 'Unter freiem Himmel wenige Meter, in Gebäuden und Tiefgaragen deutlich schlechter.'],
+      ['Keine Notrufzentrale', 'Sie benachrichtigt die Familie, nicht den Rettungsdienst. Der Notruf lässt sich mit einem Tippen wählen, aber die rote Taste gilt der Familie.'],
+      ['Nur für Android', 'Für das iPhone gibt es sie nicht. iOS erlaubt bewusst kein automatisches SMS-Senden — dort ist der eingebaute Notruf SOS die richtige Lösung, und der ist besser als alles, was wir bauen könnten.'],
+      ['Beta-Version', 'Sie funktioniert und ist auf echten Telefonen erprobt — befindet sich aber noch im Test. Wenn etwas nicht geht, schreiben Sie mir.']
+    ],
+
+    kap_cimke: 'Wie man sie bekommt',
+    kap_cim: 'Schreiben Sie mir, ich schicke sie.',
+    kap_szo: 'Hier gibt es noch keinen Download. Es ist eine Beta, und ich möchte wissen, wer sie hat — damit ich Bescheid sagen kann, wenn es eine Korrektur gibt. Eine kurze Nachricht genügt.',
+    kap_gomb: 'Péter schreiben',
+    kap_bolt: 'Sobald die App im Google Play Store ist, steht hier die Download-Taste — damit entfallen auch zwei Hürden: die Warnung „unbekannter Entwickler" und die gesperrte SMS-Berechtigung.',
+
+    lab_ingyen: 'Kostenlos, und das bleibt so. Wir nehmen dafür von niemandem einen Cent.',
+    lab_licenc: 'Lizenz: PolyForm Noncommercial 1.0.0',
+    lab_verzio: 'Aktuelle Version: 1.0.0-beta.11'
+  },
+
+  /* ═══ ENGLISH ══════════════════════════════════════════════════ */
+  en: {
+    nevek: ['Anna', 'Peter', 'Susan', 'Mary', 'Dr. Clarke'],
+    ures: 'empty',
+    szamok: [
+      { o: 'lap-piros',       i: 'mento',   n: 'AMBULANCE', s: '999' },
+      { o: 'lap-feher-piros', i: 'tuz',     n: 'FIRE',      s: '999' },
+      { o: 'lap-feher-kek',   i: 'szirena', n: 'POLICE',    s: '999' },
+      { o: 'lap-kek',         i: 'sos',     n: 'NHS',       s: '111' }
+    ],
+
+    hos_cimke: 'A free emergency-call app for Android',
+    hos_cim: 'In an emergency, nobody should have to decide anything.',
+    hos_bev: 'Segítség is an emergency-call app with very large buttons. I built it for my 83-year-old mother, who got lost and could not say where she was. Since then anyone can have it, free.',
+    gomb_fo: "I'M IN TROUBLE!",
+    gomb_alatt: 'One tap. The phone finds where you are and texts your family.',
+    hos_alairas: "I'm Péter Kürtösi, an engineer. I built this for myself and my mother. It isn't a business, and it won't become one.",
+    makett_kinek: 'Alerts: Anna, Peter',
+
+    miert_cimke: 'Why it exists',
+    miert_cim: 'She had her phone. She called us. And we still could not help.',
+    miert_1: 'In May 2026 my mother got lost. She was not helpless: she had her phone with her, and she called us. But she could not tell us where she was — and we had no way to look.',
+    miert_2: 'The problem was not that she lacked a smartphone. The problem was that at the exact moment it should have helped, the phone asked her a question: which app, which button, which menu.',
+    miert_3: 'Then I worked on it for months: what she should see, what she should never have to decide, how she could not get lost inside it. Three months later it was what it is now — and within days it was working on strangers’ phones too.',
+
+    elv_cimke: 'The guiding principle',
+    elv_mondat: 'Not foolproof. <em>Grandmother-proof.</em>',
+    elv_szoveg: 'A technician understands the machine — they are just in a hurry. She does not understand it, and she is frightened. So Segítség never asks a question of someone who is in trouble. Every decision — permissions, settings, access — is settled in advance, while the person helping is still standing next to her.',
+
+    mit_cimke: 'What it does',
+    mit_cim: 'Six photos, one red button, and the emergency numbers.',
+    k1_cim: 'The photo is the button',
+    k1_szo: 'Six large tiles. Someone who cannot read the name will recognise the face. With no photo, you get a drawn face — not a grey silhouette.',
+    k2_cim: 'Tap to call — or to text',
+    k2_szo: 'Set per tile: call the person, or send a message you wrote in advance. "It’s Grandad, please look in on me." You write the words.',
+    k3_cim: 'The red button says where they are',
+    k3_szo: 'It finds the location and texts the people you chose — with the exact position. No question, no confirmation step.',
+    k4_cim: 'Grandmother mode',
+    k4_szo: 'Turned on, the app becomes the home screen: it cannot be closed by accident, and nobody gets lost inside the phone. Turned off, it is an ordinary app.',
+
+    tabla_cimke: 'The emergency row',
+    tabla_cim: 'The official numbers, not our invention.',
+    tabla_szo: 'The colour, the symbol and the order come from the official emergency signage. In a crisis, habit beats logic: if someone has seen that order a thousand times, we should not be the ones to rearrange it.',
+    tabla_figyelem: '⚠️ These buttons are fully editable. The app currently ships with the Hungarian numbers — in other countries they must be changed in the settings. An English version of the app is in progress.',
+
+    beall_cimke: 'Setting it up',
+    beall_cim: 'This part is for you, not for them.',
+    beall_bev: 'Segítség is not set up by the person who will use it. A son, a granddaughter, a neighbour sets it up — once, and then it never needs touching again.',
+    l1_cim: 'Fill the tiles',
+    l1_szo: 'A photo from the gallery (you can crop to the face) or a drawn face, plus a name and a phone number.',
+    l2_cim: 'Choose who gets the alert',
+    l2_szo: 'The red button only reaches the people you mark. The home screen shows who will be notified.',
+    l3_cim: 'Grant the permissions now',
+    l3_szo: 'Location and messaging. The app walks you through it and confirms in green when it worked. This is the step that matters most: in an emergency there is no time for it.',
+    l4_cim: 'Turn on grandmother mode, if needed',
+    l4_szo: 'One switch. After that the phone does exactly one thing, and it cannot be got wrong.',
+    beall_zaro: 'The whole thing takes five minutes. There is a detailed built-in help section.',
+
+    mod_cimke: 'Two modes',
+    mod_cim: 'Not only for grandparents.',
+    mod_bev: 'One switch decides how far the app takes over the phone. The same app, two completely different behaviours.',
+    mod1_cim: 'Grandmother mode',
+    mod1_szo: 'The app becomes the home screen. BACK, HOME and the app switcher all bring the phone back here — it cannot be closed by accident, and nobody gets lost in the menus. For someone who needs that, the phone does exactly one thing, and it cannot be got wrong.',
+    mod2_cim: 'Ordinary app',
+    mod2_szo: 'Switched off it is a perfectly ordinary app: open it, use it, close it. Every other function of the phone is untouched. That makes it useful for people who are perfectly comfortable with their phone.',
+    kinek_cim: 'Who else the ordinary mode suits',
+    kinek: [
+      ['People who cannot speak', 'A relative of mine cannot speak. Their car broke down on an empty road. They could have dialled anyone — but not said a word. And explaining by text where they were standing would have taken several sentences. One tap would have solved it. Many people are in the same position: after a stroke, with a speech impairment — or simply because in a panic no sound comes out.'],
+      ['School-age children', 'They can work a phone — but they can still get lost. One tap, and a parent knows where they are. No working out who to call, and no having to describe where they are standing.'],
+      ['While driving', 'One large photo, one tap, a call. No hunting through contacts while watching the road.'],
+      ['People living alone', 'The red button helps just as much if someone falls or feels unwell at home — no deciding who to message, or what to say.']
+    ],
+
+    beall2_cimke: 'What you can set up',
+    beall2_cim: 'Every tile is configured separately.',
+    beall2_bev: 'Worth looking at before you download it: this is what tells you whether the app does what you are hoping for. Here is how one tile is set up.',
+    mak_cim1: 'Tile · call mode',
+    mak_cim2: 'Tile · message mode',
+    mak_nev_cimke: 'Name',
+    mak_nev1: 'Anna',
+    mak_nev2: 'Susan',
+    mak_szam_cimke: 'Phone number',
+    mak_szam1: '+44 7700 900123',
+    mak_szam2: '+44 7700 900456',
+    mak_kerdes: 'When this picture is tapped:',
+    mak_hiv: 'call them',
+    mak_uzen: 'message them',
+    mak_fuggetlen: 'These two are independent: a tile can send a message on tap AND receive the emergency alert.',
+    mak_jelolo: 'Also alert this person from the I’M IN TROUBLE button (with the location)',
+    mak_uzenet_cimke: 'The message that goes out',
+    mak_uzenet: 'It’s Grandad, please look in on me!',
+    mak_uzenet_jegyzet: 'You write the words. Left blank, a general message goes out instead — never an empty text.',
+    beall2_meg: 'What else you can set',
+    beall2_lista: [
+      ['The emergency buttons', 'The name and number of all four can be changed — different country, different numbers. Numbers you have already changed are never overwritten by an update.'],
+      ['Photo or drawn face', 'From a gallery photo you can crop to the face: drag it, and zoom in with SMALLER / LARGER. With no photo you can pick a drawn female or male face — recognisable too, not a grey silhouette.'],
+      ['Who receives the alert', 'Set per tile. On the home screen their names appear under the red button, so nobody has to remember.'],
+      ['Getting into the settings', 'A long press on the gear, then a question — where NO is the big green button. So nobody wanders in by accident.'],
+      ['Built-in help', 'A detailed description of every setting and the common questions, inside the app itself.']
+    ],
+
+    nem_cimke: 'What it does not do',
+    nem_cim: 'We know nothing about you. We do not want to.',
+    nem_bev: 'No server, no account, no sign-up, no adverts. That is not a promise — it is two locks:',
+    zar1_cim: 'The app has no internet permission',
+    zar1_szo: 'The operating system would not let it send data anywhere. Anyone can check this in the phone’s settings.',
+    zar2_cim: 'The system’s cloud backup is switched off for it',
+    zar2_szo: 'This one matters: by default Android uploads app data to Google Drive — not the app, the system itself. We found this by measurement, and switched it off.',
+    nem_zaro: 'The price: settings do not move to a new phone by themselves. Five minutes to set it up again — in exchange, your grandmother’s emergency list is not sitting in anyone’s cloud.',
+
+    korlat_cimke: 'Honest limits',
+    korlat_cim: 'What to know before you let someone rely on it.',
+    korlat_bev: 'This is a phone app, not a miracle. What it cannot do:',
+    korlatok: [
+      ['It needs signal and a charged battery', 'The alert is an ordinary SMS. With no network it will not go out — the same as a phone call.'],
+      ['Location is only as good as the phone', 'A few metres under open sky; much worse indoors or in an underground car park.'],
+      ['It is not a control room', 'It alerts the family, not the ambulance service. The emergency number is one tap away, but the red button is for family.'],
+      ['Android only', 'There is no iPhone version. iOS deliberately does not allow automatic SMS sending — there, the built-in Emergency SOS is the right answer, and it is better than anything we could build.'],
+      ['Beta version', 'It works and has been proven on real phones — but it is still in testing. If something goes wrong, write to me.']
+    ],
+
+    kap_cimke: 'How to get it',
+    kap_cim: 'Write to me and I will send it.',
+    kap_szo: 'There is no download here yet. It is a beta, and I would like to know who has it — so I can tell you when a fix goes out. A short message is enough.',
+    kap_gomb: 'Email Péter',
+    kap_bolt: 'Once it reaches the Google Play Store, the download button will appear here — and two obstacles disappear with it: the "unknown developer" warning and the blocked SMS permission.',
+
+    lab_ingyen: 'Free, and it will stay free. We will not accept a penny for it from anyone.',
+    lab_licenc: 'PolyForm Noncommercial 1.0.0 licence',
+    lab_verzio: 'Current version: 1.0.0-beta.11'
+  }
+};
+
+/* ═══ Megjelenítés ═════════════════════════════════════════════════ */
+
+const MERETEK = ['15px', '17px', '19.5px'];
+
+function biztosTarolas(muvelet, alap) {
+  try { return muvelet(); } catch (e) { return alap; }
+}
+
+function csempetRajzol(sz) {
+  const cs = document.getElementById('csempek');
+  let html = '';
+  for (let i = 0; i < 6; i++) {
+    if (i < 5) {
+      html += '<div class="csempe">' + ARCOK[i] +
+              '<span class="csempe-nev">' + sz.nevek[i] + '</span></div>';
+    } else {
+      html += '<div class="csempe ures"><svg viewBox="0 0 24 24" fill="none" stroke="#8B93A1" stroke-width="1.7" stroke-linecap="round">' +
+              '<circle cx="10" cy="8.5" r="3.6"/><path d="M3.6 19.5c0-3.4 2.9-5.6 6.4-5.6 1.1 0 2.1.2 3 .6M17.5 14.4v5.4M14.8 17.1h5.4"/></svg>' +
+              '<span class="csempe-nev">' + sz.ures + '</span></div>';
+    }
+  }
+  cs.innerHTML = html;
+}
+
+function tablatRajzol(sz) {
+  const html = sz.szamok.map(function (t) {
+    return '<div class="szam-lap ' + t.o + '">' + IKON[t.i] +
+           '<span class="nev">' + t.n + '</span>' +
+           '<span class="szam">' + t.s + '</span></div>';
+  }).join('');
+  document.getElementById('tabla-mini').innerHTML = html;
+  document.getElementById('tabla-nagy').innerHTML = html;
+}
+
+function korlatokatRajzol(sz) {
+  document.getElementById('korlatok').innerHTML = sz.korlatok.map(function (k) {
+    return '<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">' +
+           '<path d="M12 3.6 22 20.4H2z"/><path d="M12 9.6v4.2M12 17.2h.01"/></svg>' +
+           '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div></li>';
+  }).join('');
+}
+
+function ujSzakaszokatRajzol(sz) {
+  // A makett arcképei — ugyanaz a rajz, mint a csempéken.
+  document.getElementById('mak-arc1').innerHTML = ARCOK[0];
+  document.getElementById('mak-arc2').innerHTML = ARCOK[2];
+
+  document.getElementById('kinek-racs').innerHTML = sz.kinek.map(function (k) {
+    return '<div class="kinek"><b>' + k[0] + '</b><span>' + k[1] + '</span></div>';
+  }).join('');
+
+  document.getElementById('beall2-lista').innerHTML = sz.beall2_lista.map(function (k) {
+    return '<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+           'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+           '<path d="M4.6 12.4l5 5 9.8-10.4"/></svg>' +
+           '<div><b>' + k[0] + '</b><span>' + k[1] + '</span></div></li>';
+  }).join('');
+}
+
+function nyelvetAllit(kod) {
+  const sz = SZOVEG[kod];
+  if (!sz) return;
+
+  document.documentElement.lang = kod;
+
+  document.querySelectorAll('[data-t]').forEach(function (el) {
+    const ertek = sz[el.dataset.t];
+    if (typeof ertek === 'string') el.innerHTML = ertek;
+  });
+
+  csempetRajzol(sz);
+  tablatRajzol(sz);
+  korlatokatRajzol(sz);
+  ujSzakaszokatRajzol(sz);
+
+  document.querySelectorAll('.nyelvek button').forEach(function (b) {
+    b.setAttribute('aria-pressed', String(b.dataset.nyelv === kod));
+  });
+
+  biztosTarolas(function () { return localStorage.setItem('segitseg-nyelv', kod); });
+}
+
+function meretetAllit(index) {
+  document.documentElement.style.setProperty('--alap', MERETEK[index]);
+  document.querySelectorAll('.meret button').forEach(function (b) {
+    b.setAttribute('aria-pressed', String(Number(b.dataset.meret) === index));
+  });
+  biztosTarolas(function () { return localStorage.setItem('segitseg-meret', String(index)); });
+}
+
+document.querySelectorAll('.nyelvek button').forEach(function (b) {
+  b.addEventListener('click', function () { nyelvetAllit(b.dataset.nyelv); });
+});
+document.querySelectorAll('.meret button').forEach(function (b) {
+  b.addEventListener('click', function () { meretetAllit(Number(b.dataset.meret)); });
+});
+
+/* ⭐ Induló nyelv: MAGYAR — függetlenül a böngésző nyelvétől.
+   (Peter döntése: az oldal elsősorban magyaroknak szól; a német és az
+   angol változat a fenti gombokkal érhető el.)
+   Akit másik nyelvre váltott, annak azt megjegyezzük. */
+const mentettNyelv = biztosTarolas(function () { return localStorage.getItem('segitseg-nyelv'); }, null);
+nyelvetAllit(mentettNyelv || 'hu');
+
+const mentettMeret = biztosTarolas(function () { return localStorage.getItem('segitseg-meret'); }, null);
+meretetAllit(mentettMeret !== null ? Number(mentettMeret) : 1);
+</script>
+</body>
+</html>
