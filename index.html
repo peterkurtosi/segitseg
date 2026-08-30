@@ -549,6 +549,35 @@ button:focus-visible, a:focus-visible {
 .uzenet-doboz .cimke-kis { font-size: 0.76rem; color: var(--halvany); }
 .uzenet-doboz .ertek { font-size: 0.97rem; }
 
+
+/* ── A film ─────────────────────────────────────────────────────── */
+
+.film-doboz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ⚠ A film ÁLLÓ (9:16). Szélességben korlátozzuk, különben asztali
+   gépen az egész képernyőt elfoglalná, és nevetségesen nézne ki. */
+.film-doboz video {
+  width: 100%;
+  max-width: 330px;
+  aspect-ratio: 9 / 16;
+  border-radius: 20px;
+  border: 1px solid var(--vonal-eros);
+  background: #0B0D12;
+  display: block;
+}
+
+.film-jegyzet {
+  font-size: 0.9rem;
+  color: var(--halvany);
+  text-align: center;
+  max-width: 42ch;
+}
+
 /* ── Tartalmi elemek ────────────────────────────────────────────── */
 
 .racs {
@@ -793,6 +822,26 @@ footer .sor { display: flex; gap: 10px 26px; flex-wrap: wrap; align-items: basel
         <p data-t="miert_1"></p>
         <p data-t="miert_2"></p>
         <p data-t="miert_3"></p>
+      </div>
+    </section>
+
+
+    <!-- ══ A FILM ════════════════════════════════════════════════ -->
+    <section>
+      <div class="verem">
+        <span class="cimke" data-t="film_cimke"></span>
+        <h2 class="hasab" data-t="film_cim"></h2>
+        <p class="hasab" data-t="film_bev"></p>
+
+        <!-- ⚠ `preload="metadata"`: a 900 KB-os film NEM töltődik le,
+             amíg valaki rá nem kattint. Mobilneten ez nem mindegy. -->
+        <div class="film-doboz" style="margin-top:10px">
+          <video controls playsinline preload="metadata"
+                 poster="segitseg-film-borito.jpg">
+            <source src="segitseg-film.mp4" type="video/mp4">
+          </video>
+          <p class="film-jegyzet" data-t="film_jegyzet"></p>
+        </div>
       </div>
     </section>
 
@@ -1081,6 +1130,10 @@ const SZOVEG = {
     hos_alairas: 'Kürtösi Péter vagyok — gépész-, szoftver- és villamosmérnök. Ezt magamnak és az édesanyámnak építettem. Nem üzlet, nem lesz belőle az.',
     makett_kinek: 'Szólok neki: Klotild, Péter',
 
+    film_cimke: 'Nézd meg',
+    film_cim: 'Harminc másodperc, és érted.',
+    film_bev: 'Így néz ki, amikor valaki megnyomja a piros gombot — és így érkezik meg a másik telefonra.',
+    film_jegyzet: 'Nincs benne hang: a feliratok mindent elmondanak. A filmben látható nevek és a helyszín kitaláltak.',
     miert_cimke: 'Miért van',
     miert_cim: 'Volt nála telefon. Fel is hívott. És mégsem tudtunk segíteni.',
     miert_1: '2026 májusában az édesanyám eltévedt. Nem volt eszköztelen: nála volt a telefonja, és fel is hívott minket. De nem tudta megmondani, hol van — és mi sem tudtuk megnézni.',
@@ -1215,6 +1268,10 @@ const SZOVEG = {
     hos_alairas: 'Ich bin Péter Kürtösi — Maschinenbau-, Software- und Elektroingenieur. Ich habe das für mich und meine Mutter gebaut. Kein Geschäft — und es wird auch keines.',
     makett_kinek: 'Benachrichtigt: Klotild, Peter',
 
+    film_cimke: 'Ansehen',
+    film_cim: 'Dreißig Sekunden, und Sie verstehen es.',
+    film_bev: 'So sieht es aus, wenn jemand die rote Taste drückt — und so kommt es auf dem anderen Telefon an.',
+    film_jegyzet: '⚠️ Das Video ist auf Ungarisch — die Bilder sprechen aber für sich. Es hat keinen Ton. Die gezeigten Namen und der Ort sind erfunden.',
     miert_cimke: 'Warum es das gibt',
     miert_cim: 'Sie hatte ihr Telefon dabei. Sie hat angerufen. Und wir konnten trotzdem nicht helfen.',
     miert_1: 'Im Mai 2026 hat sich meine Mutter verlaufen. Sie war nicht hilflos: Sie hatte ihr Telefon dabei und hat uns angerufen. Aber sie konnte nicht sagen, wo sie war — und wir konnten es nicht nachsehen.',
@@ -1349,6 +1406,10 @@ const SZOVEG = {
     hos_alairas: "I'm Péter Kürtösi — a mechanical, software and electrical engineer. I built this for myself and my mother. It isn't a business, and it won't become one.",
     makett_kinek: 'Alerts: Klotild, Peter',
 
+    film_cimke: 'Watch',
+    film_cim: 'Thirty seconds, and you have it.',
+    film_bev: 'This is what happens when someone presses the red button — and how it arrives on the other phone.',
+    film_jegyzet: '⚠️ The film is in Hungarian — but the pictures speak for themselves. There is no sound. The names and the location shown are fictional.',
     miert_cimke: 'Why it exists',
     miert_cim: 'She had her phone. She called us. And we still could not help.',
     miert_1: 'In May 2026 my mother got lost. She was not helpless: she had her phone with her, and she called us. But she could not tell us where she was — and we had no way to look.',
