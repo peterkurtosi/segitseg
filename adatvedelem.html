@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adatvédelmi tájékoztató — Segítség</title>
+<meta name="description" content="A Segítség alkalmazás adatvédelmi tájékoztatója. Az app nem gyűjt adatot: nincs szerver, nincs fiók, minden a telefonon marad.">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="index, follow">
+
+<!-- A betűtípusok HELYBŐL jönnek (betuk/), nem a Google CDN-jéről:
+     így az oldal betöltése egyetlen adatot sem küld harmadik félnek. -->
+
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   SEGÍTSÉG — adatvédelmi tájékoztató
+   Önálló lap. Nincs külső szkript, nincs követés, nincs süti, és a
+   betűtípusok is helyből jönnek. A három nyelv EGYMÁS ALATT áll:
+   JavaScript nélkül is mind a három olvasható — egy adatvédelmi
+   tájékoztatónak mindig elérhetőnek kell lennie.
+   ═══════════════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(betuk/archivo-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(betuk/archivo-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(betuk/archivo-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(betuk/archivo-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(betuk/public-sans-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(betuk/public-sans-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(betuk/public-sans-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(betuk/public-sans-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --papir:      #F1F3F6;
+  --lap:        #FFFFFF;
+  --tinta:      #171A20;
+  --halvany:    #5C6472;
+  --vonal:      #D7DBE2;
+  --vonal-eros: #B6BDC8;
+  --piros:      #C62828;
+  --kek:        #12539E;
+  --zold:       #2E7D32;
+  --sarga-lap:  #FFF8E6;
+  --alap: 18px;           /* nagyobb alapméret: a célközönség idős */
+  --sav: 66ch;
+  --sugar: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --papir:      #12151B;
+    --lap:        #191D25;
+    --tinta:      #E8EBF0;
+    --halvany:    #99A2B0;
+    --vonal:      #2B313C;
+    --vonal-eros: #3C4451;
+    --piros:      #EF5350;
+    --kek:        #6BA6E8;
+    --zold:       #66BB6A;
+    --sarga-lap:  #2A2417;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--papir);
+  color: var(--tinta);
+  font-family: 'Public Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: var(--alap);
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+}
+
+.burok { max-width: var(--sav); margin: 0 auto; padding: 0 20px; }
+
+header {
+  background: var(--lap);
+  border-bottom: 1px solid var(--vonal);
+  padding: 28px 0 22px;
+}
+
+h1, h2, h3 {
+  font-family: 'Archivo', system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  text-wrap: balance;
+  margin: 0;
+}
+h1 { font-size: 1.75rem; }
+h2 {
+  font-size: 1.3rem;
+  margin: 2.4rem 0 0.7rem;
+  padding-top: 1.4rem;
+  border-top: 2px solid var(--vonal);
+}
+h3 { font-size: 1.05rem; margin: 1.5rem 0 0.4rem; font-weight: 600; }
+
+p, li { margin: 0.7rem 0; }
+ul { padding-left: 1.3em; }
+li { margin: 0.45rem 0; }
+
+a { color: var(--kek); text-decoration: underline; text-underline-offset: 3px; }
+a:hover, a:focus-visible { color: var(--piros); }
+
+code {
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--papir);
+  border: 1px solid var(--vonal);
+  border-radius: 5px;
+  padding: 1px 5px;
+}
+
+/* A nyelvsáv: ugrólinkek, JavaScript nélkül */
+.nyelvsav {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-top: 14px;
+}
+.nyelvsav a {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 2px solid var(--vonal-eros);
+  border-radius: 999px;
+  background: var(--papir);
+  color: var(--tinta);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.nyelvsav a:hover, .nyelvsav a:focus-visible {
+  border-color: var(--kek); color: var(--kek);
+}
+
+main { padding: 8px 0 60px; }
+
+section.nyelv {
+  background: var(--lap);
+  border: 1px solid var(--vonal);
+  border-radius: var(--sugar);
+  padding: 8px 26px 30px;
+  margin: 26px 0;
+  scroll-margin-top: 14px;
+}
+
+/* A „lényeg röviden” doboz — a legtöbb olvasó eddig jut el */
+.lenyeg {
+  background: var(--sarga-lap);
+  border: 2px solid var(--vonal-eros);
+  border-left: 6px solid var(--zold);
+  border-radius: var(--sugar);
+  padding: 18px 22px;
+  margin: 20px 0 6px;
+  font-size: 1.05rem;
+}
+.lenyeg p:first-child { margin-top: 0; }
+.lenyeg p:last-child { margin-bottom: 0; }
+
+/* Figyelmeztető doboz — a szín SOHA nem az egyetlen jelzés:
+   vastag keret + „⚠” + félkövér bevezető is jelöli. */
+.figyelem {
+  background: var(--sarga-lap);
+  border: 2px solid var(--piros);
+  border-radius: var(--sugar);
+  padding: 16px 20px;
+  margin: 18px 0;
+}
+.figyelem p:first-child { margin-top: 0; }
+.figyelem p:last-child { margin-bottom: 0; }
+
+.datum { color: var(--halvany); font-size: 0.95rem; margin-top: 6px; }
+.vissza { margin: 18px 0 0; }
+
+footer {
+  border-top: 1px solid var(--vonal);
+  padding: 22px 0 40px;
+  color: var(--halvany);
+  font-size: 0.92rem;
+}
+
+@media (max-width: 560px) {
+  :root { --alap: 17px; }
+  section.nyelv { padding: 6px 18px 24px; border-radius: 10px; }
+  h1 { font-size: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="burok">
+    <h1>Adatvédelmi tájékoztató</h1>
+    <p class="datum">
+      <strong>Segítség</strong> alkalmazás (<code>hu.segitseg.segitseg</code>)
+      és a <code>peterkurtosi.github.io/segitseg</code> weboldal<br>
+      Hatályos: 2026. szeptember 1.
+    </p>
+    <nav class="nyelvsav" aria-label="Nyelvek / Sprachen / Languages">
+      <a href="#hu">Magyar</a>
+      <a href="#de">Deutsch</a>
+      <a href="#en">English</a>
+    </nav>
+  </div>
+</header>
+
+<main class="burok">
+
+<!-- ══════════════════════════════════════════════════════════════════
+     MAGYAR
+     ══════════════════════════════════════════════════════════════ -->
+<section class="nyelv" id="hu" lang="hu">
+
+<h2 style="border-top:none; padding-top:0; margin-top:1.6rem;">1. A lényeg röviden</h2>
+
+<div class="lenyeg">
+  <p><strong>A Segítség alkalmazás semmilyen adatot nem küld el a telefonjáról.</strong>
+  Nincs mögötte szerver, nincs benne felhasználói fiók, nincs benne
+  reklám és nincs benne semmilyen mérő- vagy nyomkövető program.</p>
+  <p>Amit Ön beállít — a családtagok nevét, telefonszámát, a fényképet, az
+  üzenet szövegét — az <strong>kizárólag a saját telefonján</strong> van
+  tárolva. Mi nem látjuk, nem kapjuk meg, és nem is tudnánk megnézni.</p>
+  <p>Az egyetlen adat, ami elhagyja a telefont, <strong>az az üzenet, amit
+  Ön küld el</strong> egy Ön által megadott ismerősnek — és azt is
+  közvetlenül az ismerőse kapja meg, nem mi.</p>
+</div>
+
+<h2>2. Ki felel az alkalmazásért</h2>
+<p>Az alkalmazást <strong>Kürtösi Péter</strong> készítette és tartja karban,
+a Google Play áruházban <strong>CreativePearls</strong> néven megjelenő
+fejlesztői fiókon keresztül. Nincs mögötte cég, nincs adatfeldolgozó
+partner, és nincs üzleti modell: az alkalmazás ingyenes, és az is marad.</p>
+<p>Adatvédelmi kérdésben így érhet el:
+<a href="mailto:peter.kurtosi@gmail.com">peter.kurtosi@gmail.com</a></p>
+
+<h2>3. Mire terjed ki ez a tájékoztató</h2>
+<ul>
+  <li>a <strong>Segítség</strong> Android-alkalmazásra
+      (csomagnév: <code>hu.segitseg.segitseg</code>), és</li>
+  <li>az alkalmazás <strong>ismertető weboldalára</strong>
+      (<code>peterkurtosi.github.io/segitseg</code>).</li>
+</ul>
+<p>A kettőt külön tárgyaljuk, mert nem ugyanaz vonatkozik rájuk: az
+alkalmazás semmit nem küld el, a weboldalt viszont — mint minden
+weboldalt — egy tárhelyszolgáltató szolgálja ki. Erről a 9. pont szól.</p>
+
+<h2>4. Mi történik a telefonján</h2>
+<p>Az alkalmazás a következőket tárolja, <strong>kizárólag a telefonja
+belső tárhelyén</strong>:</p>
+<ul>
+  <li>a segítők neve és telefonszáma, amit Ön adott meg;</li>
+  <li>a hivatalos segélyhívó számok, amiket Ön állított be;</li>
+  <li>az elküldendő üzenet szövege;</li>
+  <li>a választott nyelv, ország és betűméret;</li>
+  <li>ha beállított fényképet: annak másolata.</li>
+</ul>
+<p>Ezek az adatok az alkalmazás saját, védett területén vannak, ahová a
+telefon operációs rendszere más alkalmazásokat nem enged be.</p>
+<p><strong>A telefon automatikus felhőmentését kifejezetten kikapcsoltuk</strong>
+az alkalmazásra. Ez azt jelenti, hogy a beállításai a Google Drive-ra sem
+másolódnak fel — akkor sem, ha egyébként be van kapcsolva a telefonján a
+biztonsági mentés. Ezt azért tettük, mert egy segélyhívó alkalmazásban
+családtagok nevei és telefonszámai vannak.</p>
+
+<h2>5. Az engedélyek — mire kellenek, és mi romlik el nélkülük</h2>
+
+<h3>Helymeghatározás</h3>
+<p><strong>Mire kell:</strong> hogy a kiküldött üzenetbe bele tudjuk írni,
+hol van Ön — koordinátákkal és egy térképhivatkozással, amit a
+címzett meg tud nyitni. Ez az alkalmazás lényege.</p>
+<p><strong>Ha nem adja meg:</strong> az üzenet elmegy, de nem lesz benne a
+helyzete — csak annyi, hogy Ön segítséget kér.</p>
+<p>A helyadatot az alkalmazás <strong>nem tárolja el</strong> és sehova nem
+küldi el; kizárólag abba az üzenetbe kerül bele, amit Ön elküld.</p>
+
+<h3>SMS küldése</h3>
+<p><strong>Mire kell:</strong> hogy egyetlen gombnyomással el tudja küldeni
+a segélykérő üzenetet, anélkül, hogy egy másik alkalmazásban kelljen
+megkeresnie a küldés gombot. Idős, ijedt vagy rosszul látó embernél ez a
+különbség számít.</p>
+<p><strong>Ha nem adja meg:</strong> az alkalmazás nem tud üzenetet küldeni.
+A telefonhívás gombjai ettől függetlenül működnek.</p>
+<p>Az alkalmazás <strong>nem olvassa</strong> a beérkezett üzeneteit, nem fér
+hozzá a beszélgetéseihez, és nem küld üzenetet az Ön tudta nélkül.</p>
+
+<h3>Névjegyek és fényképek</h3>
+<p>Ha a beállításnál a telefon névjegyzékéből vagy a képtárból választ, az
+alkalmazás <strong>csak azt az egy tételt</strong> kapja meg, amit Ön
+kiválasztott. A teljes névjegyzékhez és a teljes képtárhoz nem fér hozzá.</p>
+
+<h2>6. Amikor Ön elküldi az üzenetet</h2>
+<p>Ez az egyetlen pillanat, amikor adat hagyja el a telefonját, ezért
+külön leírjuk, pontosan mi történik.</p>
+<ul>
+  <li><strong>Ki kapja meg:</strong> az a személy, akit Ön előre beállított.
+      Senki más. Mi nem kapunk másolatot, és nincs olyan szerver, ahova az
+      üzenet befutna.</li>
+  <li><strong>Mi van benne:</strong> az Ön által megadott üzenetszöveg, és —
+      ha engedélyezte a helymeghatározást — a helyzete és egy
+      térképhivatkozás.</li>
+  <li><strong>Hogyan megy:</strong> közönséges SMS-ként, a mobilszolgáltatója
+      hálózatán keresztül.</li>
+</ul>
+<div class="figyelem">
+  <p>⚠️ <strong>Ameddig a mi felelősségünk tart:</strong> az üzenet
+  elküldéséig. Onnantól az Ön <strong>mobilszolgáltatója</strong> továbbítja
+  (és a szokásos módon naplózza is), majd a <strong>címzett telefonjára</strong>
+  kerül, ahol az illető saját beállításai érvényesek. Erre a két lépésre
+  nincs ráhatásunk, mint ahogy egyetlen alkalmazás készítőjének sincs.</p>
+</div>
+
+<h2>7. Amit az alkalmazás NEM csinál</h2>
+<p>Ezek nem ígéretek, hanem az alkalmazás felépítéséből következnek:</p>
+<ul>
+  <li><strong>Nincs szerverünk.</strong> Nincs hova adatot küldeni.</li>
+  <li><strong>Nincs felhasználói fiók</strong> és nincs regisztráció. Nem
+      tudjuk, ki használja az alkalmazást, és hányan.</li>
+  <li><strong>Nincs benne mérőprogram</strong> (analitika), és nincs benne
+      hibajelentés-küldő sem. Ha az alkalmazás összeomlik, arról nem
+      értesülünk automatikusan — csak ha Ön megírja nekünk.</li>
+  <li><strong>Nincs reklám</strong> és nincs hirdetésazonosító.</li>
+  <li><strong>Nincs vásárlás</strong> az alkalmazáson belül.</li>
+  <li><strong>A felhőmentés ki van kapcsolva</strong> (lásd a 4. pontot).</li>
+</ul>
+
+<h2>8. Meddig tároljuk, és hogyan törölhető</h2>
+<p>Mivel semmit nem kapunk meg, <strong>nálunk nincs mit tárolni és nincs mit
+törölni.</strong></p>
+<p>A telefonján lévő adatok addig maradnak meg, amíg Ön törli őket. Kétféle
+módon teheti meg:</p>
+<ul>
+  <li>a beállításokban egyesével átírja vagy kiüríti a mezőket, vagy</li>
+  <li><strong>eltávolítja az alkalmazást</strong> — ekkor a hozzá tartozó
+      összes adat is törlődik a telefonról, visszaállíthatatlanul (mivel a
+      felhőmentés ki van kapcsolva, onnan sem jön vissza).</li>
+</ul>
+
+<h2>9. A weboldal</h2>
+<p>Az ismertető weboldalon <strong>nincs süti, nincs látogatottságmérő és
+nincs semmilyen nyomkövető.</strong> Épp ezért nem is ugrik fel rajta
+„fogadja el a sütiket” ablak: nincs mit elfogadtatni.</p>
+<p>Amit tudni érdemes róla:</p>
+<ul>
+  <li><strong>Tárhely:</strong> az oldalt a <strong>GitHub, Inc.</strong>
+      (USA) szolgálja ki a GitHub Pages szolgáltatásán. Mint minden
+      webkiszolgáló, a GitHub is naplózza a látogatók IP-címét — ez a
+      weboldalak működésének velejárója. A GitHub tanúsított résztvevője
+      az EU–USA adatvédelmi keretrendszernek (Data Privacy Framework),
+      ami a továbbítás jogi alapját adja.</li>
+  <li><strong>Verziólekérdezés:</strong> az oldal betöltésekor lekérdezi a
+      GitHubtól, melyik a legfrissebb kiadás, és hányan töltötték le. Ez a
+      lekérdezés is a GitHubhoz megy, ugyanahhoz a szolgáltatóhoz, aki az
+      oldalt kiszolgálja.</li>
+  <li><strong>Betűtípusok:</strong> a saját kiszolgálónkról jönnek. Kifejezetten
+      <em>nem</em> a Google betűtípus-szolgáltatásából, hogy az oldal
+      betöltése ne küldje el az Ön IP-címét egy harmadik cégnek.</li>
+  <li><strong>Helyi tárolás:</strong> a böngészője elmenti a választott
+      <strong>nyelvet</strong> és <strong>betűméretet</strong>, hogy legközelebb
+      is úgy jelenjen meg az oldal. Ez a két adat csak az Ön böngészőjében
+      marad, hozzánk nem jut el, és a böngésző adatainak törlésével bármikor
+      eltávolítható.</li>
+  <li><strong>Nincs űrlap</strong> az oldalon, tehát nincs hova adatot beírni.
+      Az e-mail cím közönséges levélküldő hivatkozás.</li>
+</ul>
+
+<h2>10. Az Ön jogai</h2>
+<p>Az európai adatvédelmi rendelet (GDPR) alapján joga van tájékoztatást
+kérni a róla kezelt adatokról, kérni azok helyesbítését, törlését,
+kezelésük korlátozását, tiltakozni a kezelés ellen, és kérni az adatok
+hordozható formában való kiadását.</p>
+<p><strong>A gyakorlatban:</strong> mivel semmilyen adatát nem kapjuk meg és
+nem tároljuk, ezekre a kérésekre annyit tudunk válaszolni, hogy nincs
+nálunk adat. Ettől függetlenül minden megkeresésre válaszolunk a fenti
+e-mail címen.</p>
+<p>Ha úgy érzi, hogy az adatait nem megfelelően kezeljük, panasszal élhet a
+lakóhelye szerinti adatvédelmi hatóságnál:</p>
+<ul>
+  <li><strong>Magyarország:</strong> Nemzeti Adatvédelmi és Információszabadság
+      Hatóság (NAIH) — <a href="https://naih.hu">naih.hu</a></li>
+  <li><strong>Németország:</strong> a szövetségi vagy a tartományi adatvédelmi
+      biztos — <a href="https://www.bfdi.bund.de">bfdi.bund.de</a></li>
+  <li><strong>Egyesült Királyság:</strong> Information Commissioner's Office
+      (ICO) — <a href="https://ico.org.uk">ico.org.uk</a></li>
+</ul>
+
+<h2>11. Ha ez a tájékoztató változik</h2>
+<p>Ha az alkalmazás úgy változik, hogy az adatkezelést is érinti, ezt a
+lapot frissítjük, és a tetején lévő dátumot átírjuk. Visszamenőleg nem
+módosítunk: ami egyszer kikerült, az a kiadástörténetben nyomon
+követhető marad.</p>
+
+<h2>12. Kapcsolat</h2>
+<p>Kürtösi Péter ·
+<a href="mailto:peter.kurtosi@gmail.com">peter.kurtosi@gmail.com</a><br>
+Google Play fejlesztői fiók: CreativePearls</p>
+
+<p class="vissza"><a href="index.html">← Vissza a főoldalra</a></p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     DEUTSCH  (magázó — Sie)
+     ══════════════════════════════════════════════════════════════ -->
+<section class="nyelv" id="de" lang="de">
+
+<h2 style="border-top:none; padding-top:0; margin-top:1.6rem;">1. Das Wichtigste in Kürze</h2>
+
+<div class="lenyeg">
+  <p><strong>Die App Segítség sendet keinerlei Daten von Ihrem Telefon
+  fort.</strong> Es gibt keinen Server dahinter, kein Benutzerkonto, keine
+  Werbung und keinerlei Mess- oder Tracking-Programme.</p>
+  <p>Was Sie einrichten — die Namen und Telefonnummern Ihrer Angehörigen,
+  das Foto, den Text der Nachricht — bleibt <strong>ausschließlich auf Ihrem
+  eigenen Telefon</strong>. Wir sehen es nicht, wir erhalten es nicht, und
+  wir könnten es auch gar nicht einsehen.</p>
+  <p>Das Einzige, was das Telefon verlässt, ist <strong>die Nachricht, die
+  Sie selbst absenden</strong> — und auch die geht direkt an die von Ihnen
+  angegebene Person, nicht an uns.</p>
+</div>
+
+<h2>2. Wer für die App verantwortlich ist</h2>
+<p>Die App wurde von <strong>Péter Kürtösi</strong> entwickelt und wird von
+ihm gepflegt, über das Google-Play-Entwicklerkonto
+<strong>CreativePearls</strong>. Es steht kein Unternehmen dahinter, es gibt
+keine Auftragsverarbeiter und kein Geschäftsmodell: Die App ist kostenlos
+und bleibt es auch.</p>
+<p>Bei Fragen zum Datenschutz erreichen Sie uns unter:
+<a href="mailto:peter.kurtosi@gmail.com">peter.kurtosi@gmail.com</a></p>
+
+<h2>3. Wofür diese Erklärung gilt</h2>
+<ul>
+  <li>für die Android-App <strong>Segítség</strong>
+      (Paketname: <code>hu.segitseg.segitseg</code>) und</li>
+  <li>für die <strong>Informationswebseite</strong> der App
+      (<code>peterkurtosi.github.io/segitseg</code>).</li>
+</ul>
+<p>Beides wird getrennt behandelt, denn es gilt nicht dasselbe: Die App
+sendet nichts fort, die Webseite hingegen wird — wie jede Webseite — von
+einem Hoster ausgeliefert. Dazu mehr unter Punkt 9.</p>
+
+<h2>4. Was auf Ihrem Telefon geschieht</h2>
+<p>Die App speichert Folgendes, <strong>ausschließlich im internen Speicher
+Ihres Telefons</strong>:</p>
+<ul>
+  <li>Namen und Telefonnummern der Helfer, die Sie angegeben haben;</li>
+  <li>die offiziellen Notrufnummern, die Sie eingestellt haben;</li>
+  <li>den Text der zu sendenden Nachricht;</li>
+  <li>die gewählte Sprache, das Land und die Schriftgröße;</li>
+  <li>falls Sie ein Foto hinterlegt haben: dessen Kopie.</li>
+</ul>
+<p>Diese Daten liegen im geschützten eigenen Bereich der App, zu dem das
+Betriebssystem des Telefons anderen Apps keinen Zugang gewährt.</p>
+<p><strong>Die automatische Cloud-Sicherung des Telefons haben wir für diese
+App ausdrücklich abgeschaltet.</strong> Das bedeutet: Ihre Einstellungen
+werden auch dann nicht auf Google Drive kopiert, wenn die Datensicherung
+auf Ihrem Telefon sonst eingeschaltet ist. Wir haben das getan, weil in
+einer Notruf-App Namen und Telefonnummern von Angehörigen stehen.</p>
+
+<h2>5. Die Berechtigungen — wofür sie nötig sind und was ohne sie fehlt</h2>
+
+<h3>Standortermittlung</h3>
+<p><strong>Wofür:</strong> damit in die abgesendete Nachricht geschrieben
+werden kann, wo Sie sich befinden — mit Koordinaten und einem
+Kartenlink, den die empfangende Person öffnen kann. Das ist der Kern
+dieser App.</p>
+<p><strong>Wenn Sie sie nicht erteilen:</strong> Die Nachricht wird
+trotzdem versendet, enthält dann aber nicht Ihren Standort — nur, dass
+Sie um Hilfe bitten.</p>
+<p>Die App <strong>speichert den Standort nicht</strong> und sendet ihn
+nirgendwohin; er gelangt ausschließlich in die Nachricht, die Sie
+absenden.</p>
+
+<h3>SMS senden</h3>
+<p><strong>Wofür:</strong> damit Sie die Hilfenachricht mit einem einzigen
+Tastendruck absenden können, ohne in einer anderen App die
+Senden-Schaltfläche suchen zu müssen. Für einen älteren, erschrockenen
+oder schlecht sehenden Menschen macht genau das den Unterschied.</p>
+<p><strong>Wenn Sie sie nicht erteilen:</strong> Die App kann keine
+Nachricht senden. Die Anruf-Schaltflächen funktionieren unabhängig davon
+weiterhin.</p>
+<p>Die App <strong>liest Ihre eingegangenen Nachrichten nicht</strong>, greift
+nicht auf Ihre Konversationen zu und sendet nichts ohne Ihr Wissen.</p>
+
+<h3>Kontakte und Fotos</h3>
+<p>Wenn Sie bei der Einrichtung aus dem Telefonbuch oder der Galerie
+auswählen, erhält die App <strong>nur genau den einen Eintrag</strong>, den
+Sie ausgewählt haben. Auf das gesamte Telefonbuch und die gesamte
+Galerie hat sie keinen Zugriff.</p>
+
+<h2>6. Wenn Sie die Nachricht absenden</h2>
+<p>Dies ist der einzige Moment, in dem Daten Ihr Telefon verlassen, deshalb
+beschreiben wir genau, was dabei geschieht.</p>
+<ul>
+  <li><strong>Wer sie erhält:</strong> die Person, die Sie vorher eingerichtet
+      haben. Sonst niemand. Wir erhalten keine Kopie, und es gibt keinen
+      Server, bei dem die Nachricht einginge.</li>
+  <li><strong>Was darin steht:</strong> der von Ihnen festgelegte
+      Nachrichtentext und — wenn Sie die Standortermittlung erlaubt haben —
+      Ihr Standort samt Kartenlink.</li>
+  <li><strong>Wie sie übertragen wird:</strong> als gewöhnliche SMS über das
+      Netz Ihres Mobilfunkanbieters.</li>
+</ul>
+<div class="figyelem">
+  <p>⚠️ <strong>Wie weit unsere Verantwortung reicht:</strong> bis zum
+  Absenden der Nachricht. Ab da leitet Ihr
+  <strong>Mobilfunkanbieter</strong> sie weiter (und protokolliert sie
+  dabei in üblicher Weise), danach liegt sie auf dem
+  <strong>Telefon der empfangenden Person</strong>, wo deren eigene
+  Einstellungen gelten. Auf diese beiden Schritte haben wir keinen
+  Einfluss — ebenso wenig wie die Entwickler jeder anderen App.</p>
+</div>
+
+<h2>7. Was die App NICHT tut</h2>
+<p>Das sind keine Versprechen, sondern ergibt sich aus dem Aufbau der App:</p>
+<ul>
+  <li><strong>Wir haben keinen Server.</strong> Es gibt gar keinen Ort, an
+      den Daten gesendet werden könnten.</li>
+  <li><strong>Es gibt kein Benutzerkonto</strong> und keine Registrierung.
+      Wir wissen nicht, wer die App benutzt und wie viele es sind.</li>
+  <li><strong>Es ist kein Messprogramm</strong> (Analytics) enthalten und
+      auch kein Absturzberichterstatter. Wenn die App abstürzt, erfahren
+      wir davon nicht automatisch — nur, wenn Sie es uns schreiben.</li>
+  <li><strong>Keine Werbung</strong> und keine Werbe-ID.</li>
+  <li><strong>Keine Käufe</strong> innerhalb der App.</li>
+  <li><strong>Die Cloud-Sicherung ist abgeschaltet</strong> (siehe Punkt 4).</li>
+</ul>
+
+<h2>8. Speicherdauer und Löschung</h2>
+<p>Da wir nichts erhalten, gibt es <strong>bei uns nichts zu speichern und
+nichts zu löschen.</strong></p>
+<p>Die Daten auf Ihrem Telefon bleiben so lange erhalten, bis Sie sie
+löschen. Dafür gibt es zwei Wege:</p>
+<ul>
+  <li>Sie ändern oder leeren die Felder in den Einstellungen einzeln, oder</li>
+  <li>Sie <strong>deinstallieren die App</strong> — dann werden auch sämtliche
+      zugehörigen Daten unwiederbringlich vom Telefon gelöscht (da die
+      Cloud-Sicherung abgeschaltet ist, kommen sie auch von dort nicht
+      zurück).</li>
+</ul>
+
+<h2>9. Die Webseite</h2>
+<p>Auf der Informationswebseite gibt es <strong>keine Cookies, keine
+Reichweitenmessung und keinerlei Tracking.</strong> Genau deshalb erscheint
+dort auch kein „Cookies akzeptieren“-Fenster: Es gibt nichts zu
+akzeptieren.</p>
+<p>Was Sie darüber wissen sollten:</p>
+<ul>
+  <li><strong>Hosting:</strong> Die Seite wird von <strong>GitHub, Inc.</strong>
+      (USA) über GitHub Pages ausgeliefert. Wie jeder Webserver
+      protokolliert auch GitHub die IP-Adressen der Besucher — das gehört
+      zur Funktionsweise von Webseiten. GitHub ist zertifizierter Teilnehmer
+      des EU-US Data Privacy Framework, was die Rechtsgrundlage für die
+      Übermittlung bildet.</li>
+  <li><strong>Versionsabfrage:</strong> Beim Laden der Seite wird bei GitHub
+      abgefragt, welches die neueste Veröffentlichung ist und wie oft sie
+      heruntergeladen wurde. Auch diese Abfrage geht an GitHub, also an
+      denselben Anbieter, der die Seite ausliefert.</li>
+  <li><strong>Schriftarten:</strong> Sie kommen von unserem eigenen Server.
+      Ausdrücklich <em>nicht</em> vom Schriftarten-Dienst von Google, damit
+      das Laden der Seite Ihre IP-Adresse nicht an ein drittes Unternehmen
+      sendet.</li>
+  <li><strong>Lokale Speicherung:</strong> Ihr Browser merkt sich die gewählte
+      <strong>Sprache</strong> und <strong>Schriftgröße</strong>, damit die
+      Seite beim nächsten Mal wieder so erscheint. Diese beiden Angaben
+      bleiben allein in Ihrem Browser, gelangen nicht zu uns und lassen sich
+      jederzeit durch Löschen der Browserdaten entfernen.</li>
+  <li><strong>Es gibt kein Formular</strong> auf der Seite, also auch nichts,
+      wo Daten eingegeben werden könnten. Die E-Mail-Adresse ist ein
+      gewöhnlicher Mailto-Link.</li>
+</ul>
+
+<h2>10. Ihre Rechte</h2>
+<p>Nach der Datenschutz-Grundverordnung (DSGVO) haben Sie das Recht auf
+Auskunft über die zu Ihrer Person verarbeiteten Daten sowie auf deren
+Berichtigung, Löschung, Einschränkung der Verarbeitung, auf Widerspruch
+gegen die Verarbeitung und auf Datenübertragbarkeit.</p>
+<p><strong>In der Praxis:</strong> Da wir keinerlei Daten von Ihnen erhalten
+und speichern, können wir auf solche Anfragen nur antworten, dass bei uns
+keine Daten vorliegen. Wir beantworten dennoch jede Anfrage unter der oben
+genannten E-Mail-Adresse.</p>
+<p>Wenn Sie der Ansicht sind, dass wir Ihre Daten nicht ordnungsgemäß
+verarbeiten, können Sie sich bei der Datenschutzbehörde Ihres Wohnorts
+beschweren:</p>
+<ul>
+  <li><strong>Deutschland:</strong> die Bundesbeauftragte bzw. die
+      Landesbeauftragten für den Datenschutz —
+      <a href="https://www.bfdi.bund.de">bfdi.bund.de</a></li>
+  <li><strong>Ungarn:</strong> Nationale Behörde für Datenschutz und
+      Informationsfreiheit (NAIH) — <a href="https://naih.hu">naih.hu</a></li>
+  <li><strong>Vereinigtes Königreich:</strong> Information Commissioner's
+      Office (ICO) — <a href="https://ico.org.uk">ico.org.uk</a></li>
+</ul>
+
+<h2>11. Wenn sich diese Erklärung ändert</h2>
+<p>Sollte sich die App so ändern, dass es auch die Datenverarbeitung
+betrifft, aktualisieren wir diese Seite und ändern das Datum oben.
+Rückwirkend ändern wir nichts: Was einmal veröffentlicht wurde, bleibt in
+der Versionsgeschichte nachvollziehbar.</p>
+
+<h2>12. Kontakt</h2>
+<p>Péter Kürtösi ·
+<a href="mailto:peter.kurtosi@gmail.com">peter.kurtosi@gmail.com</a><br>
+Google-Play-Entwicklerkonto: CreativePearls</p>
+
+<p class="vissza"><a href="index.html">← Zurück zur Startseite</a></p>
+</section>
+
+
+<!-- ══════════════════════════════════════════════════════════════════
+     ENGLISH
+     ══════════════════════════════════════════════════════════════ -->
+<section class="nyelv" id="en" lang="en">
+
+<h2 style="border-top:none; padding-top:0; margin-top:1.6rem;">1. The short version</h2>
+
+<div class="lenyeg">
+  <p><strong>The Segítség app does not send any data off your phone.</strong>
+  There is no server behind it, no user account, no advertising and no
+  measurement or tracking software of any kind.</p>
+  <p>Everything you set up — the names and phone numbers of your family, the
+  photo, the text of the message — stays <strong>on your own phone only</strong>.
+  We do not see it, we do not receive it, and we could not look at it even
+  if we wanted to.</p>
+  <p>The only thing that ever leaves the phone is <strong>the message you send
+  yourself</strong> — and that goes straight to the person you chose, not to
+  us.</p>
+</div>
+
+<h2>2. Who is responsible for the app</h2>
+<p>The app was written and is maintained by <strong>Péter Kürtösi</strong>,
+through the Google Play developer account <strong>CreativePearls</strong>.
+There is no company behind it, no data processing partner and no business
+model: the app is free, and it will stay free.</p>
+<p>For privacy matters you can reach us at:
+<a href="mailto:peter.kurtosi@gmail.com">peter.kurtosi@gmail.com</a></p>
+
+<h2>3. What this policy covers</h2>
+<ul>
+  <li>the <strong>Segítség</strong> Android app
+      (package name: <code>hu.segitseg.segitseg</code>), and</li>
+  <li>the app's <strong>information website</strong>
+      (<code>peterkurtosi.github.io/segitseg</code>).</li>
+</ul>
+<p>We treat them separately, because the same thing does not apply to both:
+the app sends nothing anywhere, while the website — like every website — is
+served by a hosting provider. Section 9 covers that.</p>
+
+<h2>4. What happens on your phone</h2>
+<p>The app stores the following, <strong>in your phone's internal storage
+only</strong>:</p>
+<ul>
+  <li>the names and phone numbers of the helpers you entered;</li>
+  <li>the official emergency numbers you set;</li>
+  <li>the text of the message to be sent;</li>
+  <li>the chosen language, country and text size;</li>
+  <li>a copy of the photo, if you set one.</li>
+</ul>
+<p>This data sits in the app's own protected area, which the phone's
+operating system does not open to other apps.</p>
+<p><strong>We have explicitly switched off the phone's automatic cloud
+backup</strong> for this app. That means your settings are not copied to
+Google Drive either — even if backup is otherwise turned on for your phone.
+We did this because an emergency app holds the names and phone numbers of
+family members.</p>
+
+<h2>5. Permissions — what they are for, and what breaks without them</h2>
+
+<h3>Location</h3>
+<p><strong>What it is for:</strong> so that the message being sent can say
+where you are — with coordinates and a map link the recipient can open.
+This is the point of the app.</p>
+<p><strong>If you do not grant it:</strong> the message still goes out, but
+without your location — only that you are asking for help.</p>
+<p>The app <strong>does not store</strong> your location and does not send it
+anywhere; it goes only into the message that you send.</p>
+
+<h3>Sending SMS</h3>
+<p><strong>What it is for:</strong> so you can send the message for help with
+a single press, without having to find the send button in another app. For
+someone elderly, frightened or with poor eyesight, that difference matters.</p>
+<p><strong>If you do not grant it:</strong> the app cannot send a message. The
+calling buttons keep working regardless.</p>
+<p>The app <strong>does not read</strong> your incoming messages, does not
+access your conversations, and never sends anything without your knowledge.</p>
+
+<h3>Contacts and photos</h3>
+<p>If you pick from the phone book or the gallery while setting things up,
+the app receives <strong>only the single item you selected</strong>. It has no
+access to your whole phone book or your whole gallery.</p>
+
+<h2>6. When you send the message</h2>
+<p>This is the only moment when data leaves your phone, so we set out
+exactly what happens.</p>
+<ul>
+  <li><strong>Who receives it:</strong> the person you set up beforehand. Nobody
+      else. We get no copy, and there is no server for the message to arrive
+      at.</li>
+  <li><strong>What is in it:</strong> the message text you set and — if you
+      allowed location — your position together with a map link.</li>
+  <li><strong>How it travels:</strong> as an ordinary SMS, over your mobile
+      operator's network.</li>
+</ul>
+<div class="figyelem">
+  <p>⚠️ <strong>How far our responsibility reaches:</strong> to the point of
+  sending. From there your <strong>mobile operator</strong> carries it (and
+  logs it in the usual way), and then it lands on the
+  <strong>recipient's phone</strong>, where their own settings apply. We have
+  no control over those two steps — no more than the maker of any other app
+  does.</p>
+</div>
+
+<h2>7. What the app does NOT do</h2>
+<p>These are not promises; they follow from how the app is built:</p>
+<ul>
+  <li><strong>We have no server.</strong> There is nowhere to send data to.</li>
+  <li><strong>There is no user account</strong> and no registration. We do not
+      know who uses the app, or how many people do.</li>
+  <li><strong>There is no measurement software</strong> (analytics) in it, and
+      no crash reporter either. If the app crashes, we do not hear about it
+      automatically — only if you write to us.</li>
+  <li><strong>No advertising</strong> and no advertising ID.</li>
+  <li><strong>No purchases</strong> inside the app.</li>
+  <li><strong>Cloud backup is switched off</strong> (see section 4).</li>
+</ul>
+
+<h2>8. How long we keep data, and how to delete it</h2>
+<p>Since we receive nothing, there is <strong>nothing for us to keep and
+nothing for us to delete.</strong></p>
+<p>The data on your phone stays until you delete it. There are two ways to
+do that:</p>
+<ul>
+  <li>change or clear the fields one by one in the settings, or</li>
+  <li><strong>uninstall the app</strong> — this deletes all of its data from
+      the phone irreversibly (and since cloud backup is off, it does not come
+      back from there either).</li>
+</ul>
+
+<h2>9. The website</h2>
+<p>The information website has <strong>no cookies, no visitor statistics and
+no tracking of any kind.</strong> That is precisely why no "accept cookies"
+window appears on it: there is nothing to accept.</p>
+<p>What is worth knowing about it:</p>
+<ul>
+  <li><strong>Hosting:</strong> the site is served by <strong>GitHub, Inc.</strong>
+      (USA) on GitHub Pages. Like every web server, GitHub logs visitors' IP
+      addresses — that is inherent in how websites work. GitHub is a certified
+      participant in the EU-US Data Privacy Framework, which provides the
+      legal basis for the transfer.</li>
+  <li><strong>Version lookup:</strong> when the page loads, it asks GitHub which
+      the latest release is and how many times it has been downloaded. That
+      request also goes to GitHub — the same provider that serves the page.</li>
+  <li><strong>Fonts:</strong> they come from our own server. Deliberately
+      <em>not</em> from Google's font service, so that loading the page does
+      not send your IP address to a third company.</li>
+  <li><strong>Local storage:</strong> your browser remembers the
+      <strong>language</strong> and <strong>text size</strong> you chose, so the
+      page looks the same next time. Those two settings stay in your browser
+      alone, never reach us, and can be removed at any time by clearing your
+      browser data.</li>
+  <li><strong>There is no form</strong> on the site, so there is nowhere to
+      enter data. The email address is an ordinary mailto link.</li>
+</ul>
+
+<h2>10. Your rights</h2>
+<p>Under the General Data Protection Regulation (GDPR) you have the right to
+be informed about data held about you, and to ask for it to be corrected or
+deleted, for its processing to be restricted, to object to processing, and
+to receive your data in a portable form.</p>
+<p><strong>In practice:</strong> since we neither receive nor store any of
+your data, all we can answer to such a request is that we hold none. We
+will nevertheless reply to every enquiry at the email address above.</p>
+<p>If you believe we are not handling your data properly, you may complain to
+the data protection authority where you live:</p>
+<ul>
+  <li><strong>United Kingdom:</strong> Information Commissioner's Office (ICO)
+      — <a href="https://ico.org.uk">ico.org.uk</a></li>
+  <li><strong>Hungary:</strong> National Authority for Data Protection and
+      Freedom of Information (NAIH) — <a href="https://naih.hu">naih.hu</a></li>
+  <li><strong>Germany:</strong> the Federal or State Commissioner for Data
+      Protection — <a href="https://www.bfdi.bund.de">bfdi.bund.de</a></li>
+</ul>
+
+<h2>11. If this policy changes</h2>
+<p>If the app changes in a way that affects data handling, we will update
+this page and change the date at the top. We do not change anything
+retroactively: once something has been published, it remains traceable in
+the release history.</p>
+
+<h2>12. Contact</h2>
+<p>Péter Kürtösi ·
+<a href="mailto:peter.kurtosi@gmail.com">peter.kurtosi@gmail.com</a><br>
+Google Play developer account: CreativePearls</p>
+
+<p class="vissza"><a href="index.html">← Back to the main page</a></p>
+</section>
+
+</main>
+
+<footer>
+  <div class="burok">
+    © 2026 Kürtösi Péter · Segítség ·
+    <a href="index.html">peterkurtosi.github.io/segitseg</a>
+  </div>
+</footer>
+
+</body>
+</html>

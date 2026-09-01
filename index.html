@@ -12,20 +12,136 @@
   <meta name="twitter:card" content="summary">
 
   <title>Segítség</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap">
 </head>
 <body>
 <!--
   ⚠️ EZ A FÁJL GENERÁLT. NE SZERKESZD.
      A forrás: ../index.html  —  utána: python keszit.py
 -->
+<!-- A betűtípusok HELYBŐL jönnek (betuk/), nem a Google CDN-jéről:
+     így az oldal betöltése egyetlen adatot sem küld harmadik
+     félnek. A @font-face szabályok a stíluslap elején. -->
+
 <style>
 /* ═══════════════════════════════════════════════════════════════════
    SEGÍTSÉG — ismertető oldal
-   Egyetlen önálló fájl. Nincs külső szkript, nincs követés, nincs süti.
+   Nincs külső szkript, nincs követés, nincs süti. A betűtípusok is
+   HELYBŐL jönnek (betuk/) — az oldal betöltése semmilyen adatot nem
+   küld harmadik félnek.
    ═══════════════════════════════════════════════════════════════════ */
+
+/* ══ BETŰTÍPUSOK — HELYBŐL, nem a Google CDN-jéről ══════════════════
+   Miért: a fonts.googleapis.com / fonts.gstatic.com hívás elküldi a
+   látogató IP-címét a Google-nek, MIELŐTT bármit elfogadna vagy
+   elolvasna. Így az oldal betöltése semmilyen adatot nem küld
+   harmadik félnek. (2026-09-01)
+   Archivo és Public Sans — SIL Open Font License; lásd betuk/LICENCEK.md
+   ⚠ A latin-ext részhalmaz KELL: a magyar ő és ű abban van.
+   ⚠ A három súly ugyanazt a VARIABLE fájlt használja (mérve) — ezért
+     mutat több blokk ugyanarra: a böngésző egyszer tölti le.
+   ══════════════════════════════════════════════════════════════════ */
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(betuk/archivo-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(betuk/archivo-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(betuk/archivo-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(betuk/archivo-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(betuk/archivo-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Archivo';
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(betuk/archivo-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(betuk/public-sans-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(betuk/public-sans-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(betuk/public-sans-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(betuk/public-sans-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(betuk/public-sans-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Public Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(betuk/public-sans-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 :root {
   /* Világos alap — hűvös-semleges papír, hogy a piros kiüssön rajta */
@@ -695,6 +811,11 @@ footer {
   color: var(--halvany);
 }
 footer .sor { display: flex; gap: 10px 26px; flex-wrap: wrap; align-items: baseline; }
+/* Az adatvédelmi tájékoztató linkje: ne csak SZÍNNEL váljon el —
+   aláhúzás is jelöli, hogy kattintható (a szín soha nem az
+   egyetlen jelzés). */
+footer a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+footer a:hover, footer a:focus-visible { color: var(--kek); }
 
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
@@ -1060,6 +1181,7 @@ footer .sor { display: flex; gap: 10px 26px; flex-wrap: wrap; align-items: basel
     <div class="sor">
       <span>© 2026 Kürtösi Péter</span>
       <span data-t="lab_licenc"></span>
+      <a href="adatvedelem.html" data-t="lab_adatvedelem"></a>
       <span id="lab-verzio" data-t="lab_verzio"></span>
       <!-- ⚠ A számláló SZÁNDÉKOSAN nem hivatkozás: a kiadási oldalra
            mutatva a letöltő link kerülne ki a nyilvános lapra. -->
@@ -1244,7 +1366,8 @@ const SZOVEG = {
 
     lab_ingyen: 'Ingyenes, és az is marad. Egyetlen fillért nem fogadunk el érte senkitől.',
     lab_licenc: 'PolyForm Noncommercial 1.0.0 licenc',
-    lab_verzio: 'Jelenlegi változat: 1.0.0-beta.11',
+    lab_adatvedelem: 'Adatvédelmi tájékoztató',
+    lab_verzio: 'Jelenlegi változat: 1.0.0-beta.14',
     lab_verzio_elo: 'Jelenlegi változat: ',
     lab_letoltes: ' letöltés'
   },
@@ -1382,7 +1505,8 @@ const SZOVEG = {
 
     lab_ingyen: 'Kostenlos, und das bleibt so. Wir nehmen dafür von niemandem einen Cent.',
     lab_licenc: 'Lizenz: PolyForm Noncommercial 1.0.0',
-    lab_verzio: 'Aktuelle Version: 1.0.0-beta.11',
+    lab_adatvedelem: 'Datenschutzerklärung',
+    lab_verzio: 'Aktuelle Version: 1.0.0-beta.14',
     lab_verzio_elo: 'Aktuelle Version: ',
     lab_letoltes: ' Downloads'
   },
@@ -1520,7 +1644,8 @@ const SZOVEG = {
 
     lab_ingyen: 'Free, and it will stay free. We will not accept a penny for it from anyone.',
     lab_licenc: 'PolyForm Noncommercial 1.0.0 licence',
-    lab_verzio: 'Current version: 1.0.0-beta.11',
+    lab_adatvedelem: 'Privacy policy',
+    lab_verzio: 'Current version: 1.0.0-beta.14',
     lab_verzio_elo: 'Current version: ',
     lab_letoltes: ' downloads'
   }
