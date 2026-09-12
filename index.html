@@ -1812,7 +1812,11 @@ document.querySelectorAll('.meret button').forEach(function (b) {
    angol változat a fenti gombokkal érhető el.)
    Akit másik nyelvre váltott, annak azt megjegyezzük. */
 const mentettNyelv = biztosTarolas(function () { return localStorage.getItem('segitseg-nyelv'); }, null);
-nyelvetAllit(mentettNyelv || 'hu');
+/* ⭐ 2026-09-12: a márka-oldal (vigyazokrad.hu) a KIVÁLASZTOTT nyelvvel küld ide
+   (?nyelv=hu|de|en). Az más domain, a tárolója ide nem lát át — ezért a címben
+   kapott nyelv az első; ha nincs, a mentett; ha az sincs, a magyar. */
+const urlNyelv = new URLSearchParams(location.search).get('nyelv');
+nyelvetAllit(SZOVEG[urlNyelv] ? urlNyelv : (mentettNyelv || 'hu'));
 
 const mentettMeret = biztosTarolas(function () { return localStorage.getItem('segitseg-meret'); }, null);
 meretetAllit(mentettMeret !== null ? Number(mentettMeret) : 1);
