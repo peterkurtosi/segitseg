@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A WCAG kontraszt-keplet programozhato alakban, mert palettaval es elo szintevesztes-szimulacioval. A vigyazokrad.hu termekcsalad akadalymentessegi munkalapja.">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A láthatóság matematikája">
+  <meta property="og:description" content="A WCAG kontraszt-keplet programozhato alakban, mert palettaval es elo szintevesztes-szimulacioval. A vigyazokrad.hu termekcsalad akadalymentessegi munkalapja.">
+  <meta name="twitter:card" content="summary">
+
+  <title>A láthatóság matematikája</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,600;7..72,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="icon" href="ikonok/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" href="ikonok/ikon-32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="ikonok/ikon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="ikonok/ikon-180.png">
+</head>
+<body>
+<style>
+:root{
+  --papir:#FBF8F4; --lap:#FFFFFF; --tinta:#1E1A2E; --halk:#63607A;
+  --vonal:#E4DED6; --lila:#4A298A; --lila-halvany:#EEE9F7; --homok:#D9A566;
+  --jo:#1B5E20; --rossz:#96201E; --kod-hatter:#F4F1EC; --arnyek:rgba(30,26,46,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --papir:#16141C; --lap:#1D1A25; --tinta:#EDE9F3; --halk:#A9A3BC;
+    --vonal:#332E42; --lila:#B79BEE; --lila-halvany:#292040; --homok:#E5B878;
+    --jo:#7FD68B; --rossz:#F09A98; --kod-hatter:#241F31; --arnyek:rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --papir:#16141C; --lap:#1D1A25; --tinta:#EDE9F3; --halk:#A9A3BC;
+  --vonal:#332E42; --lila:#B79BEE; --lila-halvany:#292040; --homok:#E5B878;
+  --jo:#7FD68B; --rossz:#F09A98; --kod-hatter:#241F31; --arnyek:rgba(0,0,0,.35);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--papir); color:var(--tinta);
+  font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:18px; line-height:1.65; padding-block:0; padding-inline:20px;
+}
+.kozep{max-width:780px;margin:0 auto}
+h1,h2,h3{font-family:Literata,Georgia,"Times New Roman",serif;text-wrap:balance;line-height:1.2}
+h1{font-size:clamp(1.9rem,5.6vw,3rem);font-weight:700;margin:0 0 .3em}
+h2{font-size:clamp(1.35rem,4vw,1.9rem);font-weight:600;margin:2.6em 0 .6em;padding-top:.7em;border-top:1px solid var(--vonal)}
+h3{font-size:1.15rem;font-weight:600;margin:2em 0 .4em}
+p{margin:0 0 1.1em}
+a{color:var(--lila)}
+strong{font-weight:600}
+code,.mono{font-family:"IBM Plex Mono",ui-monospace,Consolas,monospace;font-size:.92em}
+.num{font-variant-numeric:tabular-nums}
+ol,ul{margin:0 0 1.1em;padding-left:1.4em}
+li{margin-bottom:.7em}
+
+/* ── nyelv ──────────────────────────────────────────── */
+body[data-lang="hu"] .en,body[data-lang="hu"] .de{display:none}
+body[data-lang="en"] .hu,body[data-lang="en"] .de{display:none}
+body[data-lang="de"] .hu,body[data-lang="de"] .en{display:none}
+.nyelvvalto{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap}
+.nyelvvalto button{
+  font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;
+  padding:9px 18px;border-radius:999px;border:2px solid rgba(255,255,255,.45);
+  background:none;color:#fff;min-height:42px;
+}
+.nyelvvalto button[aria-pressed="true"]{background:#fff;color:var(--lila);border-color:#fff}
+
+header{background:var(--lila);color:#fff;margin-inline:-20px;padding:52px 20px 40px;margin-bottom:44px}
+header h1{color:#fff;margin-bottom:.35em}
+header .alcim{font-size:1.15rem;color:#E3D9F5;margin:0 0 1.2em;max-width:56ch}
+header .kinek{display:inline-block;font-size:.95rem;color:#2B1A50;background:var(--homok);padding:8px 16px;border-radius:999px;font-weight:500}
+
+.kiemelt{background:var(--lila-halvany);border-left:5px solid var(--lila);padding:20px 22px;margin:1.8em 0;border-radius:0 8px 8px 0}
+.kiemelt p:last-child{margin-bottom:0}
+.kiemelt .cimke{display:block;font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600;color:var(--lila);margin-bottom:.5em}
+.idezet{font-family:Literata,Georgia,serif;font-style:italic;font-size:1.1rem;border-left:3px solid var(--homok);padding-left:18px;margin:1.6em 0;color:var(--halk)}
+pre{background:var(--kod-hatter);border:1px solid var(--vonal);border-radius:8px;padding:18px;overflow-x:auto;font-family:"IBM Plex Mono",monospace;font-size:.86rem;line-height:1.6;margin:1.4em 0}
+.tablazat-doboz{overflow-x:auto;margin:1.5em 0}
+table{border-collapse:collapse;width:100%;font-size:.94rem}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--vonal)}
+th{font-weight:600;font-size:.82rem;letter-spacing:.05em;text-transform:uppercase;color:var(--halk)}
+td.sz{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.jel{display:inline-flex;align-items:center;gap:.45em;font-weight:600;white-space:nowrap}
+.jel.ok{color:var(--jo)}
+.jel.nem{color:var(--rossz)}
+.jel .alak{display:inline-grid;place-items:center;width:1.45em;height:1.45em;border:2px solid currentColor;font-size:.78em;line-height:1;font-weight:700}
+.jel.ok .alak{border-radius:50%}
+.jel.nem .alak{border-radius:3px}
+
+.muhely{background:var(--lap);border:1px solid var(--vonal);border-radius:12px;padding:24px;margin:2em 0;box-shadow:0 2px 10px var(--arnyek)}
+.muhely h3{margin-top:0}
+.vezerlok{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;margin-bottom:20px}
+.mezo{display:flex;flex-direction:column;gap:6px}
+.mezo label{font-size:.82rem;font-weight:600;color:var(--halk);letter-spacing:.03em}
+.mezo input[type=color]{width:72px;height:44px;border:1px solid var(--vonal);border-radius:8px;background:none;cursor:pointer;padding:3px}
+.mezo input[type=text]{width:110px;padding:10px;border:1px solid var(--vonal);border-radius:8px;font-family:"IBM Plex Mono",monospace;font-size:.9rem;background:var(--papir);color:var(--tinta)}
+select{padding:11px 14px;border:1px solid var(--vonal);border-radius:8px;font-family:inherit;font-size:1rem;background:var(--papir);color:var(--tinta);cursor:pointer;min-height:44px;max-width:100%}
+.minta{border-radius:10px;padding:26px 20px;text-align:center;margin-bottom:18px;border:1px solid var(--vonal)}
+.minta .nagy{font-size:1.9rem;font-weight:700;font-family:Literata,serif}
+.minta .kicsi{font-size:.95rem;margin-top:.3em}
+.eredmeny{display:flex;flex-wrap:wrap;gap:14px}
+.kartya{flex:1 1 150px;background:var(--papir);border:1px solid var(--vonal);border-radius:9px;padding:14px 16px}
+.kartya .fejlec{font-size:.75rem;text-transform:uppercase;letter-spacing:.07em;color:var(--halk);font-weight:600}
+.kartya .ertek{font-family:"IBM Plex Mono",monospace;font-size:1.5rem;font-weight:500;font-variant-numeric:tabular-nums;margin-top:3px}
+.kuszobok{display:flex;flex-direction:column;gap:9px;margin-top:18px}
+.kuszob{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:11px 15px;background:var(--papir);border:1px solid var(--vonal);border-radius:8px;font-size:.93rem}
+
+.csempe-racs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:13px;margin-top:14px}
+.csempe{border:1px solid var(--vonal);border-radius:10px;overflow:hidden;background:var(--lap)}
+.csempe .arc{height:70px}
+.csempe .sav{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 6px;font-size:.88rem;font-weight:600}
+.csempe .sav .korong{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-size:12px;flex:none}
+.csempe .cr{font-family:"IBM Plex Mono",monospace;font-size:.76rem;text-align:center;padding:6px;color:var(--halk);border-top:1px solid var(--vonal);font-variant-numeric:tabular-nums}
+.parban{display:grid;grid-template-columns:1fr;gap:24px}
+@media(min-width:720px){.parban{grid-template-columns:1fr 1fr}}
+/* A ket oszlop fejlece kulonbozo hosszu (nemetul ketsoros), ezert fix magassag —
+   kulonben a ket csempe-racs fuggolegesen elcsuszik egymashoz kepest. */
+.oszlop-cim{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600;color:var(--halk);margin-bottom:8px;min-height:2.8em}
+
+footer{margin-top:70px;padding:30px 0 50px;border-top:1px solid var(--vonal);font-size:.88rem;color:var(--halk)}
+.lablec-sor{margin-bottom:.5em}
+
+/* Nyomtatásban a nyelvválasztó gomb értelmetlen. */
+.nyomtatasban{display:none}
+@media print{
+  .nyelvvalto{display:none}
+  .nyomtatasban{display:block}
+  .muhely,table{break-inside:avoid}
+  /* A cim ne maradjon egyedul az oldal aljan: menjen at a tartalmaval egyutt.
+     Enelkul a „4. Elo szamolo" fent ragadt, a doboza meg atment — es az oldal
+     ketharmada ures lett. */
+  h2,h3{break-after:avoid}
+  /* A kiemelt doboz NE essen szet az oldalhataron: kulonben a felirata („A LAP
+     LEGFONTOSABB MONDATA”) egyedul marad az oldal aljan, a mondata meg atmegy
+     a kovetkezore — ami elrontott dokumentumnak latszik. */
+  .kiemelt,.idezet{break-inside:avoid}
+  p{orphans:3;widows:3}
+  /* A cimlapon a lila fejlec nyomtatasban kevesebb helyet kap: a nemet valtozat
+     „szemelyes keres" doboza kulonben EPPHOGY nem fert ki az elso oldalra, es
+     a lap alja uresen maradt. */
+  header{padding-block:34px 26px}
+  header h1{font-size:2.3rem}
+  /* Biztositas: a hosszu (tobbbekezdeses) doboz TORHET. Egy negybekezdeses blokk
+     tordelese szabalyos; a rovid kiemelteket tovabbra sem engedjuk szetesni. */
+  .kiemelt.hosszu{break-inside:auto}
+}
+</style>
+
+<header>
+  <div class="kozep">
+    <h1 class="hu">A láthatóság matematikája</h1>
+    <h1 class="en">The Mathematics of Visibility</h1>
+    <h1 class="de">Die Mathematik der Sichtbarkeit</h1>
+
+    <p class="alcim hu">
+      Mitől látszik egy jel a képernyőn — és miért nem elég hozzá, hogy a két szín
+      „különböző”. A WCAG-képlet, a <strong>vigyazokrad.hu</strong> saját, mért palettája,
+      és élő színtévesztés-szimuláció.
+    </p>
+    <p class="alcim en">
+      What makes a mark visible on a screen — and why it is not enough for two colours
+      to be “different”. The WCAG formula, the measured palette of
+      <strong>vigyazokrad.hu</strong>, and a live colour-vision-deficiency simulator.
+    </p>
+    <p class="alcim de">
+      Woran es liegt, dass ein Zeichen auf dem Bildschirm sichtbar ist — und warum es
+      nicht genügt, dass zwei Farben „verschieden“ sind. Die WCAG-Formel, die gemessene
+      Palette von <strong>vigyazokrad.hu</strong> und eine lebendige Simulation von
+      Farbfehlsichtigkeit.
+    </p>
+
+    <span class="kinek hu">Egy vészhívó alkalmazás műhelyéből · 2026. szeptember 19.</span>
+    <span class="kinek en">From the workshop of an emergency-call app · 19 September 2026</span>
+    <span class="kinek de">Aus der Werkstatt einer Notruf-App · 19. September 2026</span>
+
+    <div class="nyelvvalto">
+      <button id="b-hu" aria-pressed="true">Magyar</button>
+      <button id="b-en" aria-pressed="false">English</button>
+      <button id="b-de" aria-pressed="false">Deutsch</button>
+    </div>
+  </div>
+</header>
+
+<div class="kozep" style="margin-bottom:28px">
+  <div style="background:var(--lap);border:1px solid var(--vonal);border-radius:10px;
+              padding:16px 20px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center">
+    <span style="font-weight:600" class="hu">Letöltés PDF-ben:</span>
+    <span style="font-weight:600" class="en">Download as PDF:</span>
+    <span style="font-weight:600" class="de">Als PDF herunterladen:</span>
+    <a href="dokumentumok/lathatosag-matematikaja-hu.pdf" download>magyar</a>
+    <a href="dokumentumok/mathematics-of-visibility-en.pdf" download>English</a>
+    <a href="dokumentumok/mathematik-der-sichtbarkeit-de.pdf" download>Deutsch</a>
+    <span style="flex:1"></span>
+    <a href="./" class="hu">&larr; vissza a Segítség lapjára</a>
+    <a href="./" class="en">&larr; back to the Segítség page</a>
+    <a href="./" class="de">&larr; zurück zur Segítség-Seite</a>
+  </div>
+</div>
+
+<div class="kozep">
+
+<p class="hu">
+  Ez a lap egy konkrét hibából nőtt ki, ami egy <strong>vészhívó alkalmazásban</strong> élt.
+  Minden szám rajta <strong>mérés</strong>, nem becslés — és a végén ott vannak a kérdések,
+  amikre nem tudjuk a választ.
+</p>
+<p class="en">
+  This page grew out of one concrete defect that lived inside an
+  <strong>emergency-call application</strong>. Every number on it is
+  <strong>measured</strong>, not estimated — and at the end you will find the questions
+  we do not know the answers to.
+</p>
+<p class="de">
+  Diese Seite ist aus einem konkreten Fehler entstanden, der in einer
+  <strong>Notruf-Anwendung</strong> steckte. Jede Zahl darauf ist
+  <strong>gemessen</strong>, nicht geschätzt — und am Ende stehen die Fragen, auf die wir
+  die Antwort nicht kennen.
+</p>
+
+<div class="kiemelt hosszu">
+  <span class="cimke hu">személyes kérés</span>
+  <span class="cimke en">a personal request</span>
+  <span class="cimke de">eine persönliche Bitte</span>
+
+  <p class="hu">
+    <strong>Kürtösi Péter vagyok, és a segítségeteket kérem.</strong> Mérnök vagyok, nem
+    színelméleti szakember. Ezt a rendszert idős és rosszul látó embereknek építem, ahol
+    egy nem látható jel nem esztétikai kérdés — ott valaki nem talál segítséget.
+  </p>
+  <p class="hu">
+    Az alábbi hibát <em>nem én vettem észre</em>. Amit itt összeszedtem, az a matematika,
+    amire programozni tudok. Ha valamit rosszul értek belőle, ha van jobb út, vagy ha a
+    7. pontban feltett négy kérdésre tudtok válaszolni — <strong>kérlek szóljatok.</strong>
+    Bármelyik megjegyzés többet ér, mint amennyi munkát a válasz kér.
+  </p>
+  <p class="hu" style="margin-top:1.2em">
+    <strong>Bármilyen visszajelzést szívesen fogadok</strong> — helyesbítést, ellenvéleményt,
+    irodalmat, vagy csak egy „ez így nem jó”-t.<br>
+    Kürtösi Péter · <a href="mailto:peter@vigyazokrad.hu">peter@vigyazokrad.hu</a>
+  </p>
+
+  <p class="en">
+    <strong>My name is Péter Kürtösi, and I am asking for your help.</strong> I am an
+    engineer, not a colour scientist. I build this system for elderly and visually
+    impaired people, where an invisible mark is not a question of taste — there, somebody
+    fails to find help.
+  </p>
+  <p class="en">
+    The defect described below was <em>not</em> found by me. What I have assembled here is
+    the mathematics I can program against. If I have misunderstood any of it, if there is
+    a better path, or if you can answer the four questions in section 7 —
+    <strong>please tell me.</strong> Any remark you make is worth more than the effort it
+    costs you.
+  </p>
+  <p class="en" style="margin-top:1.2em">
+    <strong>Any feedback at all is welcome</strong> — a correction, a disagreement, a
+    reference, or simply “this is wrong”.<br>
+    Péter Kürtösi · <a href="mailto:peter@vigyazokrad.hu">peter@vigyazokrad.hu</a>
+  </p>
+
+  <p class="de">
+    <strong>Mein Name ist Péter Kürtösi, und ich bitte um Ihre Hilfe.</strong> Ich bin
+    Ingenieur, kein Farbwissenschaftler. Ich baue dieses System für ältere und
+    sehbehinderte Menschen — dort ist ein unsichtbares Zeichen keine Geschmacksfrage:
+    dort findet jemand keine Hilfe.
+  </p>
+  <p class="de">
+    Den unten beschriebenen Fehler habe <em>nicht ich</em> entdeckt. Was ich hier
+    zusammengetragen habe, ist die Mathematik, gegen die ich programmieren kann. Wenn ich
+    etwas davon falsch verstanden habe, wenn es einen besseren Weg gibt, oder wenn Sie die
+    vier Fragen in Abschnitt 7 beantworten können — <strong>bitte sagen Sie es mir.</strong>
+    Jede Anmerkung ist mehr wert als die Mühe, die sie Sie kostet.
+  </p>
+  <p class="de" style="margin-top:1.2em">
+    <strong>Jede Rückmeldung ist willkommen</strong> — eine Korrektur, ein Widerspruch,
+    ein Literaturhinweis, oder einfach ein „so stimmt das nicht“.<br>
+    Péter Kürtösi · <a href="mailto:peter@vigyazokrad.hu">peter@vigyazokrad.hu</a>
+  </p>
+</div>
+
+<h2 class="hu">1. A hiba, ami elindította</h2>
+<h2 class="en">1. The defect that started it</h2>
+<h2 class="de">1. Der Fehler, der alles ausgelöst hat</h2>
+
+<p class="hu">
+  Az alkalmazás főképernyőjén csempék vannak: minden csempe egy ember. A csempe alján egy
+  kis ikon mondta meg, hogy koppintásra <em>hívás</em> indul-e vagy <em>üzenet</em> megy.
+  Az ikon jó színű volt — fényképes csempéken kifogástalanul látszott.
+</p>
+<p class="en">
+  The app’s home screen is a grid of tiles, one person per tile. A small icon at the
+  bottom of each tile told you whether tapping it would place a <em>call</em> or send a
+  <em>message</em>. The icon’s colour was fine — on tiles with a photograph it was
+  perfectly legible.
+</p>
+<p class="de">
+  Der Startbildschirm der App besteht aus Kacheln, eine Person pro Kachel. Ein kleines
+  Symbol am unteren Rand zeigte an, ob ein Tippen einen <em>Anruf</em> auslöst oder eine
+  <em>Nachricht</em> sendet. Die Farbe des Symbols war in Ordnung — auf Kacheln mit einem
+  Foto war es einwandfrei lesbar.
+</p>
+
+<p class="hu">Aztán valaki, aki csak odapillantott a telefonra, ezt mondta:</p>
+<p class="en">Then someone who merely glanced at the phone said this:</p>
+<p class="de">Dann sagte jemand, der nur kurz auf das Telefon blickte, Folgendes:</p>
+
+<blockquote class="idezet hu">„Pont olyan zöld a boríték, mint a csempe háttere. A kutya se látja rajta.”</blockquote>
+<blockquote class="idezet en">“The envelope is exactly the same green as the tile behind it. Nobody can see it.”</blockquote>
+<blockquote class="idezet de">„Der Umschlag ist genau so grün wie die Kachel dahinter. Das sieht doch kein Mensch.“</blockquote>
+
+<p class="hu">
+  A rajzolt avatarok névsávja ugyanis maga is pasztell. Ugyanaz az ikon, ami fényképen
+  kiválóan látszott, ott <strong>eltűnt</strong>. És amikor megmértük, kiderült, hogy
+  rosszabb a helyzet, mint amit szabad szemmel látni lehetett. Az ikon színe
+  <span class="mono">#7FE38A</span> volt:
+</p>
+<p class="en">
+  The name band under an illustrated avatar is itself a pastel. The very same icon that
+  was perfectly visible over a photograph simply <strong>disappeared</strong> there. And
+  when we measured it, the situation turned out to be worse than the eye suggested. The
+  icon colour was <span class="mono">#7FE38A</span>:
+</p>
+<p class="de">
+  Das Namensband unter einem gezeichneten Avatar ist selbst ein Pastellton. Genau dasselbe
+  Symbol, das über einem Foto hervorragend sichtbar war, <strong>verschwand</strong> dort.
+  Und als wir nachgemessen haben, zeigte sich: es ist schlimmer, als das Auge vermuten
+  ließ. Die Symbolfarbe war <span class="mono">#7FE38A</span>:
+</p>
+
+<div class="tablazat-doboz">
+<table>
+  <thead>
+    <tr class="hu"><th>avatar-háttér</th><th>hex</th><th>kontraszt az ikonnal</th><th>WCAG 1.4.11 (3:1)</th></tr>
+    <tr class="en"><th>avatar background</th><th>hex</th><th>contrast with the icon</th><th>WCAG 1.4.11 (3:1)</th></tr>
+    <tr class="de"><th>Avatar-Hintergrund</th><th>Hex</th><th>Kontrast zum Symbol</th><th>WCAG 1.4.11 (3:1)</th></tr>
+  </thead>
+  <tbody id="regi-tabla"></tbody>
+</table>
+</div>
+
+<p class="hu">
+  Fényképes csempén ugyanez az ikon <strong class="mono num">9,92:1</strong>-et mért — de
+  azt a számot nem lehet hexből kiszámolni, mert ott a névsáv egy <strong>fekete átmenet
+  78 %-on</strong>, és a háttér maga a fénykép. Ezért ez a szám a <em>képernyőn</em>
+  mérve készült, nem a képletből.
+</p>
+<p class="en">
+  Over a photographic tile the same icon measured <strong class="mono num">9.92:1</strong>
+  — but that number cannot be derived from a hex value, because there the name band is
+  <strong>black at 78 % opacity</strong> and the backdrop is the photograph itself. That
+  figure was therefore measured <em>on the screen</em>, not computed from the formula.
+</p>
+<p class="de">
+  Über einer Foto-Kachel maß dasselbe Symbol <strong class="mono num">9,92:1</strong> —
+  diese Zahl lässt sich jedoch nicht aus einem Hex-Wert berechnen, denn dort ist das
+  Namensband <strong>Schwarz mit 78 % Deckkraft</strong>, und der Hintergrund ist das Foto
+  selbst. Dieser Wert wurde daher <em>am Bildschirm</em> gemessen, nicht aus der Formel
+  errechnet.
+</p>
+
+<div class="kiemelt">
+  <span class="cimke hu">amit ez jelent</span>
+  <span class="cimke en">what this means</span>
+  <span class="cimke de">was das bedeutet</span>
+  <p class="hu">
+    A <strong class="mono num">1,00</strong> nem „gyenge kontraszt”. Az azt jelenti, hogy
+    a két szín <strong>fénysűrűsége matematikailag azonos</strong> — nulla kontraszt.
+    Nem a szeme csalta meg azt, aki nem látta: <strong>tényleg nem volt ott semmi.</strong>
+  </p>
+  <p class="en">
+    A ratio of <strong class="mono num">1.00</strong> is not “low contrast”. It means the
+    two colours have <strong>mathematically identical luminance</strong> — zero contrast.
+    The person who could not see it was not imagining things:
+    <strong>there genuinely was nothing there.</strong>
+  </p>
+  <p class="de">
+    <strong class="mono num">1,00</strong> ist kein „schwacher Kontrast“. Es bedeutet,
+    dass beide Farben <strong>mathematisch dieselbe Leuchtdichte</strong> haben — null
+    Kontrast. Wer es nicht sah, hat sich nicht getäuscht:
+    <strong>es war tatsächlich nichts da.</strong>
+  </p>
+</div>
+
+<h2 class="hu">2. A képlet, pontosan</h2>
+<h2 class="en">2. The formula, precisely</h2>
+<h2 class="de">2. Die Formel, genau</h2>
+
+<p class="hu">
+  A WCAG 2.1 kontraszt-aránya három lépés. Először minden csatornát vissza kell vinni a
+  gammából lineáris fénybe:
+</p>
+<p class="en">
+  The WCAG 2.1 contrast ratio takes three steps. First, each channel is taken back out of
+  gamma into linear light:
+</p>
+<p class="de">
+  Das Kontrastverhältnis nach WCAG 2.1 besteht aus drei Schritten. Zuerst wird jeder Kanal
+  aus dem Gamma zurück in lineares Licht überführt:
+</p>
+
+<pre>s   = c / 255
+lin = (s &lt;= 0.04045) ? s / 12.92
+                     : ((s + 0.055) / 1.055) ^ 2.4</pre>
+
+<p class="hu">Aztán a relatív fénysűrűség (<em>relative luminance</em>):</p>
+<p class="en">Then the relative luminance:</p>
+<p class="de">Dann die relative Leuchtdichte (<em>relative luminance</em>):</p>
+
+<pre>L = 0.2126·R_lin + 0.7152·G_lin + 0.0722·B_lin</pre>
+
+<p class="hu">És végül a kontraszt-arány, a világosabbat felülre téve:</p>
+<p class="en">And finally the contrast ratio, lighter colour on top:</p>
+<p class="de">Und schließlich das Kontrastverhältnis, die hellere Farbe oben:</p>
+
+<pre>CR = (L_lighter + 0.05) / (L_darker + 0.05)      // 1:1 … 21:1</pre>
+
+<h3 class="hu">Programozható alakban</h3>
+<h3 class="en">In programmable form</h3>
+<h3 class="de">In programmierbarer Form</h3>
+
+<pre>function luminance(hex) {
+  const v = [0, 2, 4].map(i =&gt; {
+    const s = parseInt(hex.substr(i + 1, 2), 16) / 255;
+    return s &lt;= 0.04045 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+  });
+  return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2];
+}
+
+function contrast(a, b) {
+  const la = luminance(a), lb = luminance(b);
+  return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
+}</pre>
+
+<h3 class="hu">A küszöbök</h3>
+<h3 class="en">The thresholds</h3>
+<h3 class="de">Die Schwellenwerte</h3>
+
+<div class="tablazat-doboz">
+<table>
+  <thead>
+    <tr class="hu"><th>mire vonatkozik</th><th>WCAG-pont</th><th>AA</th><th>AAA</th></tr>
+    <tr class="en"><th>what it covers</th><th>WCAG criterion</th><th>AA</th><th>AAA</th></tr>
+    <tr class="de"><th>wofür es gilt</th><th>WCAG-Kriterium</th><th>AA</th><th>AAA</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="hu">normál szöveg</span><span class="en">body text</span><span class="de">Fließtext</span></td>
+      <td class="mono">1.4.3 / 1.4.6</td>
+      <td class="sz"><span class="hu">4,5:1</span><span class="en">4.5:1</span><span class="de">4,5:1</span></td>
+      <td class="sz">7:1</td>
+    </tr>
+    <tr>
+      <td><span class="hu">nagy szöveg (≥24 px, vagy ≥18,7 px félkövér)</span><span class="en">large text (≥24 px, or ≥18.7 px bold)</span><span class="de">große Schrift (≥24 px, oder ≥18,7 px fett)</span></td>
+      <td class="mono">1.4.3 / 1.4.6</td>
+      <td class="sz">3:1</td>
+      <td class="sz"><span class="hu">4,5:1</span><span class="en">4.5:1</span><span class="de">4,5:1</span></td>
+    </tr>
+    <tr>
+      <td><strong><span class="hu">nem-szöveges grafika, kezelőelem, állapotjel</span><span class="en">non-text graphics, UI components, state indicators</span><span class="de">Nicht-Text-Grafik, Bedienelement, Zustandsanzeige</span></strong></td>
+      <td class="mono">1.4.11</td><td class="sz"><strong>3:1</strong></td><td class="sz">—</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p class="hu">
+  A csempéken lévő ikonok a <strong>harmadik sorba</strong> tartoznak: nem szöveg, de
+  nélkülük nem érthető a felület. A küszöb tehát <strong class="mono num">3,0</strong> —
+  és a mért <span class="mono num">1,00–1,17</span> ennek a harmada.
+</p>
+<p class="en">
+  The tile icons fall into the <strong>third row</strong>: not text, but the interface
+  cannot be understood without them. The threshold is therefore
+  <strong class="mono num">3.0</strong> — and the measured
+  <span class="mono num">1.00–1.17</span> is a third of that.
+</p>
+<p class="de">
+  Die Kachel-Symbole fallen in die <strong>dritte Zeile</strong>: kein Text, aber ohne sie
+  ist die Oberfläche nicht verständlich. Der Schwellenwert ist also
+  <strong class="mono num">3,0</strong> — und die gemessenen
+  <span class="mono num">1,00–1,17</span> sind ein Drittel davon.
+</p>
+
+<h2 class="hu">3. Amit a képlet <em>nem</em> tartalmaz</h2>
+<h2 class="en">3. What the formula does <em>not</em> contain</h2>
+<h2 class="de">3. Was die Formel <em>nicht</em> enthält</h2>
+
+<p class="hu">Nézze meg a három szorzót a fénysűrűség-képletben:</p>
+<p class="en">Look at the three coefficients in the luminance formula:</p>
+<p class="de">Sehen Sie sich die drei Koeffizienten in der Leuchtdichte-Formel an:</p>
+
+<pre>0.2126 · R    0.7152 · G    0.0722 · B
+   21 %          72 %           7 %</pre>
+
+<div class="kiemelt">
+  <span class="cimke hu">a lap legfontosabb mondata</span>
+  <span class="cimke en">the single most important sentence here</span>
+  <span class="cimke de">der wichtigste Satz dieser Seite</span>
+  <p class="hu">
+    <strong>A színárnyalat (hue) nem szerepel a képletben.</strong> Csak a világosság.
+    Ezért lehet két szín a színkörön <em>szemben</em> — tehát majdnem komplementer —,
+    és a kontraszt-arányuk mégis <span class="mono num">1,0</span>.
+  </p>
+  <p class="en">
+    <strong>Hue does not appear in the formula at all.</strong> Only lightness does.
+    That is why two colours can sit <em>opposite</em> each other on the colour wheel —
+    near-complementary — and still have a contrast ratio of
+    <span class="mono num">1.0</span>.
+  </p>
+  <p class="de">
+    <strong>Der Farbton kommt in der Formel überhaupt nicht vor.</strong> Nur die
+    Helligkeit. Deshalb können zwei Farben im Farbkreis <em>gegenüber</em> liegen — also
+    nahezu komplementär sein — und trotzdem ein Kontrastverhältnis von
+    <span class="mono num">1,0</span> haben.
+  </p>
+</div>
+
+<p class="hu">
+  Ebből következik a szabály, amit programozni lehet: <strong>soha ne a színárnyalattal
+  különböztessünk meg két dolgot. Világosság-különbséget kell csinálni.</strong>
+  A színárnyalat lehet ráadás, de nem lehet a jelentés hordozója — mert a nézők egy
+  részénél egyszerűen nincs ott.
+</p>
+<p class="en">
+  From which follows a rule you can actually program: <strong>never let hue alone
+  distinguish two things. Create a difference in lightness.</strong> Hue may carry extra
+  meaning, but it cannot be the carrier of the meaning — because for a share of your
+  viewers it simply is not there.
+</p>
+<p class="de">
+  Daraus folgt eine Regel, die sich tatsächlich programmieren lässt: <strong>Niemals
+  allein der Farbton darf zwei Dinge unterscheiden. Es muss ein Helligkeitsunterschied
+  sein.</strong> Der Farbton darf zusätzliche Bedeutung tragen, aber nicht der Träger der
+  Bedeutung sein — denn bei einem Teil der Betrachter ist er schlicht nicht vorhanden.
+</p>
+
+<p class="hu">
+  A javítás is pontosan ezt tette: az ikon nem világosabb zöld lett, hanem <strong>sötét
+  korongot kapott fehér jellel</strong>. A színárnyalat maradt beszédes (zöld = üzenet,
+  kék = hívás), de a <em>láthatóságot</em> már a világosság-különbség hordozza.
+</p>
+<p class="en">
+  The fix did exactly that: the icon did not become a brighter green — it was given a
+  <strong>dark disc with a white glyph</strong>. Hue still speaks (green = message,
+  blue = call), but <em>visibility</em> is now carried by the difference in lightness.
+</p>
+<p class="de">
+  Genau das hat die Korrektur getan: Das Symbol wurde nicht heller grün, sondern erhielt
+  eine <strong>dunkle Scheibe mit weißem Zeichen</strong>. Der Farbton spricht weiterhin
+  (grün = Nachricht, blau = Anruf), aber die <em>Sichtbarkeit</em> trägt jetzt der
+  Helligkeitsunterschied.
+</p>
+
+<h2 class="hu">4. Élő számoló</h2>
+<h2 class="en">4. Live calculator</h2>
+<h2 class="de">4. Rechner zum Ausprobieren</h2>
+
+<div class="muhely">
+  <h3><span class="hu">Két szín kontrasztja</span><span class="en">Contrast between two colours</span><span class="de">Kontrast zwischen zwei Farben</span></h3>
+  <div class="vezerlok">
+    <div class="mezo">
+      <label for="sz-elo"><span class="hu">előtér</span><span class="en">foreground</span><span class="de">Vordergrund</span></label>
+      <input type="color" id="sz-elo" value="#7FE38A">
+    </div>
+    <div class="mezo">
+      <label for="sz-elo-hex">hex</label>
+      <input type="text" id="sz-elo-hex" value="#7FE38A" spellcheck="false">
+    </div>
+    <div class="mezo">
+      <label for="sz-hat"><span class="hu">háttér</span><span class="en">background</span><span class="de">Hintergrund</span></label>
+      <input type="color" id="sz-hat" value="#A8D5BA">
+    </div>
+    <div class="mezo">
+      <label for="sz-hat-hex">hex</label>
+      <input type="text" id="sz-hat-hex" value="#A8D5BA" spellcheck="false">
+    </div>
+  </div>
+
+  <div class="minta" id="minta">
+    <div class="nagy">Kati</div>
+    <div class="kicsi"><span class="hu">✉ üzenet megy neki</span><span class="en">✉ a message will be sent</span><span class="de">✉ eine Nachricht wird gesendet</span></div>
+  </div>
+
+  <div class="eredmeny">
+    <div class="kartya"><div class="fejlec"><span class="hu">L előtér</span><span class="en">L foreground</span><span class="de">L Vordergrund</span></div><div class="ertek num" id="l-elo">—</div></div>
+    <div class="kartya"><div class="fejlec"><span class="hu">L háttér</span><span class="en">L background</span><span class="de">L Hintergrund</span></div><div class="ertek num" id="l-hat">—</div></div>
+    <div class="kartya"><div class="fejlec"><span class="hu">kontraszt</span><span class="en">contrast</span><span class="de">Kontrast</span></div><div class="ertek num" id="cr">—</div></div>
+  </div>
+
+  <div class="kuszobok" id="kuszobok"></div>
+</div>
+
+<p class="hu">
+  Az alapértelmezett érték a <strong>valódi hibás pár</strong>: az eredeti világoszöld
+  boríték (<span class="mono">#7FE38A</span>) a zöld avatar névsávján
+  (<span class="mono">#A8D5BA</span>). A két szín szemre teljesen különböző.
+</p>
+<p class="en">
+  The default values are the <strong>actual defective pair</strong>: the original pale
+  green envelope (<span class="mono">#7FE38A</span>) on the green avatar’s name band
+  (<span class="mono">#A8D5BA</span>). To the eye the two colours look entirely different.
+</p>
+<p class="de">
+  Die Vorgabewerte sind das <strong>tatsächlich fehlerhafte Paar</strong>: der
+  ursprüngliche hellgrüne Umschlag (<span class="mono">#7FE38A</span>) auf dem Namensband
+  des grünen Avatars (<span class="mono">#A8D5BA</span>). Für das Auge sehen die beiden
+  Farben völlig verschieden aus.
+</p>
+
+<h2 class="hu">5. Színtévesztés-szimuláció</h2>
+<h2 class="en">5. Colour-vision-deficiency simulation</h2>
+<h2 class="de">5. Simulation von Farbfehlsichtigkeit</h2>
+
+<p class="hu">
+  A gyakorlatban a <strong>Machado, Oliveira &amp; Fernandes (2009)</strong> mátrixokat
+  használják — ezt futtatja a Chrome DevTools és a legtöbb tervezőeszköz is. Három 3×3-as
+  mátrix, súlyosság szerint skálázva; itt a teljes (1,0-ás) esetek szerepelnek. A régebbi,
+  dichromátokra pontosabb iskola a <strong>Brettel–Viénot–Mollon (1997/99)</strong>,
+  ami LMS-térben vetít.
+</p>
+<p class="en">
+  In practice the <strong>Machado, Oliveira &amp; Fernandes (2009)</strong> matrices are
+  what people use — they are what Chrome DevTools and most design tools run. Three 3×3
+  matrices, scalable by severity; the full (1.0) cases are used here. The older school,
+  more accurate for dichromats, is <strong>Brettel–Viénot–Mollon (1997/99)</strong>,
+  which projects in LMS space.
+</p>
+<p class="de">
+  In der Praxis verwendet man die Matrizen von <strong>Machado, Oliveira &amp; Fernandes
+  (2009)</strong> — sie stecken in den Chrome DevTools und in den meisten
+  Design-Werkzeugen. Drei 3×3-Matrizen, nach Schweregrad skalierbar; hier stehen die
+  vollen Fälle (1,0). Die ältere, für Dichromaten genauere Schule ist
+  <strong>Brettel–Viénot–Mollon (1997/99)</strong>, die im LMS-Raum projiziert.
+</p>
+
+<p class="hu">
+  ⚠ Egy részlet, ami sokszor elsikkad: ezek a mátrixok <strong>lineáris RGB-ben</strong>
+  értendők. Aki közvetlenül az sRGB-értékekre alkalmazza őket, az közel jár, de nem pontos.
+  Ezen a lapon a szimuláció sRGB → lineáris → mátrix → sRGB úton megy.
+</p>
+<p class="en">
+  ⚠ One detail that is often missed: these matrices are defined for <strong>linear
+  RGB</strong>. Applying them straight to sRGB values gets you close, but it is not
+  correct. On this page the simulation goes sRGB → linear → matrix → sRGB.
+</p>
+<p class="de">
+  ⚠ Ein Detail, das oft übersehen wird: Diese Matrizen sind für <strong>lineares
+  RGB</strong> definiert. Wer sie direkt auf sRGB-Werte anwendet, kommt nahe heran, aber
+  es ist nicht korrekt. Auf dieser Seite läuft die Simulation über
+  sRGB → linear → Matrix → sRGB.
+</p>
+
+<div class="muhely">
+  <h3><span class="hu">A csempék, szimulált látással</span><span class="en">The tiles, under simulated vision</span><span class="de">Die Kacheln unter simuliertem Sehen</span></h3>
+  <div class="vezerlok">
+    <div class="mezo">
+      <label for="cvd"><span class="hu">látásmód</span><span class="en">vision mode</span><span class="de">Sehmodus</span></label>
+      <select id="cvd">
+        <option value="normal" data-hu="normál látás" data-en="normal vision" data-de="normales Sehen"></option>
+        <option value="prot" data-hu="protanópia (vörös-vak)" data-en="protanopia (red-blind)" data-de="Protanopie (Rotblindheit)"></option>
+        <option value="deut" data-hu="deuteranópia (zöld-vak)" data-en="deuteranopia (green-blind)" data-de="Deuteranopie (Grünblindheit)"></option>
+        <option value="trit" data-hu="tritanópia (kék-sárga)" data-en="tritanopia (blue-yellow)" data-de="Tritanopie (Blau-Gelb)"></option>
+        <option value="akro" data-hu="akromatópszia (teljes színvakság)" data-en="achromatopsia (total colour blindness)" data-de="Achromatopsie (totale Farbblindheit)"></option>
+      </select>
+    </div>
+  </div>
+
+  <div class="parban">
+    <div>
+      <div class="oszlop-cim"><span class="hu">Előtte — világos ikon, keret nélkül</span><span class="en">Before — pale icon, no surround</span><span class="de">Vorher — helles Symbol, ohne Umfeld</span></div>
+      <div class="csempe-racs" id="racs-regi"></div>
+    </div>
+    <div>
+      <div class="oszlop-cim"><span class="hu">Utána — sötét korong, fehér jel</span><span class="en">After — dark disc, white glyph</span><span class="de">Nachher — dunkle Scheibe, weißes Zeichen</span></div>
+      <div class="csempe-racs" id="racs-uj"></div>
+    </div>
+  </div>
+</div>
+
+<div class="kiemelt">
+  <span class="cimke hu">érdemes kipróbálni</span>
+  <span class="cimke en">worth trying</span>
+  <span class="cimke de">einen Versuch wert</span>
+  <p class="hu">
+    Váltson <strong>akromatópsziára</strong>. A bal oldali ikonok teljesen eltűnnek —
+    a jobb oldaliak ugyanolyan jól látszanak, mint színesben. Ez a legtisztább bizonyíték
+    arra, hogy a jelentést a <strong>világosság</strong> hordozza, nem a szín.
+  </p>
+  <p class="hu">
+    És figyelje meg azt is, hogy a kontraszt-számok a szimulált módokban
+    <em>alig változnak</em>. Ez nem hiba: ezek a mátrixok nagyjából megőrzik a
+    fénysűrűséget. Épp ezért igaz, hogy <strong>ami világosságban átmegy, az a
+    színtévesztőknek is átmegy.</strong>
+  </p>
+  <p class="en">
+    Switch to <strong>achromatopsia</strong>. The icons on the left vanish completely —
+    the ones on the right remain exactly as legible as they are in colour. This is the
+    cleanest possible proof that meaning is carried by <strong>lightness</strong>, not
+    by hue.
+  </p>
+  <p class="en">
+    Notice too that the contrast figures <em>barely move</em> between the simulated
+    modes. That is not a bug: these matrices approximately preserve luminance. Which is
+    precisely why <strong>whatever passes on lightness also passes for colour-deficient
+    viewers.</strong>
+  </p>
+  <p class="de">
+    Schalten Sie auf <strong>Achromatopsie</strong>. Die Symbole links verschwinden
+    vollständig — die rechten bleiben genauso gut lesbar wie in Farbe. Das ist der
+    sauberste Beweis dafür, dass die Bedeutung von der <strong>Helligkeit</strong>
+    getragen wird und nicht von der Farbe.
+  </p>
+  <p class="de">
+    Beachten Sie auch, dass sich die Kontrastwerte zwischen den simulierten Modi
+    <em>kaum verändern</em>. Das ist kein Fehler: Diese Matrizen erhalten die Leuchtdichte
+    näherungsweise. Genau deshalb gilt: <strong>Was über die Helligkeit besteht, besteht
+    auch für farbfehlsichtige Betrachter.</strong>
+  </p>
+</div>
+
+<h3 class="hu">Amivel kód nélkül lehet tesztelni</h3>
+<h3 class="en">Testing without writing any code</h3>
+<h3 class="de">Testen ganz ohne Programmieren</h3>
+
+<div class="tablazat-doboz">
+<table>
+  <thead>
+    <tr class="hu"><th>eszköz</th><th>hol</th><th>mit ad</th></tr>
+    <tr class="en"><th>tool</th><th>where</th><th>what it gives</th></tr>
+    <tr class="de"><th>Werkzeug</th><th>wo</th><th>was es liefert</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Chrome DevTools</strong></td>
+      <td class="mono">⋮ → More tools → Rendering → Emulate vision deficiencies</td>
+      <td>
+        <span class="hu">protanópia, deuteranópia, tritanópia, akromatópszia, homályos látás, csökkentett kontraszt — <em>bármelyik weblapra</em></span>
+        <span class="en">protanopia, deuteranopia, tritanopia, achromatopsia, blurred vision, reduced contrast — <em>on any web page</em></span>
+        <span class="de">Protanopie, Deuteranopie, Tritanopie, Achromatopsie, unscharfes Sehen, verringerter Kontrast — <em>auf jeder Webseite</em></span>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Android</strong></td>
+      <td class="mono"><span class="hu">Fejlesztői beállítások → Színtér szimulálása</span><span class="en">Developer options → Simulate colour space</span><span class="de">Entwickleroptionen → Farbraum simulieren</span></td>
+      <td>
+        <span class="hu">deuteranomália / protanomália / tritanomália — <em>a valódi appon, valódi telefonon</em></span>
+        <span class="en">deuteranomaly / protanomaly / tritanomaly — <em>on the real app, on a real phone</em></span>
+        <span class="de">Deuteranomalie / Protanomalie / Tritanomalie — <em>in der echten App, auf einem echten Telefon</em></span>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Color Oracle</strong></td>
+      <td class="mono">colororacle.org</td>
+      <td>
+        <span class="hu">teljes képernyős szimuláció, Win/Mac/Linux, ingyenes</span>
+        <span class="en">full-screen simulation, Win/Mac/Linux, free</span>
+        <span class="de">Vollbild-Simulation, Win/Mac/Linux, kostenlos</span>
+      </td>
+    </tr>
+    <tr>
+      <td><strong>Sim Daltonism</strong></td>
+      <td class="mono">macOS</td>
+      <td>
+        <span class="hu">mozgatható „lencse” a képernyőn</span>
+        <span class="en">a movable “lens” you drag around the screen</span>
+        <span class="de">eine verschiebbare „Lupe“ über dem Bildschirm</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 class="hu">6. Ahol a WCAG 2.1 téved</h2>
+<h2 class="en">6. Where WCAG 2.1 gets it wrong</h2>
+<h2 class="de">6. Wo WCAG 2.1 danebenliegt</h2>
+
+<p class="hu">
+  Becsületesnek kell lenni: a fenti képlet <strong>ismerten pontatlan</strong>. Leginkább
+  sötét háttéren és a középtónusokban tér el attól, amit az ember ténylegesen lát — a
+  <span class="mono num">+0,05</span> tag egy egyszerűsítés, ami a sötét oldalon torzít.
+</p>
+<p class="en">
+  Honesty requires saying it: the formula above is <strong>known to be inaccurate</strong>.
+  It diverges most from what people actually see on dark backgrounds and in the midtones —
+  the <span class="mono num">+0.05</span> term is a simplification that distorts the dark
+  end.
+</p>
+<p class="de">
+  Ehrlichkeit verlangt, es zu sagen: Die obige Formel ist <strong>bekanntermaßen
+  ungenau</strong>. Am stärksten weicht sie auf dunklen Hintergründen und in den
+  Mitteltönen von dem ab, was Menschen tatsächlich sehen — der Term
+  <span class="mono num">+0,05</span> ist eine Vereinfachung, die das dunkle Ende verzerrt.
+</p>
+
+<p class="hu">
+  Az utódja az <strong>APCA</strong> (Accessible Perceptual Contrast Algorithm), a WCAG 3
+  tervezetében. Az modellezi a <em>polaritást</em> is: a sötét-világoson és a
+  világos-sötéten nem ugyanaz, és nem egy arányszámot ad, hanem egy
+  <span class="mono">Lc</span> értéket nagyjából −108 … +106 között.
+</p>
+<p class="en">
+  Its successor is <strong>APCA</strong> (Accessible Perceptual Contrast Algorithm), in
+  the WCAG 3 draft. It models <em>polarity</em> as well — dark-on-light and light-on-dark
+  are not the same case — and returns not a ratio but an <span class="mono">Lc</span>
+  value roughly between −108 and +106.
+</p>
+<p class="de">
+  Ihr Nachfolger ist <strong>APCA</strong> (Accessible Perceptual Contrast Algorithm), im
+  Entwurf von WCAG 3. Er modelliert auch die <em>Polarität</em> — dunkel-auf-hell und
+  hell-auf-dunkel sind nicht derselbe Fall — und liefert kein Verhältnis, sondern einen
+  <span class="mono">Lc</span>-Wert etwa zwischen −108 und +106.
+</p>
+
+<div class="kiemelt">
+  <span class="cimke hu">a gyakorlati döntés</span>
+  <span class="cimke en">the practical decision</span>
+  <span class="cimke de">die praktische Entscheidung</span>
+  <p class="hu">
+    Ami ma <strong>normatív</strong> — amire hivatkozni lehet egy áruházi adatlapon, egy
+    pályázatban vagy egy szimpóziumon —, az a <strong>WCAG 2.1</strong>. Tehát arra
+    programozunk. Az APCA-t ismerjük, és ahol többet mond, ott figyelünk rá — de a
+    megfelelőséget a 2.1 adja.
+  </p>
+  <p class="en">
+    What is <strong>normative</strong> today — what you can cite on a store listing, in a
+    tender, or at a conference — is <strong>WCAG 2.1</strong>. So that is what we program
+    against. We know APCA, and where it tells us more we listen — but conformance is
+    stated in 2.1.
+  </p>
+  <p class="de">
+    <strong>Normativ</strong> ist heute — und zitierfähig in einem Store-Eintrag, einer
+    Ausschreibung oder auf einer Tagung — <strong>WCAG 2.1</strong>. Dagegen programmieren
+    wir also. APCA kennen wir, und wo es mehr sagt, hören wir hin — die Konformität aber
+    erklärt 2.1.
+  </p>
+</div>
+
+<h2 class="hu">7. Amit nem tudunk</h2>
+<h2 class="en">7. What we do not know</h2>
+<h2 class="de">7. Was wir nicht wissen</h2>
+
+<p class="hu">Ezek a valódi kérdéseink — ezekre keressük a választ:</p>
+<p class="en">These are our genuine open questions:</p>
+<p class="de">Das sind unsere echten offenen Fragen:</p>
+
+<ol class="hu">
+  <li><strong>Elég-e a 3:1 egy vészhelyzeti felületen?</strong> A WCAG minimumot mond, nem optimumot. Egy vészhívó gomb, amit ijedt, rosszul látó, idős ember keres — ott hol van a valódi határ?</li>
+  <li><strong>Mit kezdjünk a szín <em>jelentésével</em>, ha a láthatóságot már a világosság hordozza?</strong> A zöld = üzenet, kék = hívás párosítás megmaradt. Segít-e még annak, aki a kettőt nem különbözteti meg — vagy inkább zavar?</li>
+  <li><strong>Van-e értelme a súlyosság-skálának a gyakorlatban?</strong> A Machado-mátrixok 0,1-es lépésekben skálázhatók. Reálisabb-e egy 0,6-os deuteranomália, mint a teljes deuteranópia — vagy tervezéskor mindig a legrosszabb esetre kell menni?</li>
+  <li><strong>A pasztell-paletta tartható-e egyáltalán?</strong> A hat avatar-szín azért pasztell, hogy barátságos legyen és sötét betű menjen rá. De pont ez tette a világos ikont láthatatlanná. Van-e olyan paletta, ami barátságos <em>és</em> minden ráhelyezett jelnek ad világosság-tartalékot?</li>
+</ol>
+
+<ol class="en">
+  <li><strong>Is 3:1 enough on an emergency interface?</strong> WCAG states a minimum, not an optimum. For an emergency button that a frightened, poorly-sighted, elderly person is hunting for — where is the real threshold?</li>
+  <li><strong>What should we do with the <em>meaning</em> of colour, now that lightness carries visibility?</strong> Green = message, blue = call still holds. Does it still help someone who cannot tell the two apart — or does it actively confuse?</li>
+  <li><strong>Is the severity scale useful in practice?</strong> The Machado matrices scale in steps of 0.1. Is a 0.6 deuteranomaly more realistic than full deuteranopia — or should design always target the worst case?</li>
+  <li><strong>Is the pastel palette defensible at all?</strong> The six avatar colours are pastel so that they feel friendly and carry dark text. But that is exactly what made a pale icon invisible. Is there a palette that is friendly <em>and</em> leaves lightness headroom for anything placed on it?</li>
+</ol>
+
+<ol class="de">
+  <li><strong>Genügen 3:1 auf einer Notfall-Oberfläche?</strong> WCAG nennt ein Minimum, kein Optimum. Bei einer Notruf-Taste, die ein erschrockener, schlecht sehender, älterer Mensch sucht — wo liegt dort die wirkliche Grenze?</li>
+  <li><strong>Was tun wir mit der <em>Bedeutung</em> der Farbe, wenn die Sichtbarkeit bereits die Helligkeit trägt?</strong> Grün = Nachricht, blau = Anruf gilt weiterhin. Hilft das noch jemandem, der beides nicht unterscheiden kann — oder stört es eher?</li>
+  <li><strong>Ist die Schweregrad-Skala in der Praxis sinnvoll?</strong> Die Machado-Matrizen lassen sich in 0,1-Schritten skalieren. Ist eine Deuteranomalie von 0,6 realistischer als die volle Deuteranopie — oder muss man beim Entwurf stets vom schlimmsten Fall ausgehen?</li>
+  <li><strong>Ist die Pastell-Palette überhaupt haltbar?</strong> Die sechs Avatar-Farben sind pastellig, damit sie freundlich wirken und dunkle Schrift tragen. Aber genau das machte ein helles Symbol unsichtbar. Gibt es eine Palette, die freundlich ist <em>und</em> jedem daraufgesetzten Zeichen Helligkeitsreserve lässt?</li>
+</ol>
+
+<h2 class="hu">8. Egy megjegyzés a végére</h2>
+<h2 class="en">8. A closing note</h2>
+<h2 class="de">8. Eine Bemerkung zum Schluss</h2>
+
+<p class="hu">
+  Ezt a hibát <strong>nem gép találta meg.</strong> Nem volt olyan tesztünk, ami elbukott
+  volna rajta — sőt, az ikon a saját tervezési környezetében (sötét fényképen) kifogástalan
+  volt.
+</p>
+<p class="en">
+  This defect was <strong>not found by a machine.</strong> No test of ours failed on it —
+  indeed, in the environment it was designed for (over a dark photograph) the icon was
+  flawless.
+</p>
+<p class="de">
+  Diesen Fehler hat <strong>keine Maschine gefunden.</strong> Kein Test von uns ist daran
+  gescheitert — im Gegenteil: In der Umgebung, für die es entworfen war (über einem
+  dunklen Foto), war das Symbol einwandfrei.
+</p>
+
+<p class="hu">
+  Egy ember odapillantott a telefonra, és megmondta. Egy másik, aki maga is nehezen látja
+  a színeket, előtte már jelezte, hogy nem talál semmilyen ikont — és a válasz az volt
+  neki, hogy „ott a kis ikon”.
+</p>
+<p class="en">
+  A person glanced at the phone and said so. Another, who has difficulty with colour
+  himself, had already reported that he could not find any icon at all — and was told
+  “the little icon is right there”.
+</p>
+<p class="de">
+  Ein Mensch warf einen Blick auf das Telefon und sagte es. Ein anderer, der selbst
+  Schwierigkeiten mit Farben hat, hatte zuvor schon gemeldet, dass er überhaupt kein
+  Symbol finde — und bekam zur Antwort: „Das kleine Symbol ist doch da.“
+</p>
+
+<p class="hu">
+  <strong>Neki volt igaza, és nem szubjektíven: matematikailag.</strong> Ezért kell a
+  képlet — hogy a következőt már ne kelljen valakinek a saját kárán észrevennie.
+</p>
+<p class="en">
+  <strong>He was right, and not subjectively: mathematically.</strong> That is what the
+  formula is for — so that nobody has to discover the next one the hard way.
+</p>
+<p class="de">
+  <strong>Er hatte recht, und zwar nicht subjektiv, sondern mathematisch.</strong> Genau
+  dafür ist die Formel da — damit den nächsten Fehler niemand mehr auf eigene Kosten
+  entdecken muss.
+</p>
+
+<footer>
+  <div class="lablec-sor hu"><strong>Segítség</strong> · vigyazokrad.hu — vészhívó alkalmazás és fali konzol idős és lábadozó embereknek.</div>
+  <div class="lablec-sor en"><strong>Segítség</strong> · vigyazokrad.hu — an emergency-call app and wall console for elderly and convalescing people.</div>
+  <div class="lablec-sor de"><strong>Segítség</strong> · vigyazokrad.hu — Notruf-App und Wandkonsole für ältere und genesende Menschen.</div>
+
+  <div class="lablec-sor hu">Minden szám ezen a lapon mérés. A kontrasztok a WCAG 2.1 relatív fénysűrűség-képletével készültek, a szimuláció Machado–Oliveira–Fernandes (2009) mátrixokkal, lineáris RGB-ben.</div>
+  <div class="lablec-sor en">Every number on this page is measured. Contrasts use the WCAG 2.1 relative-luminance formula; the simulation uses Machado–Oliveira–Fernandes (2009) matrices in linear RGB.</div>
+  <div class="lablec-sor de">Jede Zahl auf dieser Seite ist gemessen. Die Kontraste folgen der Formel für relative Leuchtdichte nach WCAG 2.1; die Simulation nutzt die Matrizen von Machado–Oliveira–Fernandes (2009) in linearem RGB.</div>
+
+  <div class="lablec-sor nyomtatasban hu"><strong>Ennek a lapnak van élő, kattintható változata is</strong> — számolóval és szimulációval. Kérje a fenti címen.</div>
+  <div class="lablec-sor nyomtatasban en"><strong>An interactive version of this page exists</strong> — with the calculator and the simulator live. Ask at the address above.</div>
+  <div class="lablec-sor nyomtatasban de"><strong>Von dieser Seite gibt es auch eine interaktive Fassung</strong> — mit Rechner und Simulation. Fragen Sie unter der obigen Adresse.</div>
+
+  <div class="lablec-sor">2026-09-19</div>
+</footer>
+
+</div>
+
+<script>
+/* ═══════ nyelv ══════════════════════════════════════════════ */
+const GOMBOK = {hu:'b-hu', en:'b-en', de:'b-de'};
+function nyelv(n){
+  document.body.dataset.lang = n;
+  document.documentElement.lang = n;
+  for(const [k,id] of Object.entries(GOMBOK))
+    document.getElementById(id).setAttribute('aria-pressed', k === n);
+  document.querySelectorAll('#cvd option').forEach(o => { o.textContent = o.dataset[n]; });
+  szamol();
+}
+for(const [k,id] of Object.entries(GOMBOK))
+  document.getElementById(id).addEventListener('click', () => nyelv(k));
+
+/* ═══════ WCAG 2.1 ═══════════════════════════════════════════ */
+const hexRe = /^#?([0-9a-f]{6})$/i;
+function rgb(hex){
+  const m = hexRe.exec(hex.trim());
+  if(!m) return null;
+  const n = parseInt(m[1],16);
+  return [(n>>16)&255,(n>>8)&255,n&255];
+}
+function linRGB(c){ const s=c/255; return s<=0.04045 ? s/12.92 : Math.pow((s+0.055)/1.055,2.4); }
+function lum(hex){ const c=rgb(hex); return c ? 0.2126*linRGB(c[0])+0.7152*linRGB(c[1])+0.0722*linRGB(c[2]) : 0; }
+function cr(a,b){ const x=lum(a), y=lum(b); return (Math.max(x,y)+0.05)/(Math.min(x,y)+0.05); }
+/* A magyar és a német tizedesvesszőt használ, az angol pontot. */
+function tizedes(s){ return document.body.dataset.lang === 'en' ? s : s.replace('.',','); }
+function ker(x){ return tizedes(x.toFixed(2)); }
+function tiz(x){ return tizedes(x.toFixed(4)); }
+
+/* ═══════ Machado 2009, lineáris RGB ═════════════════════════ */
+const MATRIX = {
+  prot:[[ 0.152286, 1.052583,-0.204868],[ 0.114503, 0.786281, 0.099216],[-0.003882,-0.048116, 1.051998]],
+  deut:[[ 0.367322, 0.860646,-0.227968],[ 0.280085, 0.672501, 0.047413],[-0.011820, 0.042940, 0.968881]],
+  trit:[[ 1.255528,-0.076749,-0.178779],[-0.078411, 0.930809, 0.147602],[ 0.004733, 0.691367, 0.303900]]
+};
+function gamma(v){
+  v = Math.min(1, Math.max(0, v));
+  return Math.round(255 * (v <= 0.0031308 ? 12.92*v : 1.055*Math.pow(v,1/2.4) - 0.055));
+}
+function ketJegy(n){ return n.toString(16).padStart(2,'0'); }
+function szimulal(hex, mod){
+  const c = rgb(hex);
+  if(!c || mod === 'normal') return hex.toUpperCase();
+  const lin = c.map(linRGB);
+  if(mod === 'akro'){
+    const g = gamma(0.2126*lin[0] + 0.7152*lin[1] + 0.0722*lin[2]);
+    return '#'+ketJegy(g)+ketJegy(g)+ketJegy(g);
+  }
+  return '#'+MATRIX[mod].map(s => gamma(s[0]*lin[0]+s[1]*lin[1]+s[2]*lin[2])).map(ketJegy).join('').toUpperCase();
+}
+
+/* ═══════ a valódi paletta ═══════════════════════════════════ */
+const AVATAROK = [
+  {hu:'zöld',   en:'green',     de:'grün',     hex:'#A8D5BA'},
+  {hu:'rózsa',  en:'pink',      de:'rosa',     hex:'#F6C6D0'},
+  {hu:'sárga',  en:'yellow',    de:'gelb',     hex:'#F2C879'},
+  {hu:'kék',    en:'blue',      de:'blau',     hex:'#A9C7F0'},
+  {hu:'lila',   en:'lilac',     de:'flieder',  hex:'#C9B6E4'},
+  {hu:'türkiz', en:'turquoise', de:'türkis',   hex:'#9BD8DE'}
+];
+const REGI_IKON = '#7FE38A', UJ_KORONG = '#1B5E20', UJ_JEL = '#FFFFFF', KONTUR = '#1C1C20';
+const SZOVEG = {
+  hu:{ok:'megfelel', nem:'megbukik'},
+  en:{ok:'passes',   nem:'fails'},
+  de:{ok:'erfüllt',  nem:'fällt durch'}
+};
+
+function tabla(){
+  const n = document.body.dataset.lang;
+  document.getElementById('regi-tabla').innerHTML = AVATAROK.map(a => {
+    const c = cr(REGI_IKON, a.hex), jo = c >= 3;
+    return '<tr><td>'+a[n]+'</td><td class="sz">'+a.hex+'</td><td class="sz">'+ker(c)+':1</td>'+
+      '<td><span class="jel '+(jo?'ok':'nem')+'"><span class="alak">'+(jo?'✓':'✗')+'</span>'+
+      SZOVEG[n][jo?'ok':'nem']+'</span></td></tr>';
+  }).join('');
+}
+
+/* ═══════ élő számoló ════════════════════════════════════════ */
+const eElo = document.getElementById('sz-elo'), eEloH = document.getElementById('sz-elo-hex');
+const eHat = document.getElementById('sz-hat'), eHatH = document.getElementById('sz-hat-hex');
+const KUSZOBOK = [
+  {c:3,   hu:'nem-szöveges grafika és kezelőelem', en:'non-text graphics and UI components', de:'Nicht-Text-Grafik und Bedienelemente', pont:'1.4.11 AA'},
+  {c:4.5, hu:'normál szöveg',                      en:'body text',                           de:'Fließtext',                            pont:'1.4.3 AA'},
+  {c:7,   hu:'normál szöveg, megerősített',        en:'body text, enhanced',                 de:'Fließtext, erhöht',                    pont:'1.4.6 AAA'}
+];
+function szamol(){
+  const n = document.body.dataset.lang;
+  const e = eEloH.value, h = eHatH.value;
+  if(!hexRe.test(e.trim()) || !hexRe.test(h.trim())) return;
+  document.getElementById('l-elo').textContent = tiz(lum(e));
+  document.getElementById('l-hat').textContent = tiz(lum(h));
+  const c = cr(e,h);
+  document.getElementById('cr').textContent = ker(c)+':1';
+  const m = document.getElementById('minta');
+  m.style.background = h; m.style.color = e;
+  document.getElementById('kuszobok').innerHTML = KUSZOBOK.map(k => {
+    const jo = c >= k.c;
+    return '<div class="kuszob"><span>'+k[n]+' <span class="mono" style="color:var(--halk)">('+k.pont+', '+
+      tizedes(String(k.c))+':1)</span></span>'+
+      '<span class="jel '+(jo?'ok':'nem')+'"><span class="alak">'+(jo?'✓':'✗')+'</span>'+
+      SZOVEG[n][jo?'ok':'nem']+'</span></div>';
+  }).join('');
+  tabla();
+  rajzol();
+}
+function parosit(szin, szoveg){
+  szin.addEventListener('input', () => { szoveg.value = szin.value.toUpperCase(); szamol(); });
+  szoveg.addEventListener('input', () => {
+    if(hexRe.test(szoveg.value.trim())){ szin.value = szoveg.value.trim().replace(/^#?/,'#'); szamol(); }
+  });
+}
+parosit(eElo, eEloH); parosit(eHat, eHatH);
+
+/* ═══════ csempe-bemutató ════════════════════════════════════ */
+function csempe(hatterHex, jelHex, korongHex, mod){
+  const h = szimulal(hatterHex, mod), j = szimulal(jelHex, mod);
+  const k = korongHex ? szimulal(korongHex, mod) : null;
+  const c = korongHex ? cr(korongHex, hatterHex) : cr(jelHex, hatterHex);
+  const jel = k ? '<span class="korong" style="background:'+k+';color:'+j+'">✉</span>'
+                : '<span style="color:'+j+';font-size:17px">✉</span>';
+  return '<div class="csempe">'+
+    '<div class="arc" style="background:'+h+'"></div>'+
+    '<div class="sav" style="background:'+h+';color:'+szimulal(KONTUR,mod)+'">'+jel+'Kati</div>'+
+    '<div class="cr">'+ker(c)+':1 '+(c>=3?'✓':'✗')+'</div></div>';
+}
+function rajzol(){
+  const mod = document.getElementById('cvd').value;
+  document.getElementById('racs-regi').innerHTML = AVATAROK.map(a => csempe(a.hex, REGI_IKON, null, mod)).join('');
+  document.getElementById('racs-uj').innerHTML   = AVATAROK.map(a => csempe(a.hex, UJ_JEL, UJ_KORONG, mod)).join('');
+}
+document.getElementById('cvd').addEventListener('change', rajzol);
+
+/* ═══════ indulás ════════════════════════════════════════════ */
+const kert = (location.hash + location.search).toLowerCase();
+nyelv(kert.includes('de') ? 'de' : kert.includes('en') ? 'en' : 'hu');
+</script>
+</body>
+</html>

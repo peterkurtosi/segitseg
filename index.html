@@ -790,6 +790,39 @@ ul.tetelek li span { color: var(--halvany); }
   align-items: flex-start;
 }
 
+/* ── A LATHATOSAG-MUNKALAP szakasza ──────────────────────────────
+   A borito a PDF elso oldalanak kicsinyitett kepe. Dekoracio: a valodi,
+   feliratozott gomb kozvetlenul alatta all. */
+.lat-doboz {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  /* A jobb oszlop (gomb + letoltesek) sokkal alacsonyabb a boritonal, ezert
+     fuggolegesen kozepre kerul — flex-start mellett a sor billegett. */
+  align-items: center;
+  margin-top: 18px;
+}
+.lat-borito {
+  display: block;
+  flex: 0 0 auto;
+  width: 196px;
+  max-width: 100%;
+  border: 1px solid var(--vonal);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 14px rgba(23, 26, 32, 0.13);
+}
+.lat-borito img { display: block; width: 100%; height: auto; }
+.lat-jobb {
+  flex: 1 1 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+.lat-pdf { margin: 0; font-size: 0.95rem; color: var(--halvany); }
+.lat-pdf a { color: inherit; }
+
 .kapcsolat {
   display: inline-flex;
   align-items: center;
@@ -1188,6 +1221,47 @@ footer a:hover, footer a:focus-visible { color: var(--kek); }
       </div>
     </section>
 
+    <!-- ══ AKADÁLYMENTESSÉG — A LÁTHATÓSÁG MATEMATIKÁJA ══════════
+         ⭐ Ez a szakasz NEM az app funkcióiról szól, hanem arról, HOGYAN
+            építünk. Peter (2026-09-19): „ez a színelméleti kérdés nemcsak
+            az app problémája lesz, hanem minden vigyazokrad terméké".
+         ⚠ A borító-kép DEKORÁCIÓ: a link aria-hidden + tabindex="-1",
+            mert alatta ott a rendes, feliratozott gomb. Enélkül a
+            képernyőolvasó két linket olvasna, és az egyiknek nincs neve. -->
+    <section>
+      <div class="verem">
+        <span class="cimke" data-t="akad_cimke"></span>
+        <h2 class="hasab" data-t="akad_cim"></h2>
+        <p class="hasab" data-t="akad_1"></p>
+        <p class="hasab" data-t="akad_2"></p>
+        <p class="hasab" data-t="akad_3"></p>
+
+        <div class="lat-doboz hasab">
+          <!-- ⭐ A borító NYELVFÜGGŐ: a data-t HTML-t helyettesít be, ezért a
+               linken belüli <img> nyelvenként más. Így a német olvasó a német
+               dokumentum címlapját látja, nem a magyarét. -->
+          <a class="lat-borito" href="lathatosag.html" aria-hidden="true"
+             tabindex="-1" data-t="akad_borito"></a>
+          <div class="lat-jobb">
+            <a class="kapcsolat" href="lathatosag.html">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 5.5h6.5a2.5 2.5 0 0 1 2.5 2.5v11a2 2 0 0 0-2-2H4z"/>
+                <path d="M20 5.5h-6.5A2.5 2.5 0 0 0 11 8v11a2 2 0 0 1 2-2h7z"/>
+              </svg>
+              <span data-t="akad_gomb"></span>
+            </a>
+            <p class="lat-pdf">
+              <span data-t="akad_pdf"></span>
+              <a href="dokumentumok/lathatosag-matematikaja-hu.pdf" download>magyar</a> ·
+              <a href="dokumentumok/mathematics-of-visibility-en.pdf" download>English</a> ·
+              <a href="dokumentumok/mathematik-der-sichtbarkeit-de.pdf" download>Deutsch</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ══ HOGYAN KAPHATÓ MEG ════════════════════════════════════ -->
     <section>
       <div class="zaras">
@@ -1394,16 +1468,16 @@ const SZOVEG = {
     uj_1: 'Az üzenetküldés most már a régebbi telefonokon is működik. Korábban Android 11 és az alatt egyetlen üzenet sem ment el — és épp azok a régebbi készülékek a leggyakoribbak az idősebbeknél.',
     uj_2: 'Az alkalmazás csak akkor mondja, hogy elment az üzenet, ha a hálózat visszaigazolta. Ha nem jött visszaigazolás, azt is megmondja — nem nyugtat meg hamisan.',
     uj_3: 'Minden csempén látszik, mi történik koppintásra: hívás vagy üzenet, és hogy a segélygomb is szól-e az illetőnek. A képernyőolvasó mindezt ki is mondja.',
-    uj_cimke: 'Neu',
-    uj_cim: 'Was sich in der letzten Version verbessert hat',
-    uj_1: 'Nachrichten gehen jetzt auch auf älteren Telefonen raus. Unter Android 11 ging bisher keine einzige Nachricht raus — und gerade diese älteren Geräte sind bei älteren Menschen am häufigsten.',
-    uj_2: 'Die App meldet den Versand nur, wenn das Netz ihn bestätigt hat. Kommt keine Bestätigung, sagt sie das — statt falsch zu beruhigen.',
-    uj_3: 'Jede Kachel zeigt, was ein Tippen bewirkt: Anruf oder Nachricht, und ob die Hilfe-Taste diese Person ebenfalls benachrichtigt. Der Screenreader liest das alles vor.',
-    uj_cimke: 'New',
-    uj_cim: 'What improved in the latest version',
-    uj_1: 'Messaging now works on older phones too. On Android 11 and below not a single message was ever sent — and those older handsets are the most common ones among older people.',
-    uj_2: 'The app says a message went out only if the network confirmed it. If no confirmation arrives, it says so — instead of reassuring you falsely.',
-    uj_3: 'Every tile shows what a tap will do: a call or a message, and whether the help button alerts that person too. The screen reader reads all of it out.',
+    // ⚠ AKADÁLYMENTESSÉG — a munkalap. A lap és a PDF-ek: lathatosag.html,
+    //   dokumentumok/. Frissítéskor a borító-képet is újra kell rajzolni.
+    akad_cimke: 'Akadálymentesség',
+    akad_cim: 'Amit a színekről tanultunk — és amiben segítséget kérünk',
+    akad_1: 'Az egyik csempén volt egy kis ikon, ami megmondta, hogy koppintásra hívás indul-e vagy üzenet megy. Valaki, aki nehezen látja a színeket, azt mondta: nem talál semmilyen ikont. Megmértük — a kontraszt <b>1,00</b> volt. Vagyis matematikailag tényleg nem volt ott semmi.',
+    akad_2: 'Ebből munkalap lett: a WCAG kontraszt-képlete programozható alakban, a saját palettánk mérve, és élő színtévesztés-szimuláció. És ez nem csak az alkalmazásé — <b>minden vigyazokrad.hu termékre</b> ugyanez vonatkozik, a fali konzolra és a gyógyszeradagolóra is.',
+    akad_3: 'Nem vagyunk színelméleti szakemberek. Ha értesz hozzá, vagy ismersz valakit, aki igen: <b>minden visszajelzést szívesen fogadunk.</b>',
+    akad_gomb: 'A munkalap megnyitása',
+    akad_borito: '<img src="dokumentumok/lathatosag-borito-hu.png" alt="" width="760" height="984" loading="lazy">',
+    akad_pdf: 'Letöltés PDF-ben:',
     kap_cimke: 'Hogyan kapható meg',
     kap_cim: 'Írj nekem, és elküldöm.',
     kap_szo: 'Innen most nem lehet letölteni. Béta változat, és szeretném tudni, kihez kerül — hogy szólni tudjak, ha javítás készül. Írj egy sort, és küldöm a telepítőt meg a leírást.',
@@ -1542,6 +1616,19 @@ const SZOVEG = {
       ['Nur für Android', 'Für das iPhone gibt es sie nicht. iOS erlaubt bewusst kein automatisches SMS-Senden — dort ist der eingebaute Notruf SOS die richtige Lösung, und der ist besser als alles, was wir bauen könnten.'],
       ['Beta-Version', 'Sie funktioniert und ist auf echten Telefonen erprobt — befindet sich aber noch im Test. Wenn etwas nicht geht, schreiben Sie mir.']
     ],
+    uj_cimke: 'Neu',
+    uj_cim: 'Was sich in der letzten Version verbessert hat',
+    uj_1: 'Nachrichten gehen jetzt auch auf älteren Telefonen raus. Unter Android 11 ging bisher keine einzige Nachricht raus — und gerade diese älteren Geräte sind bei älteren Menschen am häufigsten.',
+    uj_2: 'Die App meldet den Versand nur, wenn das Netz ihn bestätigt hat. Kommt keine Bestätigung, sagt sie das — statt falsch zu beruhigen.',
+    uj_3: 'Jede Kachel zeigt, was ein Tippen bewirkt: Anruf oder Nachricht, und ob die Hilfe-Taste diese Person ebenfalls benachrichtigt. Der Screenreader liest das alles vor.',
+    akad_cimke: 'Barrierefreiheit',
+    akad_cim: 'Was wir über Farbe gelernt haben — und wobei wir um Hilfe bitten',
+    akad_1: 'Auf einer Kachel stand ein kleines Symbol, das anzeigte, ob ein Tippen einen Anruf auslöst oder eine Nachricht sendet. Jemand mit Farbfehlsichtigkeit sagte, er finde überhaupt kein Symbol. Wir haben nachgemessen — der Kontrast betrug <b>1,00</b>. Mathematisch war dort tatsächlich nichts.',
+    akad_2: 'Daraus wurde ein Arbeitspapier: die WCAG-Kontrastformel in programmierbarer Form, unsere eigene Palette gemessen, und eine lebendige Simulation von Farbfehlsichtigkeit. Und das betrifft nicht nur die App — <b>es gilt für jedes Produkt von vigyazokrad.hu</b>, auch für die Wandkonsole und den Medikamentenspender.',
+    akad_3: 'Wir sind keine Farbwissenschaftler. Wenn Sie es sind oder jemanden kennen, der es ist: <b>jede Rückmeldung ist willkommen.</b>',
+    akad_gomb: 'Das Arbeitspapier öffnen',
+    akad_borito: '<img src="dokumentumok/lathatosag-borito-de.png" alt="" width="760" height="984" loading="lazy">',
+    akad_pdf: 'Als PDF herunterladen:',
 
     kap_cimke: 'Wie man sie bekommt',
     kap_cim: 'Schreiben Sie mir, ich schicke sie.',
@@ -1681,6 +1768,19 @@ const SZOVEG = {
       ['Android only', 'There is no iPhone version. iOS deliberately does not allow automatic SMS sending — there, the built-in Emergency SOS is the right answer, and it is better than anything we could build.'],
       ['Beta version', 'It works and has been proven on real phones — but it is still in testing. If something goes wrong, write to me.']
     ],
+    uj_cimke: 'New',
+    uj_cim: 'What improved in the latest version',
+    uj_1: 'Messaging now works on older phones too. On Android 11 and below not a single message was ever sent — and those older handsets are the most common ones among older people.',
+    uj_2: 'The app says a message went out only if the network confirmed it. If no confirmation arrives, it says so — instead of reassuring you falsely.',
+    uj_3: 'Every tile shows what a tap will do: a call or a message, and whether the help button alerts that person too. The screen reader reads all of it out.',
+    akad_cimke: 'Accessibility',
+    akad_cim: 'What we learned about colour — and where we are asking for help',
+    akad_1: 'One tile carried a small icon telling you whether tapping it would place a call or send a message. Someone who has difficulty with colour said he could not find any icon at all. We measured it — the contrast was <b>1.00</b>. Mathematically, there really was nothing there.',
+    akad_2: 'That turned into a working paper: the WCAG contrast formula in programmable form, our own palette measured, and a live colour-vision-deficiency simulator. And this is not only about the app — <b>it applies to every vigyazokrad.hu product</b>, the wall console and the medicine dispenser included.',
+    akad_3: 'We are not colour scientists. If you are, or you know someone who is: <b>any feedback at all is welcome.</b>',
+    akad_gomb: 'Open the working paper',
+    akad_borito: '<img src="dokumentumok/lathatosag-borito-en.png" alt="" width="760" height="984" loading="lazy">',
+    akad_pdf: 'Download as PDF:',
 
     kap_cimke: 'How to get it',
     kap_cim: 'Write to me and I will send it.',
