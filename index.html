@@ -1168,6 +1168,26 @@ footer a:hover, footer a:focus-visible { color: var(--kek); }
       </div>
     </section>
 
+    <!-- ══ MI ÚJSÁG ══════════════════════════════════════════════
+         ⚠⚠ EZT MINDEN KIADÁSNÁL FRISSÍTENI KELL — ez az EGYETLEN
+            kézzel karbantartott rész a lapon.
+         ⭐ VERZIÓSZÁM SZÁNDÉKOSAN NINCS benne: azt a lábléc mutatja,
+            és a JavaScript a GitHubról frissíti. Egy második, kézzel
+            írt szám pontosan úgy avulna el, ahogy 2026-09-01-ig
+            elavult — lásd a `keszit.py` megjegyzését.
+         🔴 HIVATKOZÁS SEM KERÜLHET IDE a kiadási oldalra: azzal a
+            letöltő link kerülne ki a nyilvános lapra. Lásd a lábléc
+            megjegyzését a verzió-számlálónál. -->
+    <section>
+      <div class="verem">
+        <span class="cimke" data-t="uj_cimke"></span>
+        <h2 class="hasab" data-t="uj_cim"></h2>
+        <p class="hasab" data-t="uj_1"></p>
+        <p class="hasab" data-t="uj_2"></p>
+        <p class="hasab" data-t="uj_3"></p>
+      </div>
+    </section>
+
     <!-- ══ HOGYAN KAPHATÓ MEG ════════════════════════════════════ -->
     <section>
       <div class="zaras">
@@ -1368,6 +1388,22 @@ const SZOVEG = {
       ['Béta változat', 'Működik, és valódi telefonokon bizonyított — de még tesztelés alatt áll. Ha valami nem megy, írj.']
     ],
 
+    // ⚠ MI ÚJSÁG — minden kiadásnál frissítendő.
+    uj_cimke: 'Mi újság',
+    uj_cim: 'Ami a legutóbbi változatban javult',
+    uj_1: 'Az üzenetküldés most már a régebbi telefonokon is működik. Korábban Android 11 és az alatt egyetlen üzenet sem ment el — és épp azok a régebbi készülékek a leggyakoribbak az idősebbeknél.',
+    uj_2: 'Az alkalmazás csak akkor mondja, hogy elment az üzenet, ha a hálózat visszaigazolta. Ha nem jött visszaigazolás, azt is megmondja — nem nyugtat meg hamisan.',
+    uj_3: 'Minden csempén látszik, mi történik koppintásra: hívás vagy üzenet, és hogy a segélygomb is szól-e az illetőnek. A képernyőolvasó mindezt ki is mondja.',
+    uj_cimke: 'Neu',
+    uj_cim: 'Was sich in der letzten Version verbessert hat',
+    uj_1: 'Nachrichten gehen jetzt auch auf älteren Telefonen raus. Unter Android 11 ging bisher keine einzige Nachricht raus — und gerade diese älteren Geräte sind bei älteren Menschen am häufigsten.',
+    uj_2: 'Die App meldet den Versand nur, wenn das Netz ihn bestätigt hat. Kommt keine Bestätigung, sagt sie das — statt falsch zu beruhigen.',
+    uj_3: 'Jede Kachel zeigt, was ein Tippen bewirkt: Anruf oder Nachricht, und ob die Hilfe-Taste diese Person ebenfalls benachrichtigt. Der Screenreader liest das alles vor.',
+    uj_cimke: 'New',
+    uj_cim: 'What improved in the latest version',
+    uj_1: 'Messaging now works on older phones too. On Android 11 and below not a single message was ever sent — and those older handsets are the most common ones among older people.',
+    uj_2: 'The app says a message went out only if the network confirmed it. If no confirmation arrives, it says so — instead of reassuring you falsely.',
+    uj_3: 'Every tile shows what a tap will do: a call or a message, and whether the help button alerts that person too. The screen reader reads all of it out.',
     kap_cimke: 'Hogyan kapható meg',
     kap_cim: 'Írj nekem, és elküldöm.',
     kap_szo: 'Innen most nem lehet letölteni. Béta változat, és szeretném tudni, kihez kerül — hogy szólni tudjak, ha javítás készül. Írj egy sort, és küldöm a telepítőt meg a leírást.',
@@ -1377,7 +1413,7 @@ const SZOVEG = {
     lab_ingyen: 'Ingyenes, és az is marad. Egyetlen fillért nem fogadunk el érte senkitől.',
     lab_licenc: 'PolyForm Noncommercial 1.0.0 licenc',
     lab_adatvedelem: 'Adatvédelmi tájékoztató',
-    lab_verzio: 'Jelenlegi változat: 1.0.0-beta.17',
+    lab_verzio: 'Jelenlegi változat: 1.0.0-beta.18',
     lab_verzio_elo: 'Jelenlegi változat: ',
     lab_letoltes: ' letöltés'
   },
@@ -1516,7 +1552,7 @@ const SZOVEG = {
     lab_ingyen: 'Kostenlos, und das bleibt so. Wir nehmen dafür von niemandem einen Cent.',
     lab_licenc: 'Lizenz: PolyForm Noncommercial 1.0.0',
     lab_adatvedelem: 'Datenschutzerklärung',
-    lab_verzio: 'Aktuelle Version: 1.0.0-beta.17',
+    lab_verzio: 'Aktuelle Version: 1.0.0-beta.18',
     lab_verzio_elo: 'Aktuelle Version: ',
     lab_letoltes: ' Downloads'
   },
@@ -1655,7 +1691,7 @@ const SZOVEG = {
     lab_ingyen: 'Free, and it will stay free. We will not accept a penny for it from anyone.',
     lab_licenc: 'PolyForm Noncommercial 1.0.0 licence',
     lab_adatvedelem: 'Privacy policy',
-    lab_verzio: 'Current version: 1.0.0-beta.17',
+    lab_verzio: 'Current version: 1.0.0-beta.18',
     lab_verzio_elo: 'Current version: ',
     lab_letoltes: ' downloads'
   }
