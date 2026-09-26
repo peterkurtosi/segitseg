@@ -494,7 +494,10 @@ button:focus-visible, a:focus-visible {
 
 .tabla {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* ⭐ 2026-09-26: EGY segélyhívó gomb lett. Az `auto-fit` miatt
+     egyetlen csempe a teljes szélességet kitölti — nem marad
+     negyedszélességű maradék a négy helyén. */
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
   gap: 7px;
   margin-top: 10px;
 }
@@ -1342,9 +1345,6 @@ const SZOVEG = {
     nevek: ['Klotild', 'Péter', 'Kati', 'Marika', 'Dr. House'],
     ures: 'üres hely',
     szamok: [
-      { o: 'lap-piros',       i: 'mento',   n: 'MENTŐK',     s: '104' },
-      { o: 'lap-feher-piros', i: 'tuz',     n: 'TŰZOLTÓK',   s: '105' },
-      { o: 'lap-feher-kek',   i: 'szirena', n: 'RENDŐRSÉG',  s: '107' },
       { o: 'lap-kek',         i: 'sos',     n: 'SEGÉLYHÍVÓ', s: '112' }
     ],
 
@@ -1381,10 +1381,10 @@ const SZOVEG = {
     k4_cim: 'Nagyi mód',
     k4_szo: 'Bekapcsolva az alkalmazás lesz a kezdőképernyő: nem lehet véletlenül bezárni, nem lehet „eltévedni" a telefonban. Kikapcsolva teljesen normál alkalmazás.',
 
-    tabla_cimke: 'A segélyhívó sáv',
-    tabla_cim: 'A hivatalos tábla, nem a saját ötletünk.',
-    tabla_szo: 'A szín, a jel és a sorrend a hivatalos magyar segélyhívó tábláról jön. Vészhelyzetben a megszokás többet ér, mint a logika: ha valaki életében ezerszer látta ezt a sorrendet, ne mi írjuk át.',
-    tabla_figyelem: '⚠️ Ezek a gombok szabadon átírhatók. Az alkalmazásban jelenleg a magyar számok az alapértelmezettek — más országban a beállításban kell átírni őket. A német és angol nyelvű változat készül.',
+    tabla_cimke: 'A segélyhívó gomb',
+    tabla_cim: 'Egy gomb. Nem kell választani.',
+    tabla_szo: 'Magyarországon a 104, a 105 és a 107 hívása 2014 óta úgyis a 112 központjába fut be. Négy gomb tehát nem kínált volna gyorsabb utat — csak egy döntést kért volna a legrosszabb pillanatban. Ezért maradt egy. És ez három elemmel kevesebb, amin a képernyőolvasónak át kell lapoznia a segélyhívóig.',
+    tabla_figyelem: '⚠️ A szám az országhoz igazodik: Magyarországon és Németországban 112, Nagy-Britanniában 999. A beállításban egyetlen helyen átírható. Akkor is működik, ha nincs egyenleg a SIM-kártyán.',
 
     beall_cimke: 'A beállítás',
     beall_cim: 'Ez a rész neked szól, nem neki.',
@@ -1435,7 +1435,7 @@ const SZOVEG = {
     mak_uzenet_jegyzet: 'A szöveget te írod. Ha üresen hagyod, egy általános üzenet megy ki — üres SMS soha.',
     beall2_meg: 'Amit még be lehet állítani',
     beall2_lista: [
-      ['A segélyhívó gombok', 'Mind a négy neve és száma átírható — más ország, más számok. A már átírt számokat egy frissítés soha nem írja felül.'],
+      ['A segélyhívó gomb', 'A neve és a száma is átírható — más ország, más szám. Üresen viszont nem hagyható: egy vészhelyzeti alkalmazásban nem maradhat a képernyő segélyhívó gomb nélkül.'],
       ['Fénykép vagy rajzolt arc', 'A galériából választott képből kivághatod az arcot: húzod, és a KISEBB / NAGYOBB gombokkal ráközelítesz. Ha nincs fénykép, választhatsz rajzolt női vagy férfi arcot — az is felismerhető, nem egy szürke sziluett.'],
       ['Ki kapjon segélykérést', 'Csempénként külön. A főképernyőn a piros gomb alatt ott a nevük, hogy ne kelljen emlékezni rá.'],
       ['Belépés a beállításokba', 'Hosszú nyomás a fogaskeréken, majd egy kérdés — ahol a NEM a nagy zöld gomb. Így véletlenül nem lehet belekeveredni.'],
@@ -1487,7 +1487,7 @@ const SZOVEG = {
     lab_ingyen: 'Ingyenes, és az is marad. Egyetlen fillért nem fogadunk el érte senkitől.',
     lab_licenc: 'PolyForm Noncommercial 1.0.0 licenc',
     lab_adatvedelem: 'Adatvédelmi tájékoztató',
-    lab_verzio: 'Jelenlegi változat: 1.0.0-beta.18',
+    lab_verzio: 'Jelenlegi változat: 1.0.0-beta.19',
     lab_verzio_elo: 'Jelenlegi változat: ',
     lab_letoltes: ' letöltés'
   },
@@ -1497,10 +1497,7 @@ const SZOVEG = {
     nevek: ['Klotild', 'Peter', 'Kati', 'Marika', 'Dr. House'],
     ures: 'frei',
     szamok: [
-      { o: 'lap-piros',       i: 'mento',   n: 'RETTUNG',   s: '112' },
-      { o: 'lap-feher-piros', i: 'tuz',     n: 'FEUERWEHR', s: '112' },
-      { o: 'lap-feher-kek',   i: 'szirena', n: 'POLIZEI',   s: '110' },
-      { o: 'lap-kek',         i: 'sos',     n: 'ÄRZTL. DIENST', s: '116117' }
+      { o: 'lap-kek',         i: 'sos',     n: 'NOTRUF',     s: '112' }
     ],
 
     hos_cimke: 'Kostenlose Notruf-App für Android',
@@ -1536,10 +1533,10 @@ const SZOVEG = {
     k4_cim: 'Großmutter-Modus',
     k4_szo: 'Eingeschaltet wird die App zum Startbildschirm: man kann sie nicht versehentlich schließen und sich im Telefon nicht verirren. Ausgeschaltet ist sie eine ganz normale App.',
 
-    tabla_cimke: 'Die Notrufleiste',
-    tabla_cim: 'Die offiziellen Nummern, nicht unsere Idee.',
-    tabla_szo: 'Farbe, Symbol und Reihenfolge stammen von der offiziellen Notruftafel. In einer Notlage zählt Gewohnheit mehr als Logik: Wer diese Reihenfolge tausendmal gesehen hat, soll sie von uns nicht umgestellt bekommen.',
-    tabla_figyelem: '⚠️ Diese Tasten sind frei änderbar. In der App sind derzeit die ungarischen Nummern voreingestellt — in anderen Ländern müssen sie in den Einstellungen angepasst werden. Eine deutsche Sprachversion der App ist in Arbeit.',
+    tabla_cimke: 'Die Notruftaste',
+    tabla_cim: 'Eine Taste. Nichts zu entscheiden.',
+    tabla_szo: 'In Ungarn laufen Anrufe bei 104, 105 und 107 seit 2014 ohnehin in der Leitstelle der 112 auf. Vier Tasten hätten also keinen schnelleren Weg geboten — sondern nur eine Entscheidung im schlechtesten Moment verlangt. Deshalb ist es eine geworden. Und das sind drei Elemente weniger, durch die sich ein Screenreader bis zum Notruf arbeiten muss.',
+    tabla_figyelem: '⚠️ Die Nummer richtet sich nach dem Land: 112 in Ungarn und Deutschland, 999 im Vereinigten Königreich. In den Einstellungen an einer einzigen Stelle änderbar. Sie funktioniert auch ohne Guthaben auf der SIM-Karte.',
 
     beall_cimke: 'Die Einrichtung',
     beall_cim: 'Dieser Teil ist für Sie, nicht für sie.',
@@ -1590,7 +1587,7 @@ const SZOVEG = {
     mak_uzenet_jegyzet: 'Den Text schreiben Sie selbst. Bleibt das Feld leer, geht ein allgemeiner Text raus — niemals eine leere SMS.',
     beall2_meg: 'Was sich außerdem einstellen lässt',
     beall2_lista: [
-      ['Die Notruftasten', 'Name und Nummer aller vier sind änderbar — anderes Land, andere Nummern. Bereits geänderte Nummern werden von einem Update nie überschrieben.'],
+      ['Die Notruftaste', 'Beschriftung und Nummer sind änderbar — anderes Land, andere Nummer. Leer bleiben darf sie aber nicht: in einer Notfall-App darf der Bildschirm nicht ohne Notruftaste dastehen.'],
       ['Foto oder gezeichnetes Gesicht', 'Aus einem Foto aus der Galerie lässt sich das Gesicht zuschneiden: ziehen und mit KLEINER / GRÖSSER heranzoomen. Ohne Foto können Sie ein gezeichnetes weibliches oder männliches Gesicht wählen — auch das ist erkennbar, keine graue Silhouette.'],
       ['Wer den Notruf bekommt', 'Pro Kachel einzeln. Auf dem Startbildschirm stehen die Namen unter der roten Taste, damit man sie sich nicht merken muss.'],
       ['Zugang zu den Einstellungen', 'Langes Drücken auf das Zahnrad, dann eine Rückfrage — bei der NEIN die große grüne Taste ist. So gerät niemand versehentlich hinein.'],
@@ -1639,7 +1636,7 @@ const SZOVEG = {
     lab_ingyen: 'Kostenlos, und das bleibt so. Wir nehmen dafür von niemandem einen Cent.',
     lab_licenc: 'Lizenz: PolyForm Noncommercial 1.0.0',
     lab_adatvedelem: 'Datenschutzerklärung',
-    lab_verzio: 'Aktuelle Version: 1.0.0-beta.18',
+    lab_verzio: 'Aktuelle Version: 1.0.0-beta.19',
     lab_verzio_elo: 'Aktuelle Version: ',
     lab_letoltes: ' Downloads'
   },
@@ -1649,10 +1646,7 @@ const SZOVEG = {
     nevek: ['Klotild', 'Peter', 'Kati', 'Marika', 'Dr. House'],
     ures: 'empty',
     szamok: [
-      { o: 'lap-piros',       i: 'mento',   n: 'AMBULANCE', s: '999' },
-      { o: 'lap-feher-piros', i: 'tuz',     n: 'FIRE',      s: '999' },
-      { o: 'lap-feher-kek',   i: 'szirena', n: 'POLICE',    s: '999' },
-      { o: 'lap-kek',         i: 'sos',     n: 'NHS',       s: '111' }
+      { o: 'lap-kek',         i: 'sos',     n: 'EMERGENCY',  s: '999' }
     ],
 
     hos_cimke: 'A free emergency-call app for Android',
@@ -1688,10 +1682,10 @@ const SZOVEG = {
     k4_cim: 'Grandmother mode',
     k4_szo: 'Turned on, the app becomes the home screen: it cannot be closed by accident, and nobody gets lost inside the phone. Turned off, it is an ordinary app.',
 
-    tabla_cimke: 'The emergency row',
-    tabla_cim: 'The official numbers, not our invention.',
-    tabla_szo: 'The colour, the symbol and the order come from the official emergency signage. In a crisis, habit beats logic: if someone has seen that order a thousand times, we should not be the ones to rearrange it.',
-    tabla_figyelem: '⚠️ These buttons are fully editable. The app currently ships with the Hungarian numbers — in other countries they must be changed in the settings. An English version of the app is in progress.',
+    tabla_cimke: 'The emergency button',
+    tabla_cim: 'One button. Nothing to decide.',
+    tabla_szo: 'In Hungary, calls to 104, 105 and 107 have all been answered by the 112 control room since 2014. Four buttons would not have offered a faster route — only a decision at the worst possible moment. So one it is. And that is three fewer items for a screen reader to move through before reaching it.',
+    tabla_figyelem: '⚠️ The number follows the country: 112 in Hungary and Germany, 999 in the United Kingdom. It can be changed in one place in the settings. It works even with no credit on the SIM card.',
 
     beall_cimke: 'Setting it up',
     beall_cim: 'This part is for you, not for them.',
@@ -1742,7 +1736,7 @@ const SZOVEG = {
     mak_uzenet_jegyzet: 'You write the words. Left blank, a general message goes out instead — never an empty text.',
     beall2_meg: 'What else you can set',
     beall2_lista: [
-      ['The emergency buttons', 'The name and number of all four can be changed — different country, different numbers. Numbers you have already changed are never overwritten by an update.'],
+      ['The emergency button', 'Both the label and the number can be changed — different country, different number. It cannot be left empty, though: in an emergency app the screen must never be without one.'],
       ['Photo or drawn face', 'From a gallery photo you can crop to the face: drag it, and zoom in with SMALLER / LARGER. With no photo you can pick a drawn female or male face — recognisable too, not a grey silhouette.'],
       ['Who receives the alert', 'Set per tile. On the home screen their names appear under the red button, so nobody has to remember.'],
       ['Getting into the settings', 'A long press on the gear, then a question — where NO is the big green button. So nobody wanders in by accident.'],
@@ -1791,7 +1785,7 @@ const SZOVEG = {
     lab_ingyen: 'Free, and it will stay free. We will not accept a penny for it from anyone.',
     lab_licenc: 'PolyForm Noncommercial 1.0.0 licence',
     lab_adatvedelem: 'Privacy policy',
-    lab_verzio: 'Current version: 1.0.0-beta.18',
+    lab_verzio: 'Current version: 1.0.0-beta.19',
     lab_verzio_elo: 'Current version: ',
     lab_letoltes: ' downloads'
   }
