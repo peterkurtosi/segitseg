@@ -61,6 +61,24 @@ li{margin-bottom:.7em}
 body[data-lang="hu"] .en,body[data-lang="hu"] .de{display:none}
 body[data-lang="en"] .hu,body[data-lang="en"] .de{display:none}
 body[data-lang="de"] .hu,body[data-lang="de"] .en{display:none}
+
+/* ═══ A LETOLTES-DOBOZ ═══════════════════════════════════════════
+   ⭐ Az eppen beallitott nyelv dolgozata a FO gomb; a masik ketto
+     kisebb linkkent marad elerheto. ⚠ A szin NEM az egyetlen jelzes:
+     a gomb szovege kimondja a nyelvet, a formatumot es az oldalszamot. */
+.pdf-doboz{background:var(--lap);border:1px solid var(--vonal);
+           border-radius:10px;padding:16px 20px}
+.pdf-sor{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+.pdf-fo{display:inline-block;background:#96201E;color:#fff;
+        text-decoration:none;font-weight:600;padding:10px 18px;
+        border-radius:8px;border:1px solid #7a1a18}
+.pdf-fo:hover,.pdf-fo:focus{background:#7a1a18;text-decoration:underline}
+.pdf-fo:focus-visible{outline:3px solid #1B5E20;outline-offset:2px}
+.pdf-mas{font-size:.92em}
+/* ⭐ A DOI: a link SZOVEGE maga az azonosito, tehat kinyomtatva is
+   hasznalhato, es a szin nem az egyetlen jelzes. */
+.pdf-doi{font-size:.92em;flex-basis:100%;margin-top:2px}
+.pdf-doi a{font-family:ui-monospace,Consolas,monospace}
 .nyelvvalto{display:flex;gap:8px;margin-top:22px;flex-wrap:wrap}
 .nyelvvalto button{
   font-family:inherit;font-size:.9rem;font-weight:600;cursor:pointer;
@@ -174,9 +192,9 @@ footer{margin-top:70px;padding:30px 0 50px;border-top:1px solid var(--vonal);fon
       Farbfehlsichtigkeit.
     </p>
 
-    <span class="kinek hu">Egy vészhívó alkalmazás műhelyéből · 2026. szeptember 19.</span>
-    <span class="kinek en">From the workshop of an emergency-call app · 19 September 2026</span>
-    <span class="kinek de">Aus der Werkstatt einer Notruf-App · 19. September 2026</span>
+    <span class="kinek hu">Egy vészhívó alkalmazás műhelyéből · 2026. szeptember 27.</span>
+    <span class="kinek en">From the workshop of an emergency-call app · 27 September 2026</span>
+    <span class="kinek de">Aus der Werkstatt einer Notruf-App · 27. September 2026</span>
 
     <div class="nyelvvalto">
       <button id="b-hu" aria-pressed="true">Magyar</button>
@@ -187,18 +205,47 @@ footer{margin-top:70px;padding:30px 0 50px;border-top:1px solid var(--vonal);fon
 </header>
 
 <div class="kozep" style="margin-bottom:28px">
-  <div style="background:var(--lap);border:1px solid var(--vonal);border-radius:10px;
-              padding:16px 20px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center">
-    <span style="font-weight:600" class="hu">Letöltés PDF-ben:</span>
-    <span style="font-weight:600" class="en">Download as PDF:</span>
-    <span style="font-weight:600" class="de">Als PDF herunterladen:</span>
-    <a href="dokumentumok/lathatosag-matematikaja-hu.pdf" download>magyar</a>
-    <a href="dokumentumok/mathematics-of-visibility-en.pdf" download>English</a>
-    <a href="dokumentumok/mathematik-der-sichtbarkeit-de.pdf" download>Deutsch</a>
-    <span style="flex:1"></span>
-    <a href="./" class="hu">&larr; vissza a Segítség lapjára</a>
-    <a href="./" class="en">&larr; back to the Segítség page</a>
-    <a href="./" class="de">&larr; zurück zur Segítség-Seite</a>
+  <div class="pdf-doboz">
+
+    <div class="hu pdf-sor">
+      <a class="pdf-fo" href="dokumentumok/lathatosag-matematikaja-hu.pdf" download>
+        <span aria-hidden="true">&darr;</span>
+        A dolgozat letöltése — magyar · PDF · 15 oldal</a>
+      <span class="pdf-mas">Más nyelven:
+        <a href="dokumentumok/mathematics-of-visibility-en.pdf" download>English</a> ·
+        <a href="dokumentumok/mathematik-der-sichtbarkeit-de.pdf" download>Deutsch</a></span>
+      <span style="flex:1"></span>
+      <span class="pdf-doi">Hivatkozható azonosító:
+        <a href="https://doi.org/10.5281/zenodo.22998702">10.5281/zenodo.22998702</a></span>
+      <a href="./">&larr; vissza a Segítség lapjára</a>
+    </div>
+
+    <div class="en pdf-sor">
+      <a class="pdf-fo" href="dokumentumok/mathematics-of-visibility-en.pdf" download>
+        <span aria-hidden="true">&darr;</span>
+        Download the paper — English · PDF · 15 pages</a>
+      <span class="pdf-mas">Other languages:
+        <a href="dokumentumok/lathatosag-matematikaja-hu.pdf" download>magyar</a> ·
+        <a href="dokumentumok/mathematik-der-sichtbarkeit-de.pdf" download>Deutsch</a></span>
+      <span style="flex:1"></span>
+      <span class="pdf-doi">Citable identifier:
+        <a href="https://doi.org/10.5281/zenodo.22998702">10.5281/zenodo.22998702</a></span>
+      <a href="./">&larr; back to the Segítség page</a>
+    </div>
+
+    <div class="de pdf-sor">
+      <a class="pdf-fo" href="dokumentumok/mathematik-der-sichtbarkeit-de.pdf" download>
+        <span aria-hidden="true">&darr;</span>
+        Die Arbeit herunterladen — Deutsch · PDF · 16 Seiten</a>
+      <span class="pdf-mas">In anderen Sprachen:
+        <a href="dokumentumok/lathatosag-matematikaja-hu.pdf" download>magyar</a> ·
+        <a href="dokumentumok/mathematics-of-visibility-en.pdf" download>English</a></span>
+      <span style="flex:1"></span>
+      <span class="pdf-doi">Zitierbare Kennung:
+        <a href="https://doi.org/10.5281/zenodo.22998702">10.5281/zenodo.22998702</a></span>
+      <a href="./">&larr; zurück zur Segítség-Seite</a>
+    </div>
+
   </div>
 </div>
 
@@ -425,7 +472,7 @@ lin = (s &lt;= 0.04045) ? s / 12.92
 
 <pre>function luminance(hex) {
   const v = [0, 2, 4].map(i =&gt; {
-    const s = parseInt(hex.substr(i + 1, 2), 16) / 255;
+    const s = parseInt(hex.slice(i + 1, i + 3), 16) / 255;
     return s &lt;= 0.04045 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
   });
   return 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2];
@@ -471,19 +518,22 @@ function contrast(a, b) {
 <p class="hu">
   A csempéken lévő ikonok a <strong>harmadik sorba</strong> tartoznak: nem szöveg, de
   nélkülük nem érthető a felület. A küszöb tehát <strong class="mono num">3,0</strong> —
-  és a mért <span class="mono num">1,00–1,17</span> ennek a harmada.
+  és a mért <span class="mono num">1,00–1,17</span> ennek a
+  <strong class="mono num">33–39 %-a</strong>.
 </p>
 <p class="en">
   The tile icons fall into the <strong>third row</strong>: not text, but the interface
   cannot be understood without them. The threshold is therefore
   <strong class="mono num">3.0</strong> — and the measured
-  <span class="mono num">1.00–1.17</span> is a third of that.
+  <span class="mono num">1.00–1.17</span> is
+  <strong class="mono num">33–39 %</strong> of that.
 </p>
 <p class="de">
   Die Kachel-Symbole fallen in die <strong>dritte Zeile</strong>: kein Text, aber ohne sie
   ist die Oberfläche nicht verständlich. Der Schwellenwert ist also
   <strong class="mono num">3,0</strong> — und die gemessenen
-  <span class="mono num">1,00–1,17</span> sind ein Drittel davon.
+  <span class="mono num">1,00–1,17</span> sind davon
+  <strong class="mono num">33–39 %</strong>.
 </p>
 
 <h2 class="hu">3. Amit a képlet <em>nem</em> tartalmaz</h2>
@@ -503,20 +553,29 @@ function contrast(a, b) {
   <span class="cimke de">der wichtigste Satz dieser Seite</span>
   <p class="hu">
     <strong>A színárnyalat (hue) nem szerepel a képletben.</strong> Csak a világosság.
-    Ezért lehet két szín a színkörön <em>szemben</em> — tehát majdnem komplementer —,
-    és a kontraszt-arányuk mégis <span class="mono num">1,0</span>.
+    Ezért lehet két szín szemre jól megkülönböztethető — a mért esetben
+    <span class="mono num">59°</span>-kal tér el a színezetük a színkörön —, és a
+    kontraszt-arányuk mégis <span class="mono num">1,00</span>. Sőt: a majdnem
+    szemközti rózsa háttéren (<span class="mono num">139°</span>) is csak
+    <span class="mono num">1,05</span>.
   </p>
   <p class="en">
     <strong>Hue does not appear in the formula at all.</strong> Only lightness does.
-    That is why two colours can sit <em>opposite</em> each other on the colour wheel —
-    near-complementary — and still have a contrast ratio of
-    <span class="mono num">1.0</span>.
+    That is why two colours can be plainly distinguishable to the eye — in the
+    measured case their hues are <span class="mono num">59°</span> apart on the
+    colour wheel — and still have a contrast ratio of
+    <span class="mono num">1.00</span>. More than that: on the nearly opposite pink
+    background (<span class="mono num">139°</span>) it is still only
+    <span class="mono num">1.05</span>.
   </p>
   <p class="de">
     <strong>Der Farbton kommt in der Formel überhaupt nicht vor.</strong> Nur die
-    Helligkeit. Deshalb können zwei Farben im Farbkreis <em>gegenüber</em> liegen — also
-    nahezu komplementär sein — und trotzdem ein Kontrastverhältnis von
-    <span class="mono num">1,0</span> haben.
+    Helligkeit. Deshalb können zwei Farben für das Auge deutlich unterscheidbar
+    sein — im gemessenen Fall liegen ihre Farbtöne <span class="mono num">59°</span>
+    auseinander auf dem Farbkreis — und trotzdem ein Kontrastverhältnis von
+    <span class="mono num">1,00</span> haben. Mehr noch: Auf dem nahezu
+    gegenüberliegenden Hintergrund Rosa (<span class="mono num">139°</span>) sind es
+    immer noch nur <span class="mono num">1,05</span>.
   </p>
 </div>
 
@@ -618,24 +677,25 @@ function contrast(a, b) {
 
 <p class="hu">
   A gyakorlatban a <strong>Machado, Oliveira &amp; Fernandes (2009)</strong> mátrixokat
-  használják — ezt futtatja a Chrome DevTools és a legtöbb tervezőeszköz is. Három 3×3-as
-  mátrix, súlyosság szerint skálázva; itt a teljes (1,0-ás) esetek szerepelnek. A régebbi,
-  dichromátokra pontosabb iskola a <strong>Brettel–Viénot–Mollon (1997/99)</strong>,
-  ami LMS-térben vetít.
+  használják — ezekre épül több elterjedt fejlesztői és tervezőeszköz
+  látásszimulációja is. Három 3×3-as mátrix, súlyosság szerint skálázva; itt a teljes
+  (1,0-ás) esetek szerepelnek. A dikromát eseteknek külön hivatkozási alapja van, a
+  <strong>Brettel–Viénot–Mollon (1997/99)</strong>, ami LMS-térben vetít.
 </p>
 <p class="en">
   In practice the <strong>Machado, Oliveira &amp; Fernandes (2009)</strong> matrices are
-  what people use — they are what Chrome DevTools and most design tools run. Three 3×3
-  matrices, scalable by severity; the full (1.0) cases are used here. The older school,
-  more accurate for dichromats, is <strong>Brettel–Viénot–Mollon (1997/99)</strong>,
-  which projects in LMS space.
+  what people use — the vision simulation in several widely used developer and design
+  tools is built on them. Three 3×3 matrices, scalable by severity; the full (1.0)
+  cases are used here. Dichromatic cases have a reference of their own,
+  <strong>Brettel–Viénot–Mollon (1997/99)</strong>, which projects in LMS space.
 </p>
 <p class="de">
   In der Praxis verwendet man die Matrizen von <strong>Machado, Oliveira &amp; Fernandes
-  (2009)</strong> — sie stecken in den Chrome DevTools und in den meisten
-  Design-Werkzeugen. Drei 3×3-Matrizen, nach Schweregrad skalierbar; hier stehen die
-  vollen Fälle (1,0). Die ältere, für Dichromaten genauere Schule ist
-  <strong>Brettel–Viénot–Mollon (1997/99)</strong>, die im LMS-Raum projiziert.
+  (2009)</strong> — auf ihnen beruht die Sehsimulation mehrerer verbreiteter
+  Entwickler- und Design-Werkzeuge. Drei 3×3-Matrizen, nach Schweregrad skalierbar;
+  hier stehen die vollen Fälle (1,0). Für dichromatische Fälle gibt es eine eigene
+  Referenz, <strong>Brettel–Viénot–Mollon (1997/99)</strong>, die im LMS-Raum
+  projiziert.
 </p>
 
 <p class="hu">
@@ -693,9 +753,13 @@ function contrast(a, b) {
   </p>
   <p class="hu">
     És figyelje meg azt is, hogy a kontraszt-számok a szimulált módokban
-    <em>alig változnak</em>. Ez nem hiba: ezek a mátrixok nagyjából megőrzik a
-    fénysűrűséget. Épp ezért igaz, hogy <strong>ami világosságban átmegy, az a
-    színtévesztőknek is átmegy.</strong>
+    <em>alig változnak</em>. Ennek mérhető oka van: az itt szereplő színeken a
+    szimuláció a relatív luminanciát legfeljebb <span class="mono num">0,041</span>-dal
+    mozdítja el — a legtöbbet a protanópia, a legkevesebbet a tritanópia
+    (<span class="mono num">0,014</span>). Ez azonban nem általános törvény: a mátrixok
+    <em>nem</em> luminancia-megőrzők. Ezen a palettán viszont a világosság-viszonyok
+    gyakorlatilag változatlanok, és ezért igaz itt, hogy <strong>ami világosságban
+    átmegy, az a színtévesztőknek is átmegy.</strong>
   </p>
   <p class="en">
     Switch to <strong>achromatopsia</strong>. The icons on the left vanish completely —
@@ -705,9 +769,13 @@ function contrast(a, b) {
   </p>
   <p class="en">
     Notice too that the contrast figures <em>barely move</em> between the simulated
-    modes. That is not a bug: these matrices approximately preserve luminance. Which is
-    precisely why <strong>whatever passes on lightness also passes for colour-deficient
-    viewers.</strong>
+    modes. There is a measurable reason: across the colours used here the simulation
+    shifts relative luminance by at most <span class="mono num">0.041</span> — most
+    under protanopia, least under tritanopia (<span class="mono num">0.014</span>).
+    This is not a general law: the matrices are <em>not</em> luminance-preserving. On
+    this palette, however, the lightness relations are effectively unchanged, which is
+    why it holds here that <strong>whatever passes on lightness also passes for
+    colour-deficient viewers.</strong>
   </p>
   <p class="de">
     Schalten Sie auf <strong>Achromatopsie</strong>. Die Symbole links verschwinden
@@ -717,9 +785,14 @@ function contrast(a, b) {
   </p>
   <p class="de">
     Beachten Sie auch, dass sich die Kontrastwerte zwischen den simulierten Modi
-    <em>kaum verändern</em>. Das ist kein Fehler: Diese Matrizen erhalten die Leuchtdichte
-    näherungsweise. Genau deshalb gilt: <strong>Was über die Helligkeit besteht, besteht
-    auch für farbfehlsichtige Betrachter.</strong>
+    <em>kaum verändern</em>. Dafür gibt es einen messbaren Grund: Über die hier
+    verwendeten Farben verschiebt die Simulation die relative Leuchtdichte um höchstens
+    <span class="mono num">0,041</span> — am meisten bei der Protanopie, am wenigsten
+    bei der Tritanopie (<span class="mono num">0,014</span>). Das ist allerdings kein
+    allgemeines Gesetz: Die Matrizen sind <em>nicht</em> leuchtdichteerhaltend. Auf
+    dieser Palette bleiben die Helligkeitsverhältnisse jedoch praktisch unverändert,
+    und deshalb gilt hier: <strong>Was über die Helligkeit besteht, besteht auch für
+    farbfehlsichtige Betrachter.</strong>
   </p>
 </div>
 
@@ -932,7 +1005,7 @@ function contrast(a, b) {
   <div class="lablec-sor nyomtatasban en"><strong>An interactive version of this page exists</strong> — with the calculator and the simulator live. Ask at the address above.</div>
   <div class="lablec-sor nyomtatasban de"><strong>Von dieser Seite gibt es auch eine interaktive Fassung</strong> — mit Rechner und Simulation. Fragen Sie unter der obigen Adresse.</div>
 
-  <div class="lablec-sor">2026-09-19</div>
+  <div class="lablec-sor">2026-09-27</div>
 </footer>
 
 </div>
@@ -998,7 +1071,12 @@ const AVATAROK = [
   {hu:'lila',   en:'lilac',     de:'flieder',  hex:'#C9B6E4'},
   {hu:'türkiz', en:'turquoise', de:'türkis',   hex:'#9BD8DE'}
 ];
-const REGI_IKON = '#7FE38A', UJ_KORONG = '#1B5E20', UJ_JEL = '#FFFFFF', KONTUR = '#1C1C20';
+/* ⭐ Az app KET korongot hasznal: zold = uzenet, kek = hivas. A demo
+   ezert valtakozva rajzolja oket — ugy, ahogy egy valodi lista kinez.
+   ⚠ A #1C1C20 a rajzolt stilus KONTURJA, NEM korong. */
+const REGI_IKON = '#7FE38A', UJ_JEL = '#FFFFFF', KONTUR = '#1C1C20';
+const KORONG_UZENET = '#1B5E20', KORONG_HIVAS = '#0D3C61';
+const UJ_KORONG = KORONG_UZENET;   /* a rosszabbik eset a tablazathoz */
 const SZOVEG = {
   hu:{ok:'megfelel', nem:'megbukik'},
   en:{ok:'passes',   nem:'fails'},
@@ -1066,7 +1144,9 @@ function csempe(hatterHex, jelHex, korongHex, mod){
 function rajzol(){
   const mod = document.getElementById('cvd').value;
   document.getElementById('racs-regi').innerHTML = AVATAROK.map(a => csempe(a.hex, REGI_IKON, null, mod)).join('');
-  document.getElementById('racs-uj').innerHTML   = AVATAROK.map(a => csempe(a.hex, UJ_JEL, UJ_KORONG, mod)).join('');
+  /* ⭐ valtakozva: zold korong = uzenet, kek korong = hivas */
+  document.getElementById('racs-uj').innerHTML   = AVATAROK.map((a, i) =>
+    csempe(a.hex, UJ_JEL, i % 2 ? KORONG_HIVAS : KORONG_UZENET, mod)).join('');
 }
 document.getElementById('cvd').addEventListener('change', rajzol);
 
