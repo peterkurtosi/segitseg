@@ -842,12 +842,64 @@ ul.tetelek li span { color: var(--halvany); }
 .kapcsolat:hover { opacity: 0.88; }
 .kapcsolat svg { width: 18px; height: 18px; }
 
-.bolt-jegyzet {
-  font-size: 0.9rem;
+/* ── A GOOGLE PLAY-JELVÉNY ÉS A QR-KÓD (2026-10-21, az 1.0.0 kiadása) ──
+   ⚠ A jelvény a Google hivatalos képe (play_keszit.py vágja körbe, más
+     változtatás nélkül). Méretét em-ben adjuk meg, hogy az A−/A/A+ gombbal
+     együtt nőjön — a Google a túl kicsi jelvényt nem engedi.
+   ⚠ A QR-kódnak a sötét témában is FEHÉR alapon kell állnia: az SVG maga
+     hozza a fehér csendes zónát, ezért itt nincs háttérszín-trükk. */
+.play-sor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px 30px;
+}
+.play-jelveny {
+  display: inline-block;
+  line-height: 0;
+  border-radius: 12px;
+}
+.play-jelveny img { display: block; height: 3.6em; width: auto; }
+.play-jelveny:hover { opacity: 0.9; }
+.qr-doboz {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.qr-doboz img {
+  display: block;
+  width: 8em;
+  height: 8em;
+  border: 1px solid var(--vonal-eros);
+  border-radius: 10px;
+}
+.qr-doboz figcaption {
+  font-size: 0.95em;
   color: var(--halvany);
-  border: 1px dashed var(--vonal-eros);
-  border-radius: 11px;
-  padding: 13px 16px;
+  max-width: 16ch;
+}
+.vedjegy {
+  margin: 0;
+  font-size: 0.8em;
+  color: var(--halvany);
+}
+.kerdes-sor {
+  width: 100%;
+  border-top: 1px solid var(--vonal);
+  padding-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+.kerdes-sor p { margin: 0; flex: 1 1 260px; }
+/* A levél-gomb most MÁSODLAGOS: a fő út a Play. Körvonalas, hogy a fekete
+   jelvény mellett ne legyen két egyforma súlyú fekete gomb. */
+.kapcsolat.masodlagos {
+  background: transparent;
+  color: var(--tinta);
+  border: 1.5px solid var(--vonal-eros);
 }
 
 footer {
@@ -1265,17 +1317,32 @@ footer a:hover, footer a:focus-visible { color: var(--kek); }
       </div>
     </section>
 
-    <!-- ══ HOGYAN KAPHATÓ MEG ════════════════════════════════════ -->
+    <!-- ══ HOGYAN KAPHATÓ MEG ════════════════════════════════════
+         ⭐ 2026-10-21: az 1.0.0 nyilvános a Google Playen. A jelvény NYELVFÜGGŐ
+            (a data-t HTML-t helyettesít be, mint az akad_borito), a QR-kód
+            mindhárom nyelven ugyanaz: a bolti lap sima címe.
+         ⚠ A QR-kép DEKORÁCIÓ a képernyőolvasónak (alt=""): beolvasni úgysem
+            tudja, a működő út a jelvény-link mellette. -->
     <section>
       <div class="zaras">
         <span class="cimke" data-t="kap_cimke"></span>
         <h2 data-t="kap_cim"></h2>
         <p class="hasab" data-t="kap_szo"></p>
-        <a class="kapcsolat" id="kapcsolat-link" href="mailto:peter.kurtosi@gmail.com?subject=Seg%C3%ADts%C3%A9g">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.4"/><path d="m3.6 6.6 8.4 6 8.4-6"/></svg>
-          <span data-t="kap_gomb"></span>
-        </a>
-        <p class="bolt-jegyzet" data-t="kap_bolt"></p>
+        <div class="play-sor">
+          <div data-t="kap_play"></div>
+          <figure class="qr-doboz">
+            <img src="play/qr-play.svg" alt="" width="136" height="136">
+            <figcaption data-t="kap_qr"></figcaption>
+          </figure>
+        </div>
+        <p class="vedjegy" data-t="kap_vedjegy"></p>
+        <div class="kerdes-sor">
+          <p data-t="kap_kerdes"></p>
+          <a class="kapcsolat masodlagos" id="kapcsolat-link" href="mailto:peter.kurtosi@gmail.com?subject=Seg%C3%ADts%C3%A9g">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.4"/><path d="m3.6 6.6 8.4 6 8.4-6"/></svg>
+            <span data-t="kap_gomb"></span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -1290,9 +1357,6 @@ footer a:hover, footer a:focus-visible { color: var(--kek); }
       <span data-t="lab_licenc"></span>
       <a href="adatvedelem.html" data-t="lab_adatvedelem"></a>
       <span id="lab-verzio" data-t="lab_verzio"></span>
-      <!-- ⚠ A számláló SZÁNDÉKOSAN nem hivatkozás: a kiadási oldalra
-           mutatva a letöltő link kerülne ki a nyilvános lapra. -->
-      <span id="letoltesek" hidden></span>
     </div>
   </div>
 </footer>
@@ -1459,15 +1523,15 @@ const SZOVEG = {
       ['A helymeghatározás annyira pontos, amennyire a telefon', 'Szabad ég alatt néhány méter, épületben, mélygarázsban sokkal rosszabb.'],
       ['Nem diszpécserközpont', 'A családot értesíti, nem a mentőket. A 112-t is fel lehet hívni belőle egy koppintással, de a piros gomb a családnak szól.'],
       ['Csak Androidra', 'iPhone-ra nem készül. Az iOS szándékosan nem enged automatikus SMS-küldést — ott a beépített Vész-SOS a jó megoldás, és az jobb, mint amit mi tudnánk.'],
-      ['Béta változat', 'Működik, és valódi telefonokon bizonyított — de még tesztelés alatt áll. Ha valami nem megy, írj.']
+      ['Android 7.0 vagy újabb kell', 'Régebbi telefonra a Google Play nem engedi telepíteni.']
     ],
 
     // ⚠ MI ÚJSÁG — minden kiadásnál frissítendő.
     uj_cimke: 'Mi újság',
-    uj_cim: 'Ami a legutóbbi változatban javult',
-    uj_1: 'Az üzenetküldés most már a régebbi telefonokon is működik. Korábban Android 11 és az alatt egyetlen üzenet sem ment el — és épp azok a régebbi készülékek a leggyakoribbak az idősebbeknél.',
-    uj_2: 'Az alkalmazás csak akkor mondja, hogy elment az üzenet, ha a hálózat visszaigazolta. Ha nem jött visszaigazolás, azt is megmondja — nem nyugtat meg hamisan.',
-    uj_3: 'Minden csempén látszik, mi történik koppintásra: hívás vagy üzenet, és hogy a segélygomb is szól-e az illetőnek. A képernyőolvasó mindezt ki is mondja.',
+    uj_cim: 'Az 1.0.0 — az első nyilvános kiadás',
+    uj_1: 'Az első megnyitáskor a Segítség egyszer elmondja, mire kéri majd az SMS-, a hívás- és a helyengedélyt — felolvasva, egyetlen nagy gombbal.',
+    uj_2: 'A piros gomb akkor sem akad el, ha a telefon nehezen találja a helyét: legfeljebb 12 másodpercig keres, utána az üzenet mindenképp elmegy.',
+    uj_3: 'Egyetlen segélyhívó gomb van a négy helyett, és a száma az országhoz igazodik: Magyarországon és Németországban 112, Nagy-Britanniában 999.',
     // ⚠ AKADÁLYMENTESSÉG — a munkalap. A lap és a PDF-ek: lathatosag.html,
     //   dokumentumok/. Frissítéskor a borító-képet is újra kell rajzolni.
     akad_cimke: 'Akadálymentesség',
@@ -1479,17 +1543,18 @@ const SZOVEG = {
     akad_borito: '<img src="dokumentumok/lathatosag-borito-hu.png" alt="" width="760" height="984" loading="lazy">',
     akad_pdf: 'Letöltés PDF-ben:',
     kap_cimke: 'Hogyan kapható meg',
-    kap_cim: 'Írj nekem, és elküldöm.',
-    kap_szo: 'Innen most nem lehet letölteni. Béta változat, és szeretném tudni, kihez kerül — hogy szólni tudjak, ha javítás készül. Írj egy sort, és küldöm a telepítőt meg a leírást.',
+    kap_cim: 'Ingyen, a Google Play Áruházból.',
+    kap_szo: 'A telefonodon koppints a gombra. Ha számítógépen olvasod ezt az oldalt, olvasd be a QR-kódot a telefonod kamerájával — egyenesen a Segítség bolti lapjára visz.',
+    kap_play: '<a class="play-jelveny" href="https://play.google.com/store/apps/details?id=hu.segitseg.segitseg"><img src="play/jelveny-hu.png" alt="Szerezd be a Google Playen" width="646" height="192"></a>',
+    kap_qr: 'Beolvasás a telefon kamerájával',
+    kap_vedjegy: 'A Google Play és a Google Play logó a Google LLC védjegye.',
+    kap_kerdes: 'Kérdésed van, vagy valami nem úgy működik, ahogy kellene? Írj nekem.',
     kap_gomb: 'Írok Péternek',
-    kap_bolt: 'Ha felkerül a Google Play Áruházba, ide kerül a letöltés gombja — akkor már két akadály (az „ismeretlen fejlesztő" figyelmeztetés és a letiltott SMS-engedély) is megszűnik.',
 
     lab_ingyen: 'Ingyenes, és az is marad. Egyetlen fillért nem fogadunk el érte senkitől.',
     lab_licenc: 'PolyForm Noncommercial 1.0.0 licenc',
     lab_adatvedelem: 'Adatvédelmi tájékoztató',
-    lab_verzio: 'Jelenlegi változat: 1.0.0-beta.19',
-    lab_verzio_elo: 'Jelenlegi változat: ',
-    lab_letoltes: ' letöltés'
+    lab_verzio: 'Jelenlegi változat: 1.0.0'
   },
 
   /* ═══ DEUTSCH ══════════════════════════════════════════════════ */
@@ -1611,13 +1676,13 @@ const SZOVEG = {
       ['Der Standort ist so genau wie das Telefon', 'Unter freiem Himmel wenige Meter, in Gebäuden und Tiefgaragen deutlich schlechter.'],
       ['Keine Notrufzentrale', 'Sie benachrichtigt die Familie, nicht den Rettungsdienst. Der Notruf lässt sich mit einem Tippen wählen, aber die rote Taste gilt der Familie.'],
       ['Nur für Android', 'Für das iPhone gibt es sie nicht. iOS erlaubt bewusst kein automatisches SMS-Senden — dort ist der eingebaute Notruf SOS die richtige Lösung, und der ist besser als alles, was wir bauen könnten.'],
-      ['Beta-Version', 'Sie funktioniert und ist auf echten Telefonen erprobt — befindet sich aber noch im Test. Wenn etwas nicht geht, schreiben Sie mir.']
+      ['Android 7.0 oder neuer', 'Auf älteren Telefonen lässt Google Play die Installation nicht zu.']
     ],
     uj_cimke: 'Neu',
-    uj_cim: 'Was sich in der letzten Version verbessert hat',
-    uj_1: 'Nachrichten gehen jetzt auch auf älteren Telefonen raus. Unter Android 11 ging bisher keine einzige Nachricht raus — und gerade diese älteren Geräte sind bei älteren Menschen am häufigsten.',
-    uj_2: 'Die App meldet den Versand nur, wenn das Netz ihn bestätigt hat. Kommt keine Bestätigung, sagt sie das — statt falsch zu beruhigen.',
-    uj_3: 'Jede Kachel zeigt, was ein Tippen bewirkt: Anruf oder Nachricht, und ob die Hilfe-Taste diese Person ebenfalls benachrichtigt. Der Screenreader liest das alles vor.',
+    uj_cim: 'Version 1.0.0 — die erste öffentliche Version',
+    uj_1: 'Beim ersten Öffnen erklärt Segítség einmal, wozu die Berechtigungen für SMS, Anrufe und Standort gebraucht werden — vorgelesen, mit einer einzigen großen Taste.',
+    uj_2: 'Die rote Taste bleibt auch dann nicht hängen, wenn das Telefon seinen Standort nur schwer findet: Es sucht höchstens 12 Sekunden, danach geht die Nachricht auf jeden Fall hinaus.',
+    uj_3: 'Statt vier Notruftasten gibt es nur noch eine, und ihre Nummer richtet sich nach dem Land: 112 in Ungarn und Deutschland, 999 im Vereinigten Königreich.',
     akad_cimke: 'Barrierefreiheit',
     akad_cim: 'Was wir über Farbe gelernt haben — und wobei wir um Hilfe bitten',
     akad_1: 'Auf einer Kachel stand ein kleines Symbol, das anzeigte, ob ein Tippen einen Anruf auslöst oder eine Nachricht sendet. Jemand mit Farbfehlsichtigkeit sagte, er finde überhaupt kein Symbol. Wir haben nachgemessen — der Kontrast betrug <b>1,00</b>. Mathematisch war dort tatsächlich nichts.',
@@ -1628,17 +1693,18 @@ const SZOVEG = {
     akad_pdf: 'Als PDF herunterladen:',
 
     kap_cimke: 'Wie man sie bekommt',
-    kap_cim: 'Schreiben Sie mir, ich schicke sie.',
-    kap_szo: 'Hier gibt es noch keinen Download. Es ist eine Beta, und ich möchte wissen, wer sie hat — damit ich Bescheid sagen kann, wenn es eine Korrektur gibt. Eine kurze Nachricht genügt.',
+    kap_cim: 'Kostenlos im Google Play Store.',
+    kap_szo: 'Auf dem Telefon tippen Sie auf die Taste. Wenn Sie diese Seite am Computer lesen, scannen Sie den QR-Code mit der Kamera Ihres Telefons — er führt direkt zur Seite von Segítség im Store.',
+    kap_play: '<a class="play-jelveny" href="https://play.google.com/store/apps/details?id=hu.segitseg.segitseg"><img src="play/jelveny-de.png" alt="Jetzt bei Google Play" width="646" height="192"></a>',
+    kap_qr: 'Mit der Telefonkamera scannen',
+    kap_vedjegy: 'Google Play und das Google Play-Logo sind Marken von Google LLC.',
+    kap_kerdes: 'Haben Sie eine Frage, oder funktioniert etwas nicht wie erwartet? Schreiben Sie mir.',
     kap_gomb: 'Péter schreiben',
-    kap_bolt: 'Sobald die App im Google Play Store ist, steht hier die Download-Taste — damit entfallen auch zwei Hürden: die Warnung „unbekannter Entwickler" und die gesperrte SMS-Berechtigung.',
 
     lab_ingyen: 'Kostenlos, und das bleibt so. Wir nehmen dafür von niemandem einen Cent.',
     lab_licenc: 'Lizenz: PolyForm Noncommercial 1.0.0',
     lab_adatvedelem: 'Datenschutzerklärung',
-    lab_verzio: 'Aktuelle Version: 1.0.0-beta.19',
-    lab_verzio_elo: 'Aktuelle Version: ',
-    lab_letoltes: ' Downloads'
+    lab_verzio: 'Aktuelle Version: 1.0.0'
   },
 
   /* ═══ ENGLISH ══════════════════════════════════════════════════ */
@@ -1760,13 +1826,13 @@ const SZOVEG = {
       ['Location is only as good as the phone', 'A few metres under open sky; much worse indoors or in an underground car park.'],
       ['It is not a control room', 'It alerts the family, not the ambulance service. The emergency number is one tap away, but the red button is for family.'],
       ['Android only', 'There is no iPhone version. iOS deliberately does not allow automatic SMS sending — there, the built-in Emergency SOS is the right answer, and it is better than anything we could build.'],
-      ['Beta version', 'It works and has been proven on real phones — but it is still in testing. If something goes wrong, write to me.']
+      ['Android 7.0 or newer', 'On older phones, Google Play will not install it.']
     ],
     uj_cimke: 'New',
-    uj_cim: 'What improved in the latest version',
-    uj_1: 'Messaging now works on older phones too. On Android 11 and below not a single message was ever sent — and those older handsets are the most common ones among older people.',
-    uj_2: 'The app says a message went out only if the network confirmed it. If no confirmation arrives, it says so — instead of reassuring you falsely.',
-    uj_3: 'Every tile shows what a tap will do: a call or a message, and whether the help button alerts that person too. The screen reader reads all of it out.',
+    uj_cim: 'Version 1.0.0 — the first public release',
+    uj_1: 'The first time it opens, Segítség explains once what the SMS, call and location permissions are for — read aloud, with a single large button.',
+    uj_2: 'The red button no longer gets stuck when the phone struggles to find its location: it searches for at most 12 seconds, and then the message goes out regardless.',
+    uj_3: 'There is now a single emergency button instead of four, and its number follows the country: 112 in Hungary and Germany, 999 in the United Kingdom.',
     akad_cimke: 'Accessibility',
     akad_cim: 'What we learned about colour — and where we are asking for help',
     akad_1: 'One tile carried a small icon telling you whether tapping it would place a call or send a message. Someone who has difficulty with colour said he could not find any icon at all. We measured it — the contrast was <b>1.00</b>. Mathematically, there really was nothing there.',
@@ -1777,17 +1843,18 @@ const SZOVEG = {
     akad_pdf: 'Download as PDF:',
 
     kap_cimke: 'How to get it',
-    kap_cim: 'Write to me and I will send it.',
-    kap_szo: 'There is no download here yet. It is a beta, and I would like to know who has it — so I can tell you when a fix goes out. A short message is enough.',
+    kap_cim: 'Free, on Google Play.',
+    kap_szo: 'On your phone, tap the button. If you are reading this page on a computer, scan the QR code with the camera of your phone — it takes you straight to the Segítség page in the store.',
+    kap_play: '<a class="play-jelveny" href="https://play.google.com/store/apps/details?id=hu.segitseg.segitseg"><img src="play/jelveny-en.png" alt="Get it on Google Play" width="564" height="168"></a>',
+    kap_qr: 'Scan with the camera of your phone',
+    kap_vedjegy: 'Google Play and the Google Play logo are trademarks of Google LLC.',
+    kap_kerdes: 'A question, or something not working as it should? Write to me.',
     kap_gomb: 'Email Péter',
-    kap_bolt: 'Once it reaches the Google Play Store, the download button will appear here — and two obstacles disappear with it: the "unknown developer" warning and the blocked SMS permission.',
 
     lab_ingyen: 'Free, and it will stay free. We will not accept a penny for it from anyone.',
     lab_licenc: 'PolyForm Noncommercial 1.0.0 licence',
     lab_adatvedelem: 'Privacy policy',
-    lab_verzio: 'Current version: 1.0.0-beta.19',
-    lab_verzio_elo: 'Current version: ',
-    lab_letoltes: ' downloads'
+    lab_verzio: 'Current version: 1.0.0'
   }
 };
 
@@ -1834,52 +1901,15 @@ function korlatokatRajzol(sz) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   A KIADÁS ADATAI — élőben, a GitHubtól
+   A LÁBLÉC VERZIÓSZÁMA — 2026-10-21 óta a pubspec.yaml-ból, nem a GitHubról
 
-   ⭐ Egy lekérdezés két dolgot old meg: a letöltésszámot ÉS a
-     verziószámot. Így a lábléc verziója soha nem avul el.
-
-   ⚠ Ha a lekérdezés bármiért nem sikerül (nincs hálózat, nincs még
-     kiadás, vagy a lap nem a GitHubról fut), akkor CSENDBEN marad a
-     statikus szöveg. Hibaüzenetet nem mutatunk: a látogatót nem
-     érdekli, és nem is tud vele mit kezdeni.
+   ⚠ Eddig a lap élőben a GitHub legutóbbi kiadását kérdezte le (verzió +
+     letöltésszám). Az 1.0.0 óta a Google Play a terjesztés útja, a GitHubon
+     a legutóbbi kiadás a 18. béta maradt — a lábléc tehát a béta számát
+     írta volna, miközben a boltban 1.0.0 van. A verziót ezért a keszit.py
+     írja be a pubspec.yaml-ból (ugyanaz a szám, ami a Play-csomagban van),
+     és a letöltésszámláló is kikerült (a Play nem ad nyilvános számot).
    ═══════════════════════════════════════════════════════════════════ */
-
-const KIADAS_API =
-  'https://api.github.com/repos/peterkurtosi/segitseg/releases/latest';
-
-let kiadasAdat = null;   // { verzio, letoltes }
-
-function kiadastKiir() {
-  if (!kiadasAdat) return;
-  const sz = SZOVEG[document.documentElement.lang] || SZOVEG.hu;
-
-  const v = document.getElementById('lab-verzio');
-  if (v) v.textContent = sz.lab_verzio_elo + kiadasAdat.verzio;
-
-  const l = document.getElementById('letoltesek');
-  if (l && kiadasAdat.letoltes > 0) {
-    l.textContent = kiadasAdat.letoltes.toLocaleString() + sz.lab_letoltes;
-    l.hidden = false;
-  }
-}
-
-function kiadastLekerdez() {
-  fetch(KIADAS_API)
-    .then(function (v) { return v.ok ? v.json() : null; })
-    .then(function (a) {
-      if (!a || !a.tag_name) return;
-      const db = (a.assets || []).reduce(function (osszeg, e) {
-        return osszeg + (e.download_count || 0);
-      }, 0);
-      kiadasAdat = {
-        verzio: String(a.tag_name).replace(/^v/, ''),
-        letoltes: db
-      };
-      kiadastKiir();
-    })
-    .catch(function () { /* marad a statikus szöveg */ });
-}
 
 function ujSzakaszokatRajzol(sz) {
   // A makett arcképei — ugyanaz a rajz, mint a csempéken.
@@ -1913,7 +1943,6 @@ function nyelvetAllit(kod) {
   tablatRajzol(sz);
   korlatokatRajzol(sz);
   ujSzakaszokatRajzol(sz);
-  kiadastKiir();
 
   document.querySelectorAll('.nyelvek button').forEach(function (b) {
     b.setAttribute('aria-pressed', String(b.dataset.nyelv === kod));
@@ -1950,8 +1979,6 @@ nyelvetAllit(SZOVEG[urlNyelv] ? urlNyelv : (mentettNyelv || 'hu'));
 
 const mentettMeret = biztosTarolas(function () { return localStorage.getItem('segitseg-meret'); }, null);
 meretetAllit(mentettMeret !== null ? Number(mentettMeret) : 1);
-
-kiadastLekerdez();
 </script>
 </body>
 </html>

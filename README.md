@@ -5,7 +5,9 @@ Android-os segélyhívó alkalmazás ismertetőjét, magyar, német és angol
 nyelven.
 
 👉 **[Az oldal megtekintése](https://peterkurtosi.github.io/segitseg/)**
-*(a GitHub Pages bekapcsolása után élő)*
+
+📲 **[Letöltés a Google Playről](https://play.google.com/store/apps/details?id=hu.segitseg.segitseg)** — ingyen
+(2026. október 21. óta nyilvános, 1.0.0)
 
 ---
 
@@ -23,8 +25,8 @@ Nagy gombos segélyhívó telefon-alkalmazás. Az édesanyámnak készült, aki
 adatgyűjtés: az alkalmazásnak nincs internet-engedélye, és a rendszer
 automatikus felhő-mentése is ki van kapcsolva rá.
 
-⚠️ Az alkalmazás **béta változatban** van, és **innen nem tölthető le**.
-Az oldalon szereplő címen lehet kérni.
+Az alkalmazás a **Google Play Áruházból** tölthető le (Android 7.0 vagy
+újabb). Ebből a tárolóból nem: itt csak az ismertető oldal van.
 
 ---
 
@@ -34,6 +36,7 @@ Az oldalon szereplő címen lehet kérni.
 |---|---|
 | `index.html` | maga az oldal — egyetlen önálló fájl, külső szkript nélkül |
 | `LICENSE.md` | licenc (PolyForm Noncommercial 1.0.0) |
+| `play/` | a Google Play hivatalos jelvényei (hu/de/en) és a bolti lap QR-kódja |
 
 ⚠️ Az `index.html` **generált fájl.** A forrása és az azt előállító
 script a projekt saját mappájában él (`10-WEBSITE/index.html` +
